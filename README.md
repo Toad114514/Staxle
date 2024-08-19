@@ -27,3 +27,5 @@ python stax.py
 ```
 # 进度
 未完成阶段
+## Star History
+[![Star History Chart](https://api.star-history.com/svg?repos=Toad114514/Staxle&type=Date)](https://star-history.com/#Toad114514/Staxle&Date)
