@@ -1,11 +1,11 @@
 # Staxle
-termux 懒人工具安装与管理，快速上手 termux
+termux 懒人工具安装与管理，快速上手 termux<br>
 [![Staxle](https://toad114514.github.io/img/wb/staxle.jpg)](https://github.com/Toad114514/Staxle)
 [![Stars](https://img.shields.io/github/stars/Toad114514/Staxle.svg)](https://github.com/Toad114514/Staxle/status)
 [![Forks](https://img.shields.io/github/forks/Toad114514/Staxle.svg)](https://github.com/Toad114514/Toad114514/network/members)
 [![Issues](https://img.shields.io/github/issues/Toad114514/Staxle.svg)](https://github.com/Toad114514/Staxle/issues)
 [![Watchers](https://img.shields.io/github/watchers/Toad114514/Staxle.svg)](https://github.com/Toad114514/Staxle/watchers)
-[![Python](https://img.shields.io/badge/language-Python%203-blue.svg)](https://www.python.org)
+[![Python](https://img.shields.io/badge/language-Python%203-blue.svg)](https://www.python.org)<br>
 由于个人是python牢底，有啥bug可反馈到 issues
 # 未来加入的特性
  - 桌面环境管理
