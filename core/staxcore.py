@@ -1,6 +1,7 @@
 import os, sys, time
 import urllib.request
 import getpass
+import socket
 import platform as plat
 from subprocess import check_output as inputstream
 class stax():
