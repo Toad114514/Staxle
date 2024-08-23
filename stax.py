@@ -1,4 +1,8 @@
 # staxle menu.py
+# ByToad114514
+# 仓库 in toad114514/Staxle
+# 部分代码使用 Gameye98/Lazymux
+# v1.03
 import os
 import requests
 import time
@@ -43,12 +47,8 @@ def main():
         print("3) PHP: 动态网站的重要一环，也是CMS和框架的必需品")
         print("4) Mysql: 动态网站不可缺失的服务器数据库")
         print("5) 安装其他类型的服务器")
-        print("  - 服务器管理工具")
-        print("01) 启动服务器")
-        print("02) 关闭服务器")
-        print("03) 配置引导")
-        print("04) Mysql 数据库管理器")
-        print("05) 重装服务器")
+        print("  ---------  ")
+        print("01) Server2me: Staxle 配套安装工具")
         print("00) 返回菜单")
         sel = input("Staxle/Server $:")
         if sel == "@":
@@ -62,6 +62,7 @@ def main():
         for sel in sel.split():
             if sel.strip() == "1": nginxins()
             elif sel.strip() == "2": apacheins()
+            elif sel.strip() == "01": os.system("python ./tools/server2me/main.py")
             elif sel.strip() == "5":
                 print("  其他类型的服务器")
                 print("1) Ngircd: IRC 服务器")

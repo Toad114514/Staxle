@@ -5,8 +5,8 @@ import socket
 import platform as plat
 from subprocess import check_output as inputstream
 class stax():
-    version = "v1.02"
-    version_num = 115
+    version = "v1.03"
+    version_num = 116
 
 stax_banner = """
    ______             __
@@ -121,38 +121,8 @@ def about_web():
 # 服务器命令
 def nginxins():
     aug()
-    os.system("wget http://nginx.org/download/nginx-1.14.2.tar.gz")
-    os.system("apt install gcc pcre pcre-devel openssl tar -y")
-    os.system("tar -xvf ./nginx-1.14.2.tar.gz -C /usr/local")
-    os.system("rm -rf ./nginx-1.14.2.tar.gz")
-    os.system("cd nginx-1.14.2")
-    os.system("""
-./configure \
---prefix=/usr/local/nginx \
---pid-path=/var/run/nginx/nginx.pid \
---lock-path=/var/lock/nginx.lock \
---error-log-path=/var/log/nginx/error.log \
---http-log-path=/var/log/nginx/access.log \
---with-http_gzip_static_module \
---http-client-body-temp-path=/var/temp/nginx/client \
---http-proxy-temp-path=/var/temp/nginx/proxy \
---http-fastcgi-temp-path=/var/temp/nginx/fastcgi \
---http-uwsgi-temp-path=/var/temp/nginx/uwsgi \
---http-scgi-temp-path=/var/temp/nginx/scgi \
---with-http_stub_status_module \
---with-http_ssl_module \
---with-file-aio \
---with-http_realip_module
-    """)
-    os.system("mkdir /var/temp/nginx -p")
-    os.system("make")
-    os.system("make install")
+    os.system("pkg install nginx")
     done("安装已完成。您的 nginx 文件夹已存放于 /usr/local/nginx")
-
-def nginxconfig():
-    aug()
-    os.system("vim /usr/local/nginx/conf/nginx.conf")
-    restart_program()
 
 def nginxstart():
     os.system("cd sbin")
@@ -206,8 +176,17 @@ def sshd():
     done("sshd 安装完成\n输入 sshd 启动")
 
 def proot_distro():
-    os.system("apt install proot-distro")
-    done("proot-distro 安装完成")
+    proot_distro_ins = os.popen("pkg list-installed|grep proot-distro")
+    if "proot-distro" not in proot_distro_ins.read():
+        os.system("apt install proot-distro")
+        done("proot-distro 安装完成")
+    else:
+        print("Proot-distro:")
+        print("proot-distro ls 查看可安装的proot")
+        print("proot-distro install <alisa> 安装proot")
+        print("proot-distro sh <alisa> 启动linux")
+        input("")
+        restart_program()
 
 # Termux
 def termux_repo():
@@ -249,16 +228,17 @@ def termux_desktop():
 #def tmoe():
 
 def neofetch():
-    if os.path.exists("/data/data/com.termux/files/usr/bin/neofetch"):
-        os.system("neofetch")
-        input("回车键继续")
-        restart_program()
-    else:
+    neofetch_ins = os.popen("pkg list-installed|grep neofetch")
+    if "neofetch" not in neofetch_ins.read():
         aug()
         os.system("apt install neofetch")
         os.system("neofetch")
         done("neofetch 安装完成\n输入 neofetch 查询信息\n或者在本工具的 termux 菜单里再次选择 neofetch 即可查询")
-    
+    else:
+        os.system("neofetch")
+        input("回车键继续")
+        restart_program()
+
 # hacker
 def nmap():
     aug()
@@ -364,8 +344,4 @@ def xsstrike():
 # Chexo
 def chexo():
     print("未完成")
-    restart_program()
-# cli-apk
-def capk():
-    os.system("python3 ./tool/capk/main.py")
     restart_program()
