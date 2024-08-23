@@ -130,6 +130,7 @@ def main():
             elif infor.strip() == "2": termux_repo()
             elif infor.strip() == "3": termux_storage()
             elif infor.strip() == "4": qurxin()
+            elif infor.strip() == "5": toolx()
             elif infor.strip() == "8": neofetch()
             elif infor.strip() == "9": os.system("termux-wake-lock")
             elif infor.strip() == "99": restart_program()

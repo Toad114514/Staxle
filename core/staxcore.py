@@ -8,6 +8,8 @@ class stax():
     version = "v1.03"
     version_num = 116
 
+
+
 stax_banner = """
    ______             __
   / __/ /____ ___ __ / /__
@@ -185,7 +187,7 @@ def proot_distro():
         print("proot-distro ls 查看可安装的proot")
         print("proot-distro install <alisa> 安装proot")
         print("proot-distro sh <alisa> 启动linux")
-        input("")
+        input("回车继续")
         restart_program()
 
 # Termux
@@ -221,7 +223,14 @@ def termux_desktop():
     os.system("./setup.sh --install")
     done("termux-desktop 安装完成\n您的设备拥有了一个桌面环境\n您可输入 cd ~/termux-desktop && ./setup.sh --uninstall 卸载它")
 
-#def tool_x():
+def toolx():
+    aug()
+    os.system("pkg install git")
+    os.system("git clone https://github.com/vaginessa/Tool-X.git")
+    os.system('mv Tool-X {}'.format(homeDir))
+    os.system("cd ~/Tool-X")
+    os.system("chmod +x ./install.axe")
+    os.system("./install.axe")
 
 #def lazymux():
 
