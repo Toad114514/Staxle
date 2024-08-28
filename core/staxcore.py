@@ -5,8 +5,8 @@ import socket
 import platform as plat
 from subprocess import check_output as inputstream
 class stax():
-    version = "v1.03"
-    version_num = 116
+    version = "v1.03.2"
+    version_num = 117
 
 
 
