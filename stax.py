@@ -2,7 +2,7 @@
 # ByToad114514
 # 仓库 in toad114514/Staxle
 # 部分代码使用 Gameye98/Lazymux
-# v1.03
+# v1.03.2
 import os
 import requests
 import time
@@ -17,22 +17,15 @@ def main():
   - 输入选项选择
 1) 服务器管理工具
 2) 桌面环境管理
-3) Termux/ut/zt
+3) Termux 配置
 4) 虚拟机
-5) 安装包管理工具
-6) 高级软件安装器
+5) 安装包管理
+6) 千年软件老字店
 7) 仓库源管理器
-8) 快捷启动菜单
-9) Hacker 工具
-10) 代码环境管理工具
-11) 脚本工具
-12) 网络检测
-13) VNC 管理
-14) 终端游戏
-15) PyList
-16) CHexo
-17) Staxle 面板后台
-18) 小工具
+8) Hacker 工具
+9) PyList
+10) CHexo
+11) Staxle 面板后台
   - 其他选项
 01) 获取公告     02) 更新 Staxle
 03) 关于         99) 退出
@@ -95,16 +88,35 @@ def main():
             writeStatus(0)
     # 桌面环境
     if sel.strip == "2":
+        print("termux图形化可玩性低，建议安装发行版然后在上面安装")
         print("  - 输入选项选择")
         print("1) termux-desktop: 安装 xfce4 在您的 termux 上")
-        print("2) 安装 VNC 服务器")
+        print("2) 安装 WM (窗口管理器)")
+        print("3) 安装 DE (桌面环境)")
         print("  - 桌面管理")
-        print("01) VNC 配置")
         print("99) 退出")
         sel = input("Staxle/DEManager $:")
+        if sel == "@":
+            sel = ""
+            for x in range(1,201):
+                sel += f"{x} "
+        if len(sel.split()) > 1:
+            writeStatus(1)
+        else:
+            writeStatus(0)
+        for demfor in sel.split():
+            if demfor.split() == "2" or demfor.split() == "02":
+                print(" 运行一些窗口在上面然后管理它们，有轻量的优点")
+                print("1) openbox: lxde桌面环境原装wm")
+                print("2) fvwm: 轻量且高度自定义")
+                print("3) wmaker: 类似 NextSTeP 的窗口环境")
+            elif demfor.strip() == "99": restart_program()
+            else: print("\n错误：无效输入");time.sleep(1);restart_program()
+        if readStatus():
+            writeStatus(0)
     # Termux
     if sel.strip() == "3":
-        print("有关于一系列termux的小工具")
+        print("termux 一些配置")
         print("1) proot-distro: 在 termux 上安装发行版 linux")
         print("2) termux 换源")
         print("3) 获取外部权限")
@@ -140,17 +152,66 @@ def main():
     # 软件小子
     if sel.strip() == "6":
         print("\n各种各样的玩意")
-        print("1) IDE")
-        print("2) 图像管理")
-        print("3) 视频多媒体")
+        print("1) IDE/开发环境/编辑器")
+        print("2) 多媒体")
+        print("3) 网络/互联网")
         print("4) 终端")
         print("5) zsh")
-        print("6) 小游戏")
+        print("6) 游戏")
         print("7) 无聊东西")
         print("99) 返回主菜单")
         sel = input("Staxle/Software $:")
+        if sel.split() == "1":
+            # 01
+            print(" i wanna be the creator(")
+            print("1) vim: 目前最强大的linux编辑器")
+            print("2) Emacs: 神的编辑器")
+            print("3) code-server: 网页版 VSCode")
+            print("4) Clang: 编译，爽！")
+            sel = input("Staxle/Software/Code $:")
+            if sel == "@":
+                sel = ""
+                for x in range(1,201):
+                    sel += f"{x} "
+            if len(sel.split()) > 1:
+                writeStatus(1)
+            else:
+                writeStatus(0)
+            for infor in sel.split():
+                if infor.strip() == "1": vim()
+                elif infor.strip() == "2": emacs()
+                elif infor.strip() == "3": code-server()
+                elif infor.strip() == "4": clang()
+                elif infor.strip() == "99": restart_program()
+                else: print("\n错误：无效输入");time.sleep(1);restart_program()
+            if readStatus():
+                writeStatus(0)
+        elif sel.split() == "3":
+            # 02
+            print(" 网上冲浪")
+            print("1) w3m: 终端式网页浏览器")
+            print("2) weechat: 简单的 IRC 聊天室")
+            sel = input("Staxle/Software/Internet $:")
+            if sel == "@":
+                sel = ""
+                for x in range(1,201):
+                    sel += f"{x} "
+            if len(sel.split()) > 1:
+                writeStatus(1)
+            else:
+                writeStatus(0)
+            for infor in sel.split():
+                if infor.strip() == "1": w3m()
+                elif infor.strip() == "2": weechat()
+                elif infor.strip() == "99": restart_program()
+                else: print("\n错误：无效输入");time.sleep(1);restart_program()
+            if readStatus():
+                writeStatus(0)
+        elif sel.strip() == "99": restart_program()
+        else: print("\n错误：无效输入");time.sleep(1);restart_program()
+        
     # Hacker
-    if sel.strip() == "9":
+    if sel.strip() == "8":
         print("\ntermux + 黑客 = ?\n本菜单大部分工具全部需要 root!")
         print("1) 信息分析")
         print("2) 网络工具")
@@ -159,6 +220,7 @@ def main():
         print("5) WiFi 攻击")
         print("6) 密码爆破")
         print("7) 逆向工程")
+        print("8) 试炼靶场")
         print("99) 返回上一菜单")
         sel = input("Staxle/Hacker $:")
         if sel == "@":
@@ -232,6 +294,7 @@ def main():
                     if infor.strip() == "1": nmap()
                     elif infor.strip() == "2": goldeneye()
                     elif infor.strip() == "3": evilurl()
+                    elif infor.strip() == "7": xsstrike()
                     elif infor.strip() == "99": restart_program()
                     else: print("\n错误：无效输入");time.sleep(1);restart_program()
                 if readStatus():
@@ -288,35 +351,17 @@ def main():
             writeStatus(0)
     # 在线更新
     if sel.strip() == "02":
-        resp = requests.get('https://toad114514.github.io/staxle/version.json')
-        if resp.status_code == 200:
-            getback = json.loads(resp.text)
-            if getback["version-code"] >= stax.version_num:
-                print("有新版本更新")
-                print("版本", getback["version"])
-                print("版本号", getback["version-code"])
-                print("版本类型", getback["version-type"])
-                print("版本描述", getback["version-desc"])
-                backnew = input("您是否需要更新?[y/n]")
-                if backnew == "y":
-                    os.system("clear")
-                    print("\n更新向导")
-                    print("正在更新 Staxle 至", getback["version"])
-                    time.sleep(1)
-                    os.system("git pull")
-                    print("更新完成，重新启动 staxle 即可")
-                    sys.exit()
-            else:
-                print("恭喜，你现在使用的就是最新版本！")
-                backnew = input("按下任意键返回")
-                restart_program()
+        os.system("git pull")
+        print("更新完成，重新启动 staxle 即可")
+        os._exit(0)
     if sel.strip() == "01":
         resp = requests.get('https://toad114514.github.io/staxle/board.txt')
         if resp.status_code == 200:
             print(resp.text)
+        input("回车键继续")
         restart_program()
     if sel.strip() == "03": about()
-    if sel.strip() == "17":
+    if sel.strip() == "11":
         os.system("python web.py")
         restart_program()
     if sel.strip() == "99":

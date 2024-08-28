@@ -354,3 +354,36 @@ def xsstrike():
 def chexo():
     print("未完成")
     restart_program()
+
+# 软件中心
+## IDE
+def vim():
+    aug()
+    os.system("pkg install vim")
+    done("vim 安装完成\n输入 vim 进入编辑器")
+
+def emacs():
+    aug()
+    os.system("pkg install emacs")
+    done("Emacs 安装完成\n输入 Emacs 进入编辑器")
+
+def code_server():
+    aug()
+    os.system("pkg install tur-repo code-server")
+    code_option()
+    done("Code-Server 安装完成\ncode-server 路径位于 ~/.config/code-server/config.yaml\n启动：code-server")
+
+def clang():
+    aug()
+    os.system("pkg install clang")
+    done("clang 安装成功")
+## 网络/互联网
+def w3m():
+    aug()
+    os.system("pkg install w3m")
+    done("w3m 安装完成\n用法：w3m <链接>")
+
+def weechat():
+    aug()
+    os.system("pkg install weechat")
+    done("weechat 安装完成\n启动：weechat")

@@ -25,8 +25,11 @@ def main():
           out.put_text("动态页面、CMS和框架的基础"),
           out.put_button("安装",onclick=lambda: de03()),
           out.put_html("<h3>IRC 服务器</h3>"),
-          out.put_text("即时聊天通讯服务器端"),
+          out.put_text("即时聊天通讯服务器"),
           out.put_button("安装",onclick=lambda: de04()),
+          out.put_html("<h3>code-server</h3>"),
+          out.put_text("浏览器上的 VSCode"),
+          out.put_button("安装",onclick=lambda: de05()),
        ]},
        {"title":"桌面环境","content":[
           out.put_markdown("# Shit")
@@ -51,38 +54,35 @@ def done(text):
     out.popup("操作完成！",text)
     
 def new():
-    resp = requests.get('https://toad114514.github.io/staxle/version.json')
-    getback = json.loads(resp.text)
-    if getback["version-code"] >= stax.version_num:
-        ver = getback["version"]
-        vernum = getback["version-code"]
-        vertype = getback["version-type"]
-        verdesc = getback["version-desc"]
-        out.popup("有新版本更新",out.put_text(ver+"("+vernum+") - "+vertype+"\n更新内容：\n"+verdesc))
-        out.toast("正在更新 Staxle 至"+getback["version"])
-        time.sleep(1)
-        os.system("git pull")
-        out.toast("更新完成，请重启 Staxle")
-        time.sleep(0.2)
-        os._exit()
-    else:
-        out.toast("👍你目前用的 Staxle 是最新版本！")
+    os.system("git pull")
+    out.toast("更新完成，请重启 Staxle")
+    time.sleep(0.2)
+    os._exit(0)
 
 def de01():
+    out.toast("请等待 nginx 安装完成")
     nginxins()
     done("nginx安装完成")
 
 def de02():
+    out.toast("请等待 apache 安装完成")
     apacheins()
     done("apache安装完成，输入 httpd 启动")
 
 def de03():
+    out.toast("请等待 php 安装完成")
     phpins()
     done("php安装完成，输入 php-fpm 启动")
 
 def de04():
+    out.toast("请等待 ngircd 安装完成")
     ircins()
     done("ngircd安装完成")
+
+def de05():
+    out.toast("请等待 code-server 安装完成")
+    code-server()
+    done("code-server安装完成")
 
 def close():
     out.toast("🤣👉面板后台已关闭 请转至终端")
