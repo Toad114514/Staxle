@@ -76,9 +76,9 @@ def main():
                 else:
                     writeStatus(0)
                 for osfor in sel.split():
-                    if sel.strip() == "1": ircins()
-                    elif sel.strip() == "1": sshd()
-                    elif sel.strip() == "99": restart_program()
+                    if osfor.strip() == "1": ircins()
+                    elif osfor.strip() == "5": sshd()
+                    elif osfor.strip() == "99": restart_program()
                     else: print("\n错误：无效输入");time.sleep(1);restart_program()
                 if readStatus():
                     writeStatus(0)
@@ -109,7 +109,22 @@ def main():
                 print(" 运行一些窗口在上面然后管理它们，有轻量的优点")
                 print("1) openbox: lxde桌面环境原装wm")
                 print("2) fvwm: 轻量且高度自定义")
-                print("3) wmaker: 类似 NextSTeP 的窗口环境")
+                print("3) wmaker: 类似 NextSTeP 的窗口管理器")
+                sel = input("Staxle/WM $:")
+                if sel == "@":
+                    sel = ""
+                    for x in range(1,201):
+                        sel += f"{x} "
+                if len(sel.split()) > 1:
+                    writeStatus(1)
+                else:
+                    writeStatus(0)
+                for wmifor in sel.split():
+                    if wmifor.split() == "1": openbox()
+                    elif wmifor.strip() == "99": restart_program()
+                    else: print("\n错误：无效输入");time.sleep(1);restart_program()
+                if readStatus():
+                    writeStatus(0)
             elif demfor.strip() == "99": restart_program()
             else: print("\n错误：无效输入");time.sleep(1);restart_program()
         if readStatus():
@@ -152,6 +167,7 @@ def main():
     # 软件小子
     if sel.strip() == "6":
         print("\n各种各样的玩意")
+        print("注：本店中带*号的选项为桌面环境使用，这些应用需要提前安装好桌面环境")
         print("1) IDE/开发环境/编辑器")
         print("2) 多媒体")
         print("3) 网络/互联网")

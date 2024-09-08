@@ -5,18 +5,38 @@ import socket
 import platform as plat
 from subprocess import check_output as inputstream
 class stax():
-    version = "v1.03.2"
-    version_num = 117
+    version = "v1.03.3"
+    version_num = 120
 
-
+def output(type,msg):
+    result = ""
+    if type == "e":
+        result = '\033[31m' + '[ERR] ' + '\033[0m'
+    if type == "d":
+        result = '\033[32m' + '[DONE] ' + '\033[0m'
+    if type == "w":
+        result = '\033[33m' + '[WRN] ' + '\033[0m'
+    if type == "i":
+        result = '\033[34m' + '[INFO] ' + '\033[0m'
+    result = result + time.strftime("%H:%M:%S") + " " + msg
+    return result
+    
 
 stax_banner = """
-   ______             __
-  / __/ /____ ___ __ / /__
- _\ \/ __/ _ `/\ \ // / -_)
-/___/\__/\_,_//_\_\/_/\__/
-   All-in-One termux Tool-panel
+   \033[31m____\033[34m__  \033[33m    \033[32m    \033[31m   _\033[34m_
+  \033[32m/ __\033[31m/ /_\033[34m___ \033[33m___ \033[32m__ /\033[31m /__
+ \033[33m_\ \\\033[32m/ __\033[31m/ _ \033[34m`/\ \033[33m\ //\033[32m / -_)
+\033[34m/___\033[33m/\__\033[32m/\_,\033[31m_//_\033[34m\_\/\033[33m_/\__/
+   \033[0mAll-in-One \033[32mtermux\033[0m Tool-panel
             By Toad114514
+"""
+stax_web_about = """
+    ___  __                        __
+  / __/ / /_  ___   ___  __  / /__
+ _\ \  / __/ /_ `/\ \ // / -_)
+/___/ \__/  \_,_//_\_\/_/\__/
+   All-in-One termux Tool-panel
+       By Toad114514
 """
 backtomenu_banner = """
 99) 回到主页面
@@ -66,7 +86,7 @@ def backtomenu_option():
 
 def banner():
 	print(stax_banner)
-	print(stax.version + "    欢迎 "+user+"/"+str(plat.system()))
+	print(stax.version+"("+stax.version_num+")"+"    欢迎 "+user+"/"+str(plat.system()))
 
 def err():
     print("无效输入。")
@@ -118,7 +138,7 @@ def about_web():
     about02 = str(plat.system())+"("+str(plat.processor())+"/"+str(plat.architecture())+")"
     about03 = "Python "+str(plat.python_version())+"("+str(plat.python_implementation())+")"
     about04 = "ip:"+ip
-    return stax_banner + "\n终端设备：\n" + about01 + "\n" + about02 + "\m" + about03 + "\n" + about04
+    return stax_web_about + "\n终端设备：\n" + about01 + "\n" + about02 + "\m" + about03 + "\n" + about04
     
 # 服务器命令
 def nginxins():
@@ -189,7 +209,36 @@ def proot_distro():
         print("proot-distro sh <alisa> 启动linux")
         input("回车继续")
         restart_program()
-
+# 桌面环境
+def openbox():
+    openbox_ins = os.popen("pkg list-installed|grep openbox")
+    if "neofetch" not in neofetch_ins.read():
+        aug()
+        os.system("apt install x11-repo -y")
+        os.system("apt install openbox tint2 aterm")
+        openbox_ins = os.popen("pkg list-installed|grep tigervnc")
+        if "neofetch" not in neofetch_ins.read():
+            print("接下来需要配置 vnc 设置，三个输入框依次是：\n输入vnc密码\n再次输入vnc密码\n启用查看模式（不可操控）\n前两个框输入你的vnc密码，后面输入n关闭\n按下回车进行配置")
+            os.system("vncserver -localhost")
+        else:
+            print(output("d","已安装 tigervnc，跳过 vnc 配置..."))
+        os.system(ct.info(),"写入 vnc 启动脚本...")
+        startvnc = "openbox &\ntint2 &\naterm &"
+        os.system("rm -rf ~/.vncxstartup")
+        os.system(f"echo {startvnc} > ~/.vnc/xstartup")
+        done("openbox 和 vnc 安装成功\n输入 vncserver 启动桌面环境")
+    else:
+        print("已经安装了 openbox 窗口管理器，您要...\n1) 卸载 openbox（保留vnc服务）\n2) 卸载 openbox（不保留vnc服务）\n3) 启动该桌面环境\n4) 返回主菜单")
+        sel = input("Staxle/installed $:")
+        if sel == "1":
+            os.system("apt remove openbox aterm tint2")
+            done("openbox 删除成功\n但是vnc服务没有删除")
+        elif sel == "2":
+            os.system("apt remove openbox aterm tint2 tigervnc")
+            print(output("i","正在删除 vnc 配置文件"))
+            os.system("rm -rf ~/.vnc")
+            done("openbox 和 vnc 服务卸载完成")
+    
 # Termux
 def termux_repo():
     os.system("termux-change-repo")
@@ -203,7 +252,7 @@ def termux_storage():
 
 def qurxin():
     aug()
-    os.system("apt install mpv figlet")
+    os.system("apt install mpv figlet -y")
     os.system("pip install lolcat")
     os.system("git clone https://github.com/fikrado/qurxin")
     os.system('mv qurxin {}'.format(homeDir))
@@ -213,7 +262,7 @@ def qurxin():
     done("qurxin 安装完成\n重启 termux 便可查看")
 
 def termux_desktop():
-    print("你可能需要去查询向导，详细看 https://github.com/adi1090x/termux-desktop")
+    print("你可能需要去查询向导，详细请访问 https://github.com/adi1090x/termux-desktop")
     time.sleep(1.5)
     aug()
     os.system("git clone --depth=1 https://github.com/adi1090x/termux-desktop.git")
@@ -225,7 +274,7 @@ def termux_desktop():
 
 def toolx():
     aug()
-    os.system("pkg install git")
+    os.system("pkg install git -y")
     os.system("git clone https://github.com/vaginessa/Tool-X.git")
     os.system('mv Tool-X {}'.format(homeDir))
     os.system("cd ~/Tool-X")
@@ -240,7 +289,7 @@ def neofetch():
     neofetch_ins = os.popen("pkg list-installed|grep neofetch")
     if "neofetch" not in neofetch_ins.read():
         aug()
-        os.system("apt install neofetch")
+        os.system("apt install neofetch -y")
         os.system("neofetch")
         done("neofetch 安装完成\n输入 neofetch 查询信息\n或者在本工具的 termux 菜单里再次选择 neofetch 即可查询")
     else:
@@ -256,14 +305,14 @@ def nmap():
 
 def sqlmap():
     aug()
-    os.system("apt install git python2")
+    os.system("apt install git python2 -y")
     os.system("git clone https://github.com/sqlmapproject/sqlmap")
     os.system('mv sqlmap {}'.format(homeDir))
     done("Sqlmap 安装完成")
 
 def evilurl():
     aug()
-    os.system("apt install git python2 python3")
+    os.system("apt install git python2 python3 -y")
     os.system("git clone https://github.com/UndeadSec/EvilURL")
     os.system('mv sqlmap {}'.format(homeDir))
     done("EvilUrl 安装完成")
@@ -272,7 +321,7 @@ def wifite2():
     if int(inputstream("id -u".split()).decode("utf8")) != 0: print("\n你设备都没Root还想黑别人家WiFi？食懵你啊！");
     else:
         aug()
-        os.system("apt install git python2 python3")
+        os.system("apt install git python2 python3 -y")
         os.system("git clone https://github.com/derv82/wifite2")
         os.system('mv wifite2 {}'.format(homeDir))
         done("wifite2 安装完成")
@@ -281,7 +330,7 @@ def wifiphisher():
     if int(inputstream("id -u".split()).decode("utf8")) != 0: print("\n你设备都没Root还想黑别人家WiFi？食懵你啊！");
     else:
         aug()
-        os.system("apt install git python3")
+        os.system("apt install git python3 -y")
         os.system("git clone https://github.com/wifiphisher/wifiphisher")
         os.system('mv wifiphisher {}'.format(HomeDir))
         done("wifiphisher 安装完成")
@@ -295,7 +344,7 @@ def apktool():
 
 def eagleeye():
     aug()
-    os.system("apt install python3")
+    os.system("apt install python3 -y")
     os.system("git clone https://github.com/ThoughtfulDev/EagleEye")
     os.system('mv EagleEye {}'.format(homeDir))
     os.system("cd ~/EagleEye")
@@ -312,7 +361,7 @@ def emailall():
 
 def arl():
     aug()
-    os.system("apt install wget")
+    os.system("apt install wget -y")
     os.system("wget https://raw.githubusercontent.com/Aabyss-Team/ARL/master/misc/setup-arl.sh")
     os.system('mv setup-arl.sh {}'.format(homeDir))
     os.system("cd ~")
@@ -324,13 +373,13 @@ def mapeye():
     aug()
     os.system("git clone https://github.com/bhikandeshmukh/MapEye.git")
     os.system('mv MapEye {}'.format(homeDir))
-    os.system("apt install python php")
+    os.system("apt install python php -y")
     os.system("pip3 install requests")
     done("MapEye 安装完成")
 
 def sqlscan():
     aug()
-    os.system("apt install php curl")
+    os.system("apt install php curl -y")
     os.system("curl https://raw.githubusercontent.com/Cvar1984/sqlscan/dev/build/main.phar --output $PREFIX/bin/sqlscan")
     os.system("chmod +x $PREFIX/bin/sqlscan")
     done("Sqlscan 安装完成\n输入 sqlscan 使用")
@@ -345,7 +394,7 @@ def sqlmate():
 
 def xsstrike():
     aug()
-    os.system('apt install git python2')
+    os.system('apt install git python2 -y')
     os.system('python2 -m pip install fuzzywuzzy prettytable mechanize HTMLParser')
     os.system('git clone https://github.com/s0md3v/XSStrike')
     os.system('mv XSStrike {}'.format(homeDir))
@@ -359,31 +408,32 @@ def chexo():
 ## IDE
 def vim():
     aug()
-    os.system("pkg install vim")
+    os.system("pkg install vim -y")
     done("vim 安装完成\n输入 vim 进入编辑器")
 
 def emacs():
     aug()
-    os.system("pkg install emacs")
+    os.system("pkg install emacs -y")
     done("Emacs 安装完成\n输入 Emacs 进入编辑器")
 
 def code_server():
     aug()
-    os.system("pkg install tur-repo code-server")
+    os.system("pkg install tur-repo -y")
+    os.system("apt install code-server -y")
     code_option()
     done("Code-Server 安装完成\ncode-server 路径位于 ~/.config/code-server/config.yaml\n启动：code-server")
 
 def clang():
     aug()
-    os.system("pkg install clang")
+    os.system("pkg install clang -y")
     done("clang 安装成功")
 ## 网络/互联网
 def w3m():
     aug()
-    os.system("pkg install w3m")
+    os.system("pkg install w3m -y")
     done("w3m 安装完成\n用法：w3m <链接>")
 
 def weechat():
     aug()
-    os.system("pkg install weechat")
+    os.system("pkg install weechat -y")
     done("weechat 安装完成\n启动：weechat")
