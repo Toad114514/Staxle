@@ -5,8 +5,8 @@ import socket
 import platform as plat
 from subprocess import check_output as inputstream
 class stax():
-    version = "v1.03.3"
-    version_num = 120
+    version = "v1.03.4"
+    version_num = 125
 
 def output(type,msg):
     result = ""
@@ -42,6 +42,10 @@ backtomenu_banner = """
 99) 回到主页面
 00) 退出 Staxle
 """
+
+whoami = os.popen("whoami").read()
+kenrel = os.popen("uname -s").read()
+osys = os.popen("uname -o").read()
 
 prefix = os.getenv("PREFIX")
 cache_1 = prefix+"/tmp/staxle"
@@ -86,7 +90,7 @@ def backtomenu_option():
 
 def banner():
 	print(stax_banner)
-	print(stax.version+"("+stax.version_num+")"+"    欢迎 "+user+"/"+str(plat.system()))
+	print(stax.version+"("+str(stax.version_num)+")"+"    欢迎 "+user+"/"+str(plat.system()))
 
 def err():
     print("无效输入。")
@@ -126,8 +130,7 @@ homeDir = loadConfigFile()
 def about():
     print(stax_banner)
     print("Staxle "+stax.version+" ("+str(stax.version_num)+")")
-    print("终端设备：")
-    print(str(plat.system())+"("+str(plat.processor())+"/"+str(plat.architecture())+")")
+    print(whoami+"@"+kenrel+"/"+osys)
     print("Python "+str(plat.python_version())+"("+str(plat.python_implementation())+")")
     print("ip:",ip)
     input("按下回车键回到菜单")
@@ -212,17 +215,17 @@ def proot_distro():
 # 桌面环境
 def openbox():
     openbox_ins = os.popen("pkg list-installed|grep openbox")
-    if "neofetch" not in neofetch_ins.read():
+    if "openbox" not in openbox_ins.read():
         aug()
         os.system("apt install x11-repo -y")
         os.system("apt install openbox tint2 aterm")
-        openbox_ins = os.popen("pkg list-installed|grep tigervnc")
-        if "neofetch" not in neofetch_ins.read():
+        tigervnc_ins = os.popen("pkg list-installed|grep tigervnc")
+        if "tigervnc" not in tigervnc_ins.read():
             print("接下来需要配置 vnc 设置，三个输入框依次是：\n输入vnc密码\n再次输入vnc密码\n启用查看模式（不可操控）\n前两个框输入你的vnc密码，后面输入n关闭\n按下回车进行配置")
             os.system("vncserver -localhost")
         else:
             print(output("d","已安装 tigervnc，跳过 vnc 配置..."))
-        os.system(ct.info(),"写入 vnc 启动脚本...")
+        print("写入 vnc 启动脚本...")
         startvnc = "openbox &\ntint2 &\naterm &"
         os.system("rm -rf ~/.vncxstartup")
         os.system(f"echo {startvnc} > ~/.vnc/xstartup")
@@ -232,12 +235,21 @@ def openbox():
         sel = input("Staxle/installed $:")
         if sel == "1":
             os.system("apt remove openbox aterm tint2")
+            os.system("apt autoremove")
             done("openbox 删除成功\n但是vnc服务没有删除")
         elif sel == "2":
             os.system("apt remove openbox aterm tint2 tigervnc")
+            os.system("apt autoremove")
             print(output("i","正在删除 vnc 配置文件"))
             os.system("rm -rf ~/.vnc")
             done("openbox 和 vnc 服务卸载完成")
+        elif sel == "3":
+            os.system("vncserver")
+            restart_program()
+        elif sel == "4":
+            restart_program()
+        else:
+            restart_program()
     
 # Termux
 def termux_repo():

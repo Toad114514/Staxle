@@ -2,7 +2,7 @@
 # ByToad114514
 # 仓库 in toad114514/Staxle
 # 部分代码使用 Gameye98/Lazymux
-# v1.03.2
+# v1.03.4
 import os
 import requests
 import time
@@ -87,7 +87,7 @@ def main():
         if readStatus():
             writeStatus(0)
     # 桌面环境
-    if sel.strip == "2":
+    if sel.strip() == "2":
         print("termux图形化可玩性低，建议安装发行版然后在上面安装")
         print("  - 输入选项选择")
         print("1) termux-desktop: 安装 xfce4 在您的 termux 上")
@@ -96,39 +96,28 @@ def main():
         print("  - 桌面管理")
         print("99) 退出")
         sel = input("Staxle/DEManager $:")
-        if sel == "@":
-            sel = ""
-            for x in range(1,201):
-                sel += f"{x} "
-        if len(sel.split()) > 1:
-            writeStatus(1)
-        else:
-            writeStatus(0)
-        for demfor in sel.split():
-            if demfor.split() == "2" or demfor.split() == "02":
-                print(" 运行一些窗口在上面然后管理它们，有轻量的优点")
-                print("1) openbox: lxde桌面环境原装wm")
-                print("2) fvwm: 轻量且高度自定义")
-                print("3) wmaker: 类似 NextSTeP 的窗口管理器")
-                sel = input("Staxle/WM $:")
-                if sel == "@":
-                    sel = ""
-                    for x in range(1,201):
-                        sel += f"{x} "
-                if len(sel.split()) > 1:
-                    writeStatus(1)
-                else:
-                    writeStatus(0)
-                for wmifor in sel.split():
-                    if wmifor.split() == "1": openbox()
-                    elif wmifor.strip() == "99": restart_program()
-                    else: print("\n错误：无效输入");time.sleep(1);restart_program()
-                if readStatus():
-                    writeStatus(0)
-            elif demfor.strip() == "99": restart_program()
-            else: print("\n错误：无效输入");time.sleep(1);restart_program()
-        if readStatus():
-            writeStatus(0)
+        if sel.strip() == "2" or sel.strip() == "02":
+            print(" 运行一些窗口在上面然后管理它们，有轻量的优点")
+            print("1) openbox: lxde桌面环境原装wm")
+            print("2) fvwm: 轻量且高度自定义")
+            print("3) wmaker: 类似 NextSTeP 的窗口管理器")
+            sel = input("Staxle/WM $:")
+            if sel == "@":
+                sel = ""
+                for x in range(1,201):
+                    sel += f"{x} "
+            if len(sel.split()) > 1:
+                writeStatus(1)
+            else:
+                writeStatus(0)
+            for wmifor in sel.split():
+                if wmifor.strip() == "1": openbox()
+                elif wmifor.strip() == "99": restart_program()
+                else: print("\n错误：无效输入");time.sleep(1);restart_program()
+            if readStatus():
+                writeStatus(0)
+        elif demfor.strip() == "99": restart_program()
+        else: print("\n错误：无效输入");time.sleep(1);restart_program()
     # Termux
     if sel.strip() == "3":
         print("termux 一些配置")
