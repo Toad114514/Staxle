@@ -179,12 +179,17 @@ def apachestop():
 
 def phpins():
     aug()
-    pkg("php libapache2-mod-php php-fpm")
-    done("PHP 安装成功，安装后自动与 Nginx 和 Apache 配合")
+    os.system("apt install php libapache2-mod-php -y")
+    sel = input("输入你目前使用的服务器\n1) Nginx\n2) Apache\n输入：")
+    if sel == "1":
+        os.system("apt install php-fpm -y")
+    elif sel == "2":
+        os.system("apt install apache-php -y")
+    done("PHP 安装成功，如果要配置 php 请启动 Server2me")
 
 def ircins():
     aug()
-    os.system("apt install ngircd")
+    os.system("apt install ngircd -y")
     done("ngircd 安装成功，配置文件在 /etc/ngircd/ 里")
 
 def ircstart():
@@ -330,7 +335,7 @@ def evilurl():
     done("EvilUrl 安装完成")
 
 def wifite2():
-    if int(inputstream("id -u".split()).decode("utf8")) != 0: print("\n你设备都没Root还想黑别人家WiFi？食懵你啊！");
+    if int(inputstream("id -u".split()).decode("utf8")) != 0: print("\n你设备都没Root还想黑别人家WiFi？食懵你啊！"); restart_program()
     else:
         aug()
         os.system("apt install git python2 python3 -y")
@@ -339,7 +344,7 @@ def wifite2():
         done("wifite2 安装完成")
 
 def wifiphisher():
-    if int(inputstream("id -u".split()).decode("utf8")) != 0: print("\n你设备都没Root还想黑别人家WiFi？食懵你啊！");
+    if int(inputstream("id -u".split()).decode("utf8")) != 0: print("\n你设备都没Root还想黑别人家WiFi？食懵你啊！"); restart_program()
     else:
         aug()
         os.system("apt install git python3 -y")
@@ -411,6 +416,28 @@ def xsstrike():
     os.system('git clone https://github.com/s0md3v/XSStrike')
     os.system('mv XSStrike {}'.format(homeDir))
     done("XSStrike 安装完成")
+
+def metasploit():
+    aug()
+    print(output("i","安装依赖"))
+    os.system("pkg install -y binutils python autoconf bison clang coreutils curl findutils apr apr-util postgresql openssl readline libffi libgmp libpcap libsqlite libgrpc libtool libxml2 libxslt ncurses make ncurses-utils ncurses git wget unzip zip tar termux-tools termux-elf-cleaner pkg-config git ruby -o Dpkg::Options::='--force-confnew'")
+    os.system("python3 -m pip install --upgrade pip")
+    os.system("python3 -m pip install requests")
+    os.system("git clone https://github.com/rapid7/metasploit-framework.git --depth=1")
+    os.system('mv metasploit-framework {}'.format(homeDir))
+    os.system("cd $HOME/metasploit-framework")
+    os.system("gem install bundler")
+    os.system("declare NOKOGIRI_VERSION=$(cat Gemfile.lock | grep -i nokogiri | sed 's/nokogiri [\(\)]/(/g' | cut -d ' ' -f 5 | grep -oP '(.).[[:digit:]][\w+]?[.].')")
+    os.system("gem install nokogiri -v $NOKOGIRI_VERSION -- --use-system-libraries")
+    os.system("gem install actionpack")
+    os.system("gem install activesupport")
+    os.system("bundle update --bundler")
+    os.system("bundle install -j$(nproc --all)")
+    print(output("i","安装 Metasploit"))
+    os.system("mkdir -p $PREFIX/var/lib/postgresql >/dev/null 2>&1")
+    os.system("initdb $PREFIX/var/lib/postgresql  >/dev/null 2>&1")
+    done("Metasploit 安装完成\n执行 cd ~/metasploit-framework/ && ./msfconsole 启动")
+
 # Chexo
 def chexo():
     print("未完成")

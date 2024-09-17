@@ -2,7 +2,7 @@
 # ByToad114514
 # 仓库 in toad114514/Staxle
 # 部分代码使用 Gameye98/Lazymux
-# v1.03.4
+# v1.03.5
 import os
 import requests
 import time
@@ -55,6 +55,7 @@ def main():
         for sel in sel.split():
             if sel.strip() == "1": nginxins()
             elif sel.strip() == "2": apacheins()
+            elif sel.strip() == "3": phpins()
             elif sel.strip() == "01": os.system("python ./tools/server2me/main.py")
             elif sel.strip() == "5":
                 print("  其他类型的服务器")
@@ -320,7 +321,7 @@ def main():
                 else:
                     writeStatus(0)
                 for infor in sel.split():
-                    if infor.strip() == "1": nmap()
+                    if infor.strip() == "1": metasploit()
                     elif infor.strip() == "2": sqlmap()
                     elif infor.strip() == "3": evilurl()
                     elif infor.strip() == "99": restart_program()
@@ -366,6 +367,9 @@ def main():
         input("回车键继续")
         restart_program()
     if sel.strip() == "03": about()
+    if sel.strip() == "10":
+        os.system("cd ./tools/chexo/ && python main.py")
+        restart_program()
     if sel.strip() == "11":
         os.system("python web.py")
         restart_program()
