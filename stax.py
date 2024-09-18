@@ -24,7 +24,7 @@ def main():
 7) 仓库源管理器
 8) Hacker 工具
 9) PyList
-10) CHexo
+10) 各种小工具
 11) Staxle 面板后台
   - 其他选项
 01) 获取公告     02) 更新 Staxle
@@ -368,8 +368,17 @@ def main():
         restart_program()
     if sel.strip() == "03": about()
     if sel.strip() == "10":
-        os.system("cd ./tools/chexo/ && python main.py")
-        restart_program()
+        print("\n  各种各样的工具，这些脚本都存储在了 tools 文件夹")
+        print("1) Chexo: TUI 化的 cli-hexo")
+        print("2) web-panel: 启动自带的网站面板")
+        print("3) EvilUrl: 检测隐藏的恶意链接")
+        print("99) 回到 Staxle 菜单")
+        sel = input("Staxle/Termux $:")
+        if sel.strip() == "1":
+            os.system("cd ./tools/chexo/ && python main.py")
+            restart_program()
+        elif sel.strip() == "99": restart_program()
+        else: print("无效输入。");restart_program()
     if sel.strip() == "11":
         os.system("python web.py")
         restart_program()

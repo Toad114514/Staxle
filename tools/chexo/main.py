@@ -1,6 +1,40 @@
 import os
 import time
 import json
+import yaml
+
+debug_skip_check = True
+
+def info(hexo_dir):
+    print("============博客信息=============")
+    with open(hexo_dir+"/package.json","r") as fe:
+        hexo_json = json.loads(fe.read())
+    hexo_version = hexo_json["hexo"]["version"]
+    print("Hexo 版本："+hexo_version)
+    with open(hexo_dir+"/_config.yml","r") as cread:
+        document = cread.read()
+    hconf = yaml.load(document, Loader=yaml.Loader)
+    blog = hconf["title"]
+    print("博客标题："+blog)
+    sub = hconf["subtitle"]
+    print("博客副标题："+sub)
+    url = hconf["url"]
+    print("博客地址："+url)
+    author = hconf["author"]
+    print("博客作者："+author)
+    theme = hconf["theme"]
+    print("主题："+theme)
+    if hconf["deploy"]["type"] == "git":
+        dept = "Git 部署 (Pages)"
+        dep_repo = hconf["deploy"]["repository"]
+        dep_branch = hconf["deploy"]["branch"]
+        print(dept)
+        print("  部署仓库："+dep_repo)
+        print("  部署分支："+dep_branch)
+    else:
+        dept = "其他部署方式"
+        print(dept)    
+    input("回车键继续")
 
 def inithexo():
     os.system("clear")
@@ -83,13 +117,24 @@ def main():
             ttmp = filetitle[listdisp]
             fntmp = listfile[listdisp]
             print(str(listdisp)+"        "+ttmp+"          "+fntmp)
-        getback = input("输入序号：")
+        getback = input("输入序号（输入其他则返回主菜单）：")
         if int(getback) < 0 or int(getback) > len(listfile):
             print("无效输入")
             time.sleep(0.7)
             main()
         else:
-            os.system("vim "+hexo_dir+"/source/_posts/"+listfile[int(getback)])
+            print("你选择了文章 \""+filetitle[int(getback)]+"\"，你要对该文章干什么？")
+            print("1) 编辑该文章")
+            print("2) 删除该文章")
+            print("3) 退出编辑")
+            sel = input("输入选项：")
+            if sel == "1":
+                os.system("vim "+hexo_dir+"/source/_posts/"+listfile[int(getback)])
+            elif sel == "2":
+                sel = input("你确定要删除它吗？[y/n]")
+                if sel =="y": os.system("rm "+hexo_dir+"/source/_posts/"+listfile[int(getback)])
+                else: print("取消操作")
+            else: print("正在返回主页面")
             main()
     if sel.strip() == "3":
         os.system("vim "+hexo_dir+"/_config.yml")
@@ -103,6 +148,9 @@ def main():
     if sel.strip() == "8":
         os.system("hexo g")
         main()
+    if sel.strip() == "9":
+        info(hexo_dir)
+        main()
     if sel.strip() == "99":
         os.system("clear")
         os._exit(1)
@@ -110,11 +158,17 @@ def main():
 
 home_dir = os.popen("echo $HOME").read()
 home_dir = home_dir.replace("\n","")
-print("正在检查 Hexo 环境...")
+if debug_skip_check == True:
+    with open("./hexo-dir","r") as file_check:
+        hexo_dir = file_check.read()
+        hexo_dir = hexo_dir.replace("~",home_dir)
+    main()
+print("正在检查 npm 环境...")
 time.sleep(1)
 if "nodejs-lts" not in os.popen("pkg list-installed|grep nodejs-lts").read():
     os.system("[!] 没有 nodejs 环境!自动安装")
     os.system("pkg install nodejs-lts -y")
+print("正在检查 hexo 环境...")
 if "hexo-cli" not in os.popen("npm ls -g|grep hexo-cli").read():
     os.system("[!] 缺失 hexo-cli 包！")
     os.system("npm install hexo-cli")
@@ -122,7 +176,7 @@ if "hexo-cli" not in os.popen("npm ls -g|grep hexo-cli").read():
 print("检查 CHexo 文件配置")
 time.sleep(1)
 if os.path.exists("./hexo-dir") == False:
-    os.system("[!] 没有配置文件！已经创建了一个")
+    print("[!] 没有配置文件！已经创建了一个")
     os.system("touch ./hexo-dir")
 with open("./hexo-dir","r") as file_check:
     hexo_dir = file_check.read()
