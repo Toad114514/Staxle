@@ -371,7 +371,6 @@ def main():
         print("\n  各种各样的工具，这些脚本都存储在了 tools 文件夹")
         print("1) Chexo: TUI 化的 cli-hexo")
         print("2) web-panel: 启动自带的网站面板")
-        print("3) EvilUrl: 检测隐藏的恶意链接")
         print("99) 回到 Staxle 菜单")
         sel = input("Staxle/Termux $:")
         if sel.strip() == "1":
@@ -383,7 +382,7 @@ def main():
         os.system("python web.py")
         restart_program()
     if sel.strip() == "99":
-        os.system("clear")
+        os.system("clear && cd ~")
         sys.exit()
     else:
         print("无效输入")
