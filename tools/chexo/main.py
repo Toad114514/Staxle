@@ -3,7 +3,7 @@ import time
 import json
 import yaml
 
-debug_skip_check = True
+debug_skip_check = False
 
 def info(hexo_dir):
     print("============博客信息=============")
