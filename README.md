@@ -21,7 +21,8 @@ termux 懒人工具安装与管理，快速上手 termux<br>
  - ...
 # 安装
 ```bash
-sh $(curl https://toad114514.github.io/staxle/setup.sh)
+wget https://toad114514.github.io/staxle/setup.sh
+sh setup.sh
 ```
 # 进度
 未完成阶段
