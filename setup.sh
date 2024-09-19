@@ -13,7 +13,7 @@ echo "[INFO] 拉取远程仓库..."
 git clone https://github.com/Toad114514/Staxle
 mv Staxle $PREFIX/etc/staxle
 echo "[INFO] 创建启动脚本..."
-cat $PREFIX/etc/staxle/res/staxle > $PREFIX/bin/staxle
+echo "python $PREFIX/etc/staxle/stax.py" > $PREFIX/bin/staxle
 chmod +x $PREFIX/bin/staxle
 echo "===============Staxle Installed==================="
 echo "安装完成！接下来输入 staxle 开启本脚本！"
