@@ -2,6 +2,7 @@ import os
 import time
 import json
 
+print("检查 PyYAML 库是否安装...")
 try:
     import yaml
 except ImportError:
