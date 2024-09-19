@@ -8,13 +8,14 @@ sleep 3
 echo "[INFO] 安装依赖..."
 pkg install python git -y
 echo "[INFO] 安装pip依赖..."
-pip install requests pywebio tqdm pyyaml lolcat
+pip install requests pywebio tqdm
 echo "[INFO] 拉取远程仓库..."
 git clone https://github.com/Toad114514/Staxle
 mv Staxle $PREFIX/etc/staxle
 echo "[INFO] 创建启动脚本..."
-echo "python $PREFIX/etc/staxle/stax.py" > $PREFIX/bin/staxle
+cat $PREFIX/etc/staxle/res/staxle > $PREFIX/bin/staxle
 chmod +x $PREFIX/bin/staxle
 echo "===============Staxle Installed==================="
 echo "安装完成！接下来输入 staxle 开启本脚本！"
+echo "staxle help  查看帮助信息"
 echo "===============Staxle Installed==================="

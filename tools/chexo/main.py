@@ -1,7 +1,16 @@
 import os
 import time
 import json
-import yaml
+
+try:
+    import yaml
+except ImportError:
+    print("未安装 PyYAML！")
+    os.system("pip install pyyaml")
+    print("请重新启动 Chexo！")
+    os._exit(0)
+else:
+    print("已安装 PyYAML")
 
 debug_skip_check = False
 
