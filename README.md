@@ -21,12 +21,8 @@ termux 懒人工具安装与管理，快速上手 termux<br>
  - ...
 # 安装
 ```bash
-apt update
-pkg install python git
-git clone https://github.com/Toad114514/Staxle
-cd ./Staxle
-pip install tqdm pywebio requests
-python stax.py
+wget https://toad114514.github.io/staxle/setup.sh
+sh setup.sh
 ```
 # 进度
 未完成阶段
