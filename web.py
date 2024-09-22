@@ -54,7 +54,8 @@ def done(text):
     out.popup("操作完成！",text)
     
 def new():
-    
+    os.system("git clone https://github.io/Toad114514/Staxle")
+    os.system("mv Staxle $PREFIX/etc/staxle")
     out.toast("更新完成，请重启 Staxle")
     time.sleep(0.2)
     os._exit(0)
