@@ -10,7 +10,7 @@ def main():
     web.session.set_env(title="💻Staxle 面板后台🤣")
     out.put_image(open("img/stax.png","rb").read())
     out.put_html("<h1>Staxle Web Panel</h1>")
-    out.put_text("基于 Staxle v1.03.3")
+    out.put_text("基于 Staxle v1.03.6")
     out.put_text("关闭面板后台需要转到面板设置点击关闭页面后台才可关闭")
     done("xxx 11454")
     out.put_tabs([

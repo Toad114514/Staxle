@@ -2,7 +2,7 @@
 # ByToad114514
 # 仓库 in toad114514/Staxle
 # 部分代码使用 Gameye98/Lazymux
-# v1.03.5
+# v1.03.6
 import os
 import requests
 import time
