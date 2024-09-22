@@ -482,7 +482,6 @@ def code_server():
     aug()
     os.system("pkg install tur-repo -y")
     os.system("apt install code-server -y")
-    code_option()
     done("Code-Server 安装完成\ncode-server 路径位于 ~/.config/code-server/config.yaml\n启动：code-server")
 
 def clang():
