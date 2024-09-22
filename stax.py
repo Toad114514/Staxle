@@ -282,7 +282,7 @@ def main():
                 print("2) goldeneye: DDoS 攻击服务器")
                 print("3) HPB: Html 页面构建")
                 print("4) WebDAV: webdav文件上传工具")
-                print("5) CMSeek: CMS 爆破工具，支持 WordPress 等 180+ 种 CMS")
+                print("5) CMSeek: CMS 扫描工具，支持 WordPress 等 180+ 种 CMS")
                 print("6) Websploit: 高级 MITM 网络攻击框架")
                 print("7) XSStrike: XSS 扫描工具")
                 print("8) Shellphish: 18种社交媒体的钓鱼工具")
@@ -300,6 +300,7 @@ def main():
                     if infor.strip() == "1": nmap()
                     elif infor.strip() == "2": goldeneye()
                     elif infor.strip() == "3": evilurl()
+                    elif infor.strip() == "4": cmseek()
                     elif infor.strip() == "7": xsstrike()
                     elif infor.strip() == "99": restart_program()
                     else: print("\n错误：无效输入");time.sleep(1);restart_program()
@@ -308,7 +309,7 @@ def main():
             elif infor.strip() == "3":
                 print("\n  只要终端有漏洞 渗透直接把你家偷")
                 print("1) Metasploit: 开源免费的漏洞渗透工具")
-                print("2) Easysploit: 自动化 Metasploit 工具")
+                print("2) Easysploit: Metasploit 自动化工具")
                 print("3) PhoneSploit: 通过 adb 控制安卓设备")
                 print("99) 回到 Staxle 菜单")
                 sel = input("Staxle/Hacker/Sploit $:")
@@ -322,8 +323,8 @@ def main():
                     writeStatus(0)
                 for infor in sel.split():
                     if infor.strip() == "1": metasploit()
-                    elif infor.strip() == "2": sqlmap()
-                    elif infor.strip() == "3": evilurl()
+                    elif infor.strip() == "2": easysploit()
+                    elif infor.strip() == "3": phonesploit()
                     elif infor.strip() == "99": restart_program()
                     else: print("\n错误：无效输入");time.sleep(1);restart_program()
                 if readStatus():
@@ -371,7 +372,6 @@ def main():
     if sel.strip() == "10":
         print("\n  各种各样的工具，这些脚本都存储在了 tools 文件夹")
         print("1) Chexo: TUI 化的 cli-hexo")
-        print("2) web-panel: 启动自带的网站面板")
         print("99) 回到 Staxle 菜单")
         sel = input("Staxle/Termux $:")
         if sel.strip() == "1":

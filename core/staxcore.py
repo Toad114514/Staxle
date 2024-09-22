@@ -211,7 +211,7 @@ def proot_distro():
         os.system("apt install proot-distro")
         done("proot-distro 安装完成")
     else:
-        print("Proot-distro:")
+        print("Proot-distro 帮助：")
         print("proot-distro ls 查看可安装的proot")
         print("proot-distro install <alisa> 安装proot")
         print("proot-distro sh <alisa> 启动linux")
@@ -438,10 +438,33 @@ def metasploit():
     os.system("initdb $PREFIX/var/lib/postgresql  >/dev/null 2>&1")
     done("Metasploit 安装完成\n执行 cd ~/metasploit-framework/ && ./msfconsole 启动")
 
-# Chexo
-def chexo():
-    print("未完成")
-    restart_program()
+def easysploit():
+    aug()
+    os.system("pkg install git -y")
+    os.system("git clone https://github.com/KALILINUXTRICKSYT/easysploit")
+    os.system('mv easysploit {}'.format(homeDir))
+    os.system("cd easysploit")
+    print(output("i","启动 Easysploit 安装脚本..."))
+    os.system("bash ./installer.sh")
+    done("Easysploit 安装完成！输入 easysploit 启动工具")
+
+def phonesploit():
+    aug()
+    os.system("pkg install git python -y")
+    os.system("git clone https://github.com/AzeemIdrisi/PhoneSploit-Pro.git")
+    os.system('mv PhoneSploit-Pro {}'.format(homeDir))
+    os.system("cd $HOME/PhoneSploit-Pro")
+    os.system("python install -r requirements.txt")
+    done("PhoneSploit 安装完成！\n输入 'cd ~/PhoneSploit-Pro && python3 phonesploitpro.py' 启动")
+
+def cmseek():
+    aug()
+    os.system("pkg install git python -y")
+    os.system("git clone https://github.com/Tuhinshubhra/CMSeeK")
+    os.system('mv CMSeeK {}'.format(homeDir))
+    os.system("cd $HOME/CMSeeK")
+    os.system("python install -r requirements.txt")
+    done("CMSeek 安装成功\n输入'cd ~/CMSeek && python3 cmseek.py' 启动")
 
 # 软件中心
 ## IDE
