@@ -149,17 +149,6 @@ def nginxins():
     os.system("pkg install nginx")
     done("安装已完成。您的 nginx 文件夹已存放于 /usr/local/nginx")
 
-def nginxstart():
-    os.system("cd sbin")
-    os.system("./nginx")
-    done("Nginx 已启动")
-    os.system("ps -aux | grep nginx")
-
-def nginxstop():
-    os.system("cd sbin")
-    os.system("./nginx -s stop")
-    done("Nginx 已关闭")
-
 def nginxreload():
     os.system("cd sbin && ./nginx -s reload")
     done("Nginx 配置已重置")
@@ -169,17 +158,9 @@ def apacheins():
     os.system("apt install httpd -y")
     done("apache已安装，配置文件在 /etc/httpd/conf，网站目录在 /var/www/html")
 
-def apachestart():
-    os.system("/etc/init.d/httpd start")
-    done("Apache 已启动")
-
-def apachestop():
-    os.system("/etc/init.d/httpd stop")
-    done("Apache 已关闭")
-
 def phpins():
     aug()
-    os.system("apt install php libapache2-mod-php -y")
+    os.system("apt install php -y")
     sel = input("输入你目前使用的服务器\n1) Nginx\n2) Apache\n输入：")
     if sel == "1":
         os.system("apt install php-fpm -y")
@@ -191,14 +172,6 @@ def ircins():
     aug()
     os.system("apt install ngircd -y")
     done("ngircd 安装成功，配置文件在 /etc/ngircd/ 里")
-
-def ircstart():
-    os.system("/etc/init.d/ngircd start")
-    done("Ngircd 服务器已启动")
-
-def ircstop():
-    os.system("/etc/init.d/ngircd stop")
-    done("Ngircd 服务器已停止")
 
 def sshd():
     aug()
