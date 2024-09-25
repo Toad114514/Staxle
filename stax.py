@@ -56,7 +56,7 @@ def main():
             if sel.strip() == "1": nginxins()
             elif sel.strip() == "2": apacheins()
             elif sel.strip() == "3": phpins()
-            elif sel.strip() == "01": os.system("python ./tools/server2me/main.py")
+            elif sel.strip() == "01": os.system("python ./tools/server2me/main.py");restart_program()
             elif sel.strip() == "5":
                 print("  其他类型的服务器")
                 print("1) Ngircd: IRC 服务器")
@@ -372,10 +372,14 @@ def main():
     if sel.strip() == "10":
         print("\n  各种各样的工具，这些脚本都存储在了 tools 文件夹")
         print("1) Chexo: TUI 化的 cli-hexo")
+        print("2) Server2me: 终端服务器面板")
         print("99) 回到 Staxle 菜单")
         sel = input("Staxle/Termux $:")
         if sel.strip() == "1":
             os.system("cd ./tools/chexo/ && python main.py")
+            restart_program()
+        if sel.strip() == "2":
+            os.system("python ./tools/server2me/main.py")
             restart_program()
         elif sel.strip() == "99": restart_program()
         else: print("无效输入。");restart_program()
