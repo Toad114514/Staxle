@@ -149,10 +149,6 @@ def nginxins():
     os.system("pkg install nginx")
     done("安装已完成。您的 nginx 文件夹已存放于 /usr/local/nginx")
 
-def nginxreload():
-    os.system("cd sbin && ./nginx -s reload")
-    done("Nginx 配置已重置")
-
 def apacheins():
     aug()
     os.system("apt install httpd -y")
@@ -175,13 +171,13 @@ def ircins():
 
 def sshd():
     aug()
-    os.system("apt install sshd")
+    os.system("apt install sshd -y")
     done("sshd 安装完成\n输入 sshd 启动")
 
 def proot_distro():
     proot_distro_ins = os.popen("pkg list-installed|grep proot-distro")
     if "proot-distro" not in proot_distro_ins.read():
-        os.system("apt install proot-distro")
+        os.system("apt install proot-distro -y")
         done("proot-distro 安装完成")
     else:
         print("Proot-distro 帮助：")
@@ -212,11 +208,11 @@ def openbox():
         print("已经安装了 openbox 窗口管理器，您要...\n1) 卸载 openbox（保留vnc服务）\n2) 卸载 openbox（不保留vnc服务）\n3) 启动该桌面环境\n4) 返回主菜单")
         sel = input("Staxle/installed $:")
         if sel == "1":
-            os.system("apt remove openbox aterm tint2")
+            os.system("apt remove openbox aterm tint2 -y")
             os.system("apt autoremove")
             done("openbox 删除成功\n但是vnc服务没有删除")
         elif sel == "2":
-            os.system("apt remove openbox aterm tint2 tigervnc")
+            os.system("apt remove openbox aterm tint2 tigervnc -y")
             os.system("apt autoremove")
             print(output("i","正在删除 vnc 配置文件"))
             os.system("rm -rf ~/.vnc")
@@ -242,7 +238,7 @@ def termux_storage():
 
 def qurxin():
     aug()
-    os.system("apt install mpv figlet -y")
+    os.system("apt install git mpv figlet -y")
     os.system("pip install lolcat")
     os.system("git clone https://github.com/fikrado/qurxin")
     os.system('mv qurxin {}'.format(homeDir))
@@ -255,6 +251,7 @@ def termux_desktop():
     print("你可能需要去查询向导，详细请访问 https://github.com/adi1090x/termux-desktop")
     time.sleep(1.5)
     aug()
+    os.system("apt install git -y")
     os.system("git clone --depth=1 https://github.com/adi1090x/termux-desktop.git")
     os.system('mv termux-desktop {}'.format(homeDir))
     os.system("cd ~/termux-desktop")
@@ -264,7 +261,7 @@ def termux_desktop():
 
 def toolx():
     aug()
-    os.system("pkg install git -y")
+    os.system("pkg install python3 git -y")
     os.system("git clone https://github.com/vaginessa/Tool-X.git")
     os.system('mv Tool-X {}'.format(homeDir))
     os.system("cd ~/Tool-X")
@@ -344,6 +341,7 @@ def eagleeye():
 
 def emailall():
     aug()
+    os.system("apt install git -y")
     os.system("git clone https://github.com/Taonn/EmailAll.git")
     os.system('mv EmailAll {}'.format(homeDir))
     os.system("pip3 install -r requirements.txt")
@@ -361,6 +359,7 @@ def arl():
 
 def mapeye():
     aug()
+    os.system("apt install git -y")
     os.system("git clone https://github.com/bhikandeshmukh/MapEye.git")
     os.system('mv MapEye {}'.format(homeDir))
     os.system("apt install python php -y")
@@ -376,6 +375,7 @@ def sqlscan():
 
 def sqlmate():
     aug()
+    os.system("apt install git -y")
     os.system("git clone https://github.com/UltimateHackers/sqlmate")
     os.system('mv sqlmate {}'.format(homeDir))
     os.system("cd ~/sqlmate")
