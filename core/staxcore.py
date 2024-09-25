@@ -196,7 +196,7 @@ def openbox():
     if "openbox" not in openbox_ins.read():
         aug()
         os.system("apt install x11-repo -y")
-        os.system("apt install openbox tint2 aterm")
+        os.system("apt install openbox tint2 aterm -y")
         tigervnc_ins = os.popen("pkg list-installed|grep tigervnc")
         if "tigervnc" not in tigervnc_ins.read():
             print("接下来需要配置 vnc 设置，三个输入框依次是：\n输入vnc密码\n再次输入vnc密码\n启用查看模式（不可操控）\n前两个框输入你的vnc密码，后面输入n关闭\n按下回车进行配置")
