@@ -174,6 +174,8 @@ def main():
             print("2) Emacs: 神的编辑器")
             print("3) code-server: 网页版 VSCode")
             print("4) Clang: 编译，爽！")
+            print("5) Lazygit: 可视化 git")
+            print("99) 返回主菜单")
             sel = input("Staxle/Software/Code $:")
             if sel == "@":
                 sel = ""
@@ -188,6 +190,7 @@ def main():
                 elif infor.strip() == "2": emacs()
                 elif infor.strip() == "3": code-server()
                 elif infor.strip() == "4": clang()
+                elif infor.strip() == "5": lazygit()
                 elif infor.strip() == "99": restart_program()
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
             if readStatus():
@@ -197,6 +200,8 @@ def main():
             print(" 网上冲浪")
             print("1) w3m: 终端式网页浏览器")
             print("2) weechat: 简单的 IRC 聊天室")
+            print("3) lynx: 比 w3m 更靓的终端网页浏览器")
+            print("99) 返回主菜单")
             sel = input("Staxle/Software/Internet $:")
             if sel == "@":
                 sel = ""
@@ -209,6 +214,7 @@ def main():
             for infor in sel.split():
                 if infor.strip() == "1": w3m()
                 elif infor.strip() == "2": weechat()
+                elif infor.strip() == "3": lynx()
                 elif infor.strip() == "99": restart_program()
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
             if readStatus():

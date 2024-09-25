@@ -455,12 +455,16 @@ def code_server():
     aug()
     os.system("pkg install tur-repo -y")
     os.system("apt install code-server -y")
-    done("Code-Server 安装完成\ncode-server 路径位于 ~/.config/code-server/config.yaml\n启动：code-server")
+    done("Code-Server 安装完成\ncode-server 配置文件路径位于 ~/.config/code-server/config.yaml\n启动：code-server")
 
 def clang():
     aug()
     os.system("pkg install clang -y")
     done("clang 安装成功")
+
+def lazygit():
+    os.system("pkg install lazygit -y")
+    done("Lazygit 安装成功\n在git文件夹中输入 lazygit 启动")
 ## 网络/互联网
 def w3m():
     aug()
@@ -471,3 +475,8 @@ def weechat():
     aug()
     os.system("pkg install weechat -y")
     done("weechat 安装完成\n启动：weechat")
+
+def lynx():
+    aug()
+    os.system("pkg install lynx -y")
+    done("lynx 安装完成\n启动：lynx <url>")
