@@ -79,6 +79,7 @@ def main():
                 for osfor in sel.split():
                     if osfor.strip() == "1": ircins()
                     elif osfor.strip() == "5": sshd()
+                    elif osfor.strip() == "7": lighttpd()
                     elif osfor.strip() == "99": restart_program()
                     else: print("\n错误：无效输入");time.sleep(1);restart_program()
                 if readStatus():

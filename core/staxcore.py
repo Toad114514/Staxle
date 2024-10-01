@@ -174,6 +174,11 @@ def sshd():
     os.system("apt install sshd -y")
     done("sshd 安装完成\n输入 sshd 启动")
 
+def lighttpd():
+    aug()
+    os.system("apt install lighttpd -y")
+    done("lighttpd 安装完成\n可进入 Server2me 配置")
+
 def proot_distro():
     proot_distro_ins = os.popen("pkg list-installed|grep proot-distro")
     if "proot-distro" not in proot_distro_ins.read():
