@@ -17,7 +17,8 @@ termux 懒人工具安装与管理的脚本，快速上手 termux<br>
  - 黑客工具安装 (一小部分完成)
  - termux 工具✔️
  - 小工具
-  + Cli-Hexo (Chexo)✔️
+  - Cli-Hexo (Chexo)✔️
+  - Server2me
  - ...
 # 安装
 ```bash
