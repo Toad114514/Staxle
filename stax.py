@@ -133,6 +133,8 @@ def main():
         print("8) Neofetch: termux 终端上的设备查询")
         print("9) termux wake-lock 防杀后台")
         print("10) termux-desktop: 安装 xfce4 在您的 termux 上")
+        print("11) termux.properties: termux 的一些配置")
+        print("12) termux.motd: termux 欢迎语设置")
         print("99) 返回上一菜单")
         sel = input("Staxle/Termux $:")
         if sel == "@":
@@ -151,6 +153,8 @@ def main():
             elif infor.strip() == "5": toolx()
             elif infor.strip() == "8": neofetch()
             elif infor.strip() == "9": os.system("termux-wake-lock")
+            elif infor.strip() == "10": os.system("vim ~/.termux/termux.properties")
+            elif infor.strip() == "10": os.system("vim $PREFIX/etc/motd")
             elif infor.strip() == "99": restart_program()
             else: print("\n错误：无效输入");time.sleep(1);restart_program()
         if readStatus():
