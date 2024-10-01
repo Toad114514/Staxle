@@ -21,46 +21,48 @@ def show_fast():
         if os.system("pgrep nginx") == 0:
             with os.popen("pgrep nginx") as pid:
                 pidr = pid.read()
-            print("Nginx 进程 PID: ",pidr)
+            p = "Nginx 进程 PID: "+pidr
         else:
-            print("已安装 Nginx")
+            p = "已安装 Nginx"
     if "apache2" in ap:
         if os.system("pgrep apache") == 0:
             with os.popen("pgrep apache") as pid:
                 pidr = pid.read()
-            print("Apache 进程 PID: ",pidr)
+            p2 = "Apache 进程 PID: "+pidr
         else:
-            print("已安装 apache")
+            p2 = "已安装 apache"
     if "php-fpm" in phf:
         if os.system("pgrep php-fpm") == 0:
             with os.popen("pgrep php-fpm") as pid:
                 pidr = pid.read()
-            print("php-fpm 进程 PID: ",pidr)
+            p3 = "php-fpm 进程 PID: "+pidr
         else:
             print("已安装 php-fpm")
     if "php-apache" in aph:
         if os.system("pgrep php-apache") == 0:
             with os.popen("pgrep php-apache") as pid:
                 pidr = pid.read()
-            print("php-apache 进程 PID: ",pidr)
+            p4"php-apache 进程 PID: "+pidr
         else:
             print("已安装 php-apache")
     if "ngircd" in ircd:
         if os.system("pgrep ngircd") == 0:
             with os.popen("pgrep ngircd") as pid:
                 pidr = pid.read()
-            print("Ngircd 进程 PID: ",pidr)
+            p5 = "Ngircd 进程 PID: "+pidr
         else:
-            print("已安装 ngircd")
+            p5 = "已安装 ngircd"
+    os.system("clear")
         
 def main():
+    print("请等待...")
+    show_fast()
     print("Server2me")
     print("        Server2me")
     print("  Server2me")
     print("=========================")
-    print("显示目前服务器状态")
-    time.sleep(0.7)
-    show_fast()
+    print("服务器状态")
+    print(p+"\n"+p2+"\n"+p3+"\n"+p4+"\n"+p5+"\n"
     print("=========================")
     print("1: 启动服务器")
     print("2: 关闭服务器")
@@ -72,12 +74,15 @@ def main():
     if sel.strip() == "1":
         print("选择需要启动的服务器")
         print("选择需要启动的服务器")
+        print("启动 nginx+php 时，先启动 php-fpm 后启动 nginx")
+        print("启动 apache+php 时，先启动 php-apache 后启动 apache")
         print("=========================")
         print("[1] Nginx")
         print("[2] Apache")
         print("[3] php-fpm")
         print("[4] php-apache")
         print("[5] ngircd")
+        print("[6] lighttpd")
         print("[99] 返回")
         sel == input("Staxle/Server2me/start: ")
         if sel.strip() == "1":
@@ -120,6 +125,14 @@ def main():
             else:
                 os.system("ngircd")
                 main()
+        if sel.strip() == "6":
+            if "lighttpd" not in os.popen("pkg list-installed|grep lighttpd").read():
+                print("未安装 lighttpd，请退出 Server2me 然后通过 Staxle 安装\n返回...")
+                time.sleep(1)
+                main()
+            else:
+                os.system("lighttpd")
+                main()
         if sel.strip() == "99":
             main()
         else:
@@ -133,6 +146,7 @@ def main():
         print("[3] php-fpm")
         print("[4] php-apache")
         print("[5] ngircd")
+        print("[6] lighttpd")
         print("[99] 退出")
         if sel.strip() == "1":
             if os.system("pgrep nginx") == 1:
@@ -174,9 +188,18 @@ def main():
             else:
                 os.system("pkill ngircd")
                 main()
+        if sel.strip() == "6":
+            if os.system("pgrep lighttpd") == 1:
+                print("未启动或者未安装 Ngircd")
+                time.sleep(1)
+                main()
+            else:
+                os.system("pkill lighttpd")
+                main()
         else:
             main()
     if sel.strip() == "6":
+        print("[i] bye")
         os._exit(0)
 
 main()
