@@ -33,6 +33,12 @@ def info(hexo_dir):
     author = hconf["author"]
     print("博客作者："+author)
     theme = hconf["theme"]
+    if theme == "butterfly":
+        theme = theme + " (butterfly.js.org)"
+    if theme == "next":
+        theme = theme + " (themes-next.js.org/docs)"
+    if theme == "fluid":
+        theme = theme + " (fliud-dev.com)"
     print("主题："+theme)
     if hconf["deploy"]["type"] == "git":
         dept = "Git 部署 (Pages)"
@@ -143,7 +149,7 @@ def main():
             elif sel == "2":
                 sel = input("你确定要删除它吗？[y/n]")
                 if sel =="y": os.system("rm "+hexo_dir+"/source/_posts/"+listfile[int(getback)])
-                else: print("取消操作")
+                else: print("取消操作"); time.sleep(1)
             else: print("正在返回主页面")
             main()
     if sel.strip() == "3":
