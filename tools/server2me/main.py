@@ -17,11 +17,6 @@ def show_fast():
         ssh = f.read()
     with os.popen("pkg list-installed|grep ftp") as f:
         ftp = f.read()
-    p = ""
-    p2 = ""
-    p3 = ""
-    p4 = ""
-    p5 = ""
     if "nginx" in ng:
         if os.system("pgrep nginx") == 0:
             with os.popen("pgrep nginx") as pid:
@@ -47,7 +42,7 @@ def show_fast():
         if os.system("pgrep php-apache") == 0:
             with os.popen("pgrep php-apache") as pid:
                 pidr = pid.read()
-            p4 = "php-apache 进程 PID: "+pidr
+            p4"php-apache 进程 PID: "+pidr
         else:
             print("已安装 php-apache")
     if "ngircd" in ircd:
@@ -58,17 +53,16 @@ def show_fast():
         else:
             p5 = "已安装 ngircd"
     os.system("clear")
-    return p+"\n"+p2+"\n"+p3+"\n"+p4+"\n"+p5+"\n"
         
 def main():
     print("请等待...")
-    pri = show_fast()
+    show_fast()
     print("Server2me")
     print("        Server2me")
     print("  Server2me")
     print("=========================")
     print("服务器状态")
-    print(pri)
+    print(p+"\n"+p2+"\n"+p3+"\n"+p4+"\n"+p5+"\n"
     print("=========================")
     print("1: 启动服务器")
     print("2: 关闭服务器")
@@ -207,7 +201,6 @@ def main():
     if sel.strip() == "6":
         print("[i] bye")
         os._exit(0)
-    else:
-       main()
+
 main()
     
