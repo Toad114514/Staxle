@@ -114,6 +114,7 @@ def main():
                 writeStatus(0)
             for wmifor in sel.split():
                 if wmifor.strip() == "1": openbox()
+                if wmifor.strip() == "2": fvwm()
                 elif wmifor.strip() == "99": restart_program()
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
             if readStatus():

@@ -229,6 +229,44 @@ def openbox():
             restart_program()
         else:
             restart_program()
+
+def fvwm():
+    x_ins = os.popen("pkg list-installed|grep fvwm")
+    if "fvwm" not in x_ins.read():
+        aug()
+        os.system("apt install x11-repo -y")
+        os.system("apt install fvwm tint2 aterm -y")
+        tigervnc_ins = os.popen("pkg list-installed|grep tigervnc")
+        if "tigervnc" not in tigervnc_ins.read():
+            print("接下来需要配置 vnc 设置，三个输入框依次是：\n输入vnc密码\n再次输入vnc密码\n启用查看模式（不可操控）\n前两个框输入你的vnc密码，后面输入n关闭\n按下回车进行配置")
+            os.system("vncserver -localhost")
+        else:
+            print(output("d","已安装 tigervnc，跳过 vnc 配置..."))
+        print("写入 vnc 启动脚本...")
+        startvnc = "fvwm &\ntint2 &\naterm &"
+        os.system("rm -rf ~/.vncxstartup")
+        os.system(f"echo {startvnc} > ~/.vnc/xstartup")
+        done("fvwm 和 vnc 安装成功\n输入 vncserver 启动桌面环境")
+    else:
+        print("已经安装了 fvwm 窗口管理器，您要...\n1) 卸载 openbox（保留vnc服务）\n2) 卸载 openbox（不保留vnc服务）\n3) 启动该桌面环境\n4) 返回主菜单")
+        sel = input("Staxle/installed $:")
+        if sel == "1":
+            os.system("apt remove fvwm aterm tint2 -y")
+            os.system("apt autoremove")
+            done("fvwm 删除成功\n但是vnc服务没有删除")
+        elif sel == "2":
+            os.system("apt remove openbox aterm tint2 tigervnc -y")
+            os.system("apt autoremove")
+            print(output("i","正在删除 vnc 配置文件"))
+            os.system("rm -rf ~/.vnc")
+            done("fvwm 和 vnc 服务卸载完成")
+        elif sel == "3":
+            os.system("vncserver")
+            restart_program()
+        elif sel == "4":
+            restart_program()
+        else:
+            restart_program()
     
 # Termux
 def termux_repo():
