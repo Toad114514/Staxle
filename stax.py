@@ -207,6 +207,7 @@ def main():
             print("1) w3m: 终端式网页浏览器")
             print("2) weechat: 简单的 IRC 聊天室")
             print("3) lynx: 比 w3m 更靓的终端网页浏览器")
+            print("4) firefox: 桌面环境下的经典浏览器 [*]")
             print("99) 返回主菜单")
             sel = input("Staxle/Software/Internet $:")
             if sel == "@":
@@ -221,6 +222,7 @@ def main():
                 if infor.strip() == "1": w3m()
                 elif infor.strip() == "2": weechat()
                 elif infor.strip() == "3": lynx()
+                elif infor.strip() == "3": firefox()
                 elif infor.strip() == "99": restart_program()
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
             if readStatus():

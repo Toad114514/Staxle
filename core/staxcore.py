@@ -523,3 +523,9 @@ def lynx():
     aug()
     os.system("pkg install lynx -y")
     done("lynx 安装完成\n启动：lynx <url>")
+
+def firefox():
+    aug()
+    os.system("pkg install x11-repo -y")
+    os.system("pkg install firefox -y")
+    done("Firefox 安装成功\n在桌面环境中输入 firefox 启动浏览器")
