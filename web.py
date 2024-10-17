@@ -16,7 +16,7 @@ def main():
        {"title":"服务器","content":[
           out.put_html("<h3>Nginx 服务器</h3>"),
           out.put_text("一款速度快，cpu占用小的C++开源自由服务器"),
-          out.put_button("安装",onclick=lambda: de01()),
+          out.put_buttons(["安装","启动","关闭"],onclick=[nginx, ng_start, ng_close]),
           out.put_html("<h3>Apache 服务器</h3>"),
           out.put_text("全球第一的服务器"),
           out.put_button("安装",onclick=lambda: de02()),

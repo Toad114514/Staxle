@@ -17,10 +17,26 @@ def new():
     time.sleep(0.2)
     os._exit(0)
 
-def de01():
+def nginx():
     out.toast("请等待 nginx 安装完成")
     os.system("pkg install nginx")
     done("nginx安装完成")
+
+def ng_start():
+    out.toast("Nginx 服务启动中...")
+    if "nginx" not in os.popen("pkg list-installed|grep nginx"):
+        out.toast("未安装 Nginx！", color="error")
+    else:
+        back = os.popen("nginx").read()
+        done("Nginx 返回信息：\n"+back)
+
+def ng_stop():
+    out.toast("Nginx 服务关闭中...")
+    if "nginx" not in os.popen("pkg list-installed|grep nginx"):
+        out.toast("未安装 Nginx！", color="error")
+    else:
+        back = os.popen("nginx -s stop").read()
+        done("Nginx 返回信息：\n"+back)
 
 def de02():
     out.toast("请等待 apache 安装完成")
