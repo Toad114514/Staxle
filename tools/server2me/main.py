@@ -58,7 +58,18 @@ def show_fast():
         else:
             p5 = "已安装 ngircd"
     os.system("clear")
-    return p+"\n"+p2+"\n"+p3+"\n"+p4+"\n"+p5+"\n"
+    result = ""
+    if p != "":
+        result = result + p + "\n"
+    if p2 != "":
+        result = result + p2 + "\n"
+    if p3 != "":
+        result = result + p3 + "\n"
+    if p4 != "":
+        result = result + p4 + "\n"
+    if p5 != "":
+        result = result + p5 + "\n"
+    return result
         
 def main():
     print("请等待...")
