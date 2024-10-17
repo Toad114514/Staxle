@@ -152,6 +152,7 @@ def main():
             elif infor.strip() == "3": termux_storage()
             elif infor.strip() == "4": qurxin()
             elif infor.strip() == "5": toolx()
+            elif infor.strip() == "6": lazymux()
             elif infor.strip() == "8": neofetch()
             elif infor.strip() == "9": os.system("termux-wake-lock")
             elif infor.strip() == "11": os.system("vim ~/.termux/termux.properties")

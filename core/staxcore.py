@@ -311,7 +311,12 @@ def toolx():
     os.system("chmod +x ./install.axe")
     os.system("./install.axe")
 
-#def lazymux():
+def lazymux():
+    aug()
+    os.system("pkg install python3 git -y")
+    os.system("git clone https://github.com/Gameye98/Lazymux")
+    os.system("my Lazymux {}".format(homeDir))
+    done("Lazymux 安装完成！\n输入 cd Lazymux && python lazymux.py 启动")
 
 #def tmoe():
 
