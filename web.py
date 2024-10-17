@@ -51,7 +51,7 @@ def close():
     os._exit(0)
 
 if __name__ == "__main__":
-    print("输入 127.0.0.1 进入面板后台")
+    print("输入 127.0.0.1:15334 进入面板后台")
     print("关闭面板后台需要转到面板设置点击关闭页面后台才可关闭")
     web.start_server(main, host="127.0.0.1", port=15334, debug=True)
     web.session.hold()

@@ -52,6 +52,58 @@ def info(hexo_dir):
         print(dept)    
     input("回车键继续")
 
+def git_push():
+    print("开始进行 Git 部署推送设置前，请注册一个 GitHub 账号用于推送静态页面仓库")
+    print("本操作将覆盖原先设置好的选项，请注意！")
+    print("如果你已经准备好进行部署设置，请输入y并回车")
+    print("如果你已经提前配置好了 Git 推送设置或者手滑，请输入n并回车")
+    sel = input("[y/n]")
+    if sel == "y":
+        input("现在请通过 GitHub 在你的账号中新建一个仓库\n仓库名为<username>.github.io\n<username>是你的 GitHub 账号名\n例如你的GitHub用户名为toad114，那么仓库就命名为 toad114.github.io\n完成操作后请回车")
+        email = input("请输入在 GitHub 注册时使用的邮箱")
+        username = input("请输入你的 GitHub 账号名")
+        print("请稍后")
+        if "git" not in os.popen("pkg list-installed|grep git").read():
+            os.system("pkg install git")
+        if "openssh" not in os.popen("pkg list-installed|grep openssh").read():
+            os.system("pkg install openssh")
+        os.system("pkg update")
+        os.system("git config --global user.name "+username)
+        os.system("git config --global user.email "+email)
+        print("接下来生成 ssh key\n回车继续之后请连按三次回车使用默认值")
+        input("回车键继续")
+        os.system("ssh-keygen -t rsa -C "+email)
+        push2()
+    if sel == "n":
+        print("取消操作")
+    else:
+        git_push()
+
+def push2():
+    print("添加 SSH Key")
+    print("请将下方的所有的文字复制下来，复制完成后回车")
+    os.system("cat ~/.ssh/id_rsa.pub")
+    input("")
+    print("接着进入 GitHub –> Settings –> SSH and GPG keys –> NEW SSH key 新建 ssh key\n title 一项中随便填，将刚才在上面复制的内容粘贴到 Key 里面\n然后点击 Add SSH Key 完成添加")
+    input("添加完成后请回车进行验证")
+    if "You've successfully authenticated" not in os.popen("ssh -T git@github.com"):
+        input("验证失败，请重新操作")
+        push2()
+    else:
+        print("ssh 通信成功！")
+    print("安装 hexo-deployer-git ...")
+    os.system("cd "+hexo_dir)
+    os.system("npm install hexo-deployer-git --save")
+    print("接下来回车将转到配置文件，拉到最下面改成如下（也可以复制）：")
+    change = "deploy:\n  type: git\n  repository: https://github.com/"+username+"/"+username+".github.io.git\n  branch: main"
+    print(change)
+    input("回车进行修改")
+    os.system("vim "+hexo_dir+"/config.yaml")
+    print("恭喜你完成了所有 Git 部署（不一定）！")
+    print("可以回到主页选择 立即 Git 部署 选项便可以部署了！")
+    print("如果无法部署，请检查配置文件")
+    input("回车键继续")
+    
 def inithexo():
     os.system("clear")
     os.system("toilet Chexo")
@@ -92,8 +144,8 @@ def main():
     print("2) 编辑文章")
     print("3) 编辑 _config.yaml")
     print("4) 主题安装")
-    print("5) Git 推送")
-    print("5) Git 推送设置")
+    print("5) 立即 Git 部署")
+    print("6) Git 部署设置")
     print("7) 启动自带服务器")
     print("8) 创建静态页面")
     print("9) 查看本博客信息")
@@ -157,6 +209,9 @@ def main():
         main()
     if sel.strip() == "5":
         os.system("hexo d -g")
+        main()
+    if sel.strip() == "6":
+        git_push()
         main()
     if sel.strip() == "7":
         os.system("hexo s")
