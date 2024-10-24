@@ -40,7 +40,7 @@ def create():
     print("====================\n     快速创建虚拟机\n==============")
     virtual_name = input("输入虚拟机名字：")
     virtual_framework = input("输入cpu架构\ni386: 使用i386架构，适合32位系统（早期Linux/win9x/2k）\nx86-64: 使用x86-64系统，适合64位系统（win7/8/10/11和各种Linux发行版）\n输入：")
-    # qemu install
+   # qemu install
     if virtual_framework == "i386":
         if "qemu-system-i386" not in os.popen("pkg list-installed|grep qemu-system-i386").read():
             print("正在安装 qemu-system-i386...")
@@ -54,14 +54,14 @@ def create():
         time.sleep(1)
         main()
     # create virtual
-    os.system("mkdir vm/"+virtual_name)
-    os.system("touch vm/"+virtual_name+"/qemd_config.json")
+    os.system("mkdir "+os.path.split(os.path.realpath(__file__))[0]+"/vm/"+virtual_name)
+    os.system("touch "+os.path.split(os.path.realpath(__file__))[0]+"/vm/"+virtual_name+"/qemd_config.json")
     sel = input("虚拟硬盘你要选择：\n[1] 新建空硬盘并使用 \n[2] 使用已有的")
     if sel.strip() == "1":
         img_size = input("输入硬盘大小（单位GB）：")
         img_name = input("输入虚拟硬盘名：")
-        os.system("qemu-img create -f qcow2 ./vm/"+virtual_name+"/"+img_name+".qcow2 "+img_size+"G")
-        img_path = "./vm/"+virtual_name+"/"+img_name+".qcow2"
+        os.system("qemu-img create -f qcow2 "+os.path.split(os.path.realpath(__file__))[0]+"/vm/"+virtual_name+"/"+img_name+".qcow2 "+img_size+"G")
+        img_path = os.path.split(os.path.realpath(__file__))[0]+"/vm/"+virtual_name+"/"+img_name+".qcow2"
         img_type = "qcow2"
     elif sel.strip() == "2":
         img_path = input("输入虚拟硬盘的绝对路径（仅支持 img、qcow、qcow2和vhd格式的硬盘）：")

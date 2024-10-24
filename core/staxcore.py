@@ -8,6 +8,8 @@ class stax():
     version = "v1.03.6"
     version_num = 150
 
+work_path = os.getcwd()
+
 def output(type,msg):
     result = ""
     if type == "e":
