@@ -5,8 +5,8 @@ import socket
 import platform as plat
 from subprocess import check_output as inputstream
 class stax():
-    version = "v1.03.6"
-    version_num = 150
+    version = "v1.05.1"
+    version_num = 170
 
 work_path = os.getcwd()
 

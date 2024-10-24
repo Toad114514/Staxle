@@ -3,7 +3,7 @@ echo "欢迎安装 Staxle!"
 echo "接下来将开始安装 Staxle"
 echo "===============Staxle Info==================="
 echo "Termux 的懒人安装和管理脚本工具，快速让你上手 Termux"
-echo "准备安装的版本为：1.03.7"
+echo "准备安装的版本为：1.05.1"
 echo "===============Start Install==================="
 sleep 3
 echo "[INFO] 安装依赖..."
