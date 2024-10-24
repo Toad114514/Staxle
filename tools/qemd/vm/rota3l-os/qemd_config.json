@@ -1,1 +1,0 @@
-{"qemd": ["v1.01", 100], "name": "rota3l-os", "type": "x86-64", "memory": 256, "cdrom": "/sdcard/sota3l.iso", "disk": {"drive-virtio-disk0": ["./vm/rota3l-os/rota3l.qcow2", "qcow2"]}, "card": {"net": "rtl8139", "video": "vmware", "sound": "sb16"}, "graphic": "vnc", "vnc": {"host": ":0"}}

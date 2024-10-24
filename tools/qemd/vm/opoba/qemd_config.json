@@ -1,1 +1,0 @@
-{"qemd": ["v1.01", 100], "name": "opoba", "type": "i386", "memory": 256, "cdrom": false, "disk": {"drive-virtio-disk0": ["./vm/opoba/gouba.qcow2", "qcow2"]}, "card": {"net": "rtl8139", "video": "vmware", "sound": "sb16"}, "graphic": "vnc", "vnc": {"host": ":0"}}
