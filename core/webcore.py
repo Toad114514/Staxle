@@ -24,19 +24,19 @@ def nginx():
 
 def ng_start():
     out.toast("Nginx 服务启动中...")
-    if "nginx" not in os.popen("pkg list-installed|grep nginx"):
-        out.toast("未安装 Nginx！", color="error")
-    else:
+    if "nginx" in os.popen("pkg list-installed|grep nginx"):
         back = os.popen("nginx").read()
         done("Nginx 返回信息：\n"+back)
-
-def ng_stop():
-    out.toast("Nginx 服务关闭中...")
-    if "nginx" not in os.popen("pkg list-installed|grep nginx"):
-        out.toast("未安装 Nginx！", color="error")
     else:
+        out.toast("未安装 Nginx！", color="error")
+
+def ng_close():
+    out.toast("Nginx 服务关闭中...")
+    if "nginx" in os.popen("pkg list-installed|grep nginx"):
         back = os.popen("nginx -s stop").read()
         done("Nginx 返回信息：\n"+back)
+    else:
+        out.toast("未安装 Nginx！", color="error")
 
 def de02():
     out.toast("请等待 apache 安装完成")

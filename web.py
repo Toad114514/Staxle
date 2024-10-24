@@ -11,6 +11,15 @@ def main():
     out.put_image(open("img/stax.png","rb").read())
     out.put_html("<h1>Staxle Web Panel</h1>")
     out.put_text("基于 Staxle v1.03.6")
+    pwd = input.input("输入 Staxle 面板后台密码：")
+    with open(".web_passwd","r") as f:
+        dui_pwd = f.read()
+    if pwd == dui_pwd:
+        runpanel()
+    else:
+        out.popup("密码错误，请重新刷新页面重试")
+
+def runpanel():
     out.put_text("关闭面板后台需要转到面板设置点击关闭页面后台才可关闭")
     out.put_tabs([
        {"title":"服务器","content":[
@@ -53,5 +62,5 @@ def close():
 if __name__ == "__main__":
     print("输入 127.0.0.1:15334 进入面板后台")
     print("关闭面板后台需要转到面板设置点击关闭页面后台才可关闭")
-    web.start_server(main, host="127.0.0.1", port=15334, debug=True)
+    web.start_server(main, host="0.0.0.0", port=15334, debug=True)
     web.session.hold()

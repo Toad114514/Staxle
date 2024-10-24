@@ -399,6 +399,10 @@ def main():
         elif sel.strip() == "99": restart_program()
         else: print("无效输入。");restart_program()
     if sel.strip() == "11":
+        if os.path.exists(".web_passwd") == False:
+            passwd = input("为面板后台设置一个新密码")
+            with open(".web_passwd","w+") as f:
+                f.write(passwd)
         os.system("python web.py")
         restart_program()
     if sel.strip() == "4": os.system("cd tools/qemd && python main.py");restart_program()
