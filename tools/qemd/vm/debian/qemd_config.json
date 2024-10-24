@@ -1,0 +1,1 @@
+{"qemd": ["v1.01", 100], "name": "debian", "type": "x86-64", "memory": 256, "cdrom": false, "disk": {"drive-virtio-disk0": ["/sdcard/debian.qcow2", "qcow2"], "drive-virtio-disk2": ["/sdcard/debian.img", "raw"], "drive-virtio-disk3": ["/sdcard/ba.9", "raw"]}, "card": {"net": "rtl8139", "video": "vmware", "sound": "sb16"}, "graphic": "vnc", "vnc": {"host": ":0"}}

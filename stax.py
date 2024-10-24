@@ -18,7 +18,7 @@ def main():
 1) 服务器管理工具
 2) 桌面环境管理
 3) Termux 配置
-4) 虚拟机
+4) 虚拟机 (Qemd)
 5) 安装包管理
 6) 千年软件老字店
 7) 仓库源管理器
@@ -401,6 +401,7 @@ def main():
     if sel.strip() == "11":
         os.system("python web.py")
         restart_program()
+    if sel.strip() == "4": os.system("cd tools/qemd && python main.py");restart_program()
     if sel.strip() == "99":
         os.system("clear && cd ~")
         sys.exit()

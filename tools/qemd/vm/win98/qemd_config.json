@@ -1,0 +1,1 @@
+{"qemd": ["v1.01", 100], "name": "win98", "type": "i386", "memory": 512, "cdrom": "/sdcard/win98.iso", "disk": {"drive-virtio-disk0": ["./vm/win98/win98.qcow2", "qcow2"], "drive-virtio-disk4": ["h.qcow2", "qcow2"], "drive-virtio-disk5": ["./vm/k.qc", "raw"]}, "card": {"net": "rtl8139", "video": "vmware", "sound": "sb16"}, "graphic": "vnc", "vnc": {"host": ":0"}}
