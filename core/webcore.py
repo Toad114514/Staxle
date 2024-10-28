@@ -60,3 +60,7 @@ def de05():
     out.toast("安装 code-server...")
     os.system("apt install code-server -y")
     done("code-server安装完成")
+
+def code_start():
+    os.system("nohup code-server")
+    done("code-server 可能已完成启动")

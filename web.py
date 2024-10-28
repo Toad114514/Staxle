@@ -16,6 +16,7 @@ def main():
         dui_pwd = f.read()
     if pwd == dui_pwd:
         runpanel()
+        print("[!] 有个老野登录了你的后台！")
     else:
         out.popup("密码错误，请重新刷新页面重试")
 
@@ -37,7 +38,7 @@ def runpanel():
           out.put_button("安装",onclick=lambda: de04()),
           out.put_html("<h3>code-server</h3>"),
           out.put_text("浏览器上的 VSCode"),
-          out.put_button("安装",onclick=lambda: de05()),
+          out.put_buttons(["安装","启动"],onclick=[de05, code_start]),
        ]},
        {"title":"桌面环境","content":[
           out.put_markdown("# Shit")
@@ -60,7 +61,7 @@ def close():
     os._exit(0)
 
 if __name__ == "__main__":
-    print("输入 127.0.0.1:15334 进入面板后台")
+    print("输入下方地址进入面板后台")
     print("关闭面板后台需要转到面板设置点击关闭页面后台才可关闭")
     web.start_server(main, host="0.0.0.0", port=15334, debug=True)
     web.session.hold()
