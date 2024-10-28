@@ -120,13 +120,13 @@ def inithexo():
         if os.path.exists(path) == False:
             os.mkdir(path)
         os.system("hexo init "+path)
-        with open("./hexo-dir","w") as k:
+        with open(chexopy+"/hexo-dir","w") as k:
             k.write(path)
         print("初始化完成，Chexo 将退出")
         os._exit(1)
     elif sel == "2":
         path = input("输入该 Hexo 文件夹路径：")
-        with open("./hexo-dir","w") as k:
+        with open(chexopy+"/hexo-dir","w") as k:
             k.write(path)
         print("初始化完成，Chexo 将退出")
         os._exit(1)
@@ -227,6 +227,10 @@ def main():
         os._exit(1)
     else: main()
 
+script_path = os.path.realpath(__file__)
+# 获取脚本所在的目录
+chexopy = os.path.dirname(script_path)
+
 home_dir = os.popen("echo $HOME").read()
 home_dir = home_dir.replace("\n","")
 if debug_skip_check == True:
@@ -246,10 +250,10 @@ if "hexo-cli" not in os.popen("npm ls -g|grep hexo-cli").read():
 
 print("检查 CHexo 文件配置")
 time.sleep(1)
-if os.path.exists("./hexo-dir") == False:
+if os.path.exists(chexopy+"/hexo-dir") == False:
     print("[!] 没有配置文件！已经创建了一个")
-    os.system("touch ./hexo-dir")
-with open("./hexo-dir","r") as file_check:
+    os.system("touch "+chexopy+"/hexo-dir")
+with open(chexopy+"/hexo-dir","r") as file_check:
     hexo_dir = file_check.read()
     hexo_dir = hexo_dir.replace("~",home_dir)
 
