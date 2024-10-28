@@ -6,7 +6,7 @@
 [![Issues](https://img.shields.io/github/issues/Toad114514/Staxle.svg)](https://github.com/Toad114514/Staxle/issues)
 [![Watchers](https://img.shields.io/github/watchers/Toad114514/Staxle.svg)](https://github.com/Toad114514/Staxle/watchers)
 [![GitHub Tag](https://img.shields.io/github/v/tag/toad114514/staxle)](https://github.com/Toad114514/Staxle/releases)
-[![Python](https://img.shields.io/badge/language-Python%203-blue.svg)](https://www.python.org)<center><br>
+[![Python](https://img.shields.io/badge/language-Python%203-blue.svg)](https://www.python.org)</center><br>
 # 简介
 这是一个为快速上手 termux 的新手，以及不想输入命令的 termux 佬特地提供的脚本工具，提供了各种 termux 中可运行的服务安装及配置<br>
 他的性质犹如类似于 [Lazymux](https://github.com/Gameye98/Lazymux) 这一类的仓库，但 Staxle 这个脚本目标是将termux中各种服务的安装与配置集结起来，只需要一个脚本就能全自动或者半自动的完成大部分所想要的服务的安装与配置<br>
