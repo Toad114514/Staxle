@@ -1,8 +1,0 @@
-[2024-10-28T17:43:47.719Z] info  code-server 4.89.1 effc6e95b4ad1c5ac5f9083ec06663ba4a2e005c
-[2024-10-28T17:43:47.730Z] info  Using user-data-dir /data/data/com.termux/files/home/.local/share/code-server
-[2024-10-28T17:43:47.859Z] info  Using config file /data/data/com.termux/files/home/.config/code-server/config.yaml
-[2024-10-28T17:43:47.859Z] info  HTTP server listening on http://0.0.0.0:2216/
-[2024-10-28T17:43:47.860Z] info    - Authentication is enabled
-[2024-10-28T17:43:47.860Z] info      - Using password from /data/data/com.termux/files/home/.config/code-server/config.yaml
-[2024-10-28T17:43:47.861Z] info    - Not serving HTTPS
-[2024-10-28T17:43:47.861Z] info  Session server listening on /data/data/com.termux/files/home/.local/share/code-server/code-server-ipc.sock
