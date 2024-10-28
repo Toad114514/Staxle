@@ -416,5 +416,7 @@ def main():
 
 # loop
 if __name__ == "__main__":
+    config()
+    cfig = config_load()
     os.system("clear")
     main()
