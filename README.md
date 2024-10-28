@@ -1,4 +1,4 @@
-<center><h1>Staxle</h1></center>
+<center># Staxle</center>
 <center>[![Staxle](https://toad114514.github.io/img/wb/staxle.jpg)](https://github.com/Toad114514/Staxle)</center><br>
 <center>termux 工具安装管理脚本</center><br>
 <center>[![Stars](https://img.shields.io/github/stars/Toad114514/Staxle.svg)](https://github.com/Toad114514/Staxle/status)
