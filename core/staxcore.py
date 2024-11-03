@@ -55,7 +55,7 @@ osys = os.popen("uname -o").read()
 
 prefix = os.getenv("PREFIX")
 cache_1 = prefix+"/tmp/staxle"
-configFile = "./stax.conf"
+configFile = "../stax.conf"
 configBase = "[HOME] = ~"
 user = getpass.getuser()
 # ip
