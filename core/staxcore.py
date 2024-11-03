@@ -25,49 +25,17 @@ def output(type,msg):
 
 script_path = os.path.realpath(__file__)
 stax_path = os.path.dirname(script_path)
-def config():
-    try:
-        cfcheck = open(stax_path+"/config.json","r")
-    except IOError:
-        print("未找到配置文件，退出")
-        os._exit(114)
-    else:
-        cfcheck.close()
-
-def config_load():
-    with open(stax_path+"/config.json","r") as f:
-        cstax = f.read()
-    cstax = json.loads(cstax)
-    return cstax
-
-def geti18n(string):
-    jsofn = config_load()
-    langd = jsofn["lang"]
-    try:
-        geti18n_f = open(stax_path+"/i18n/"+langd+".json","r")
-    except IOError:
-        bk = "无对应翻译文件"
-    else:
-        try:
-            bk = json.loads(geti18n_f.read())[string]
-        except KeyError:
-            bk = "无对应字段"
-    # finally:
-        # if geti18n_f:
-    geti18n_f.close()
-    return bk
 
 stax_banner = """
    \033[31m____\033[34m__  \033[33m    \033[32m    \033[31m   _\033[34m_
   \033[32m/ __\033[31m/ /_\033[34m___ \033[33m___ \033[32m__ /\033[31m /__
  \033[33m_\ \\\033[32m/ __\033[31m/ _ \033[34m`/\ \033[33m\ //\033[32m / -_)
 \033[34m/___\033[33m/\__\033[32m/\_,\033[31m_//_\033[34m\_\/\033[33m_/\__/\033[0m
-"""
-   # \033[0mAll-in-One \033[32mtermux\033[0m Tool-panel
-            # By Toad114514
 
-stax_banner = stax_banner + "\n    " + geti18n("stax.core.desc")
-stax_banner = stax_banner + "\n       " + geti18n("stax.core.authon")
+   \033[0mAll-in-One \033[32mtermux\033[0m Tool-panel
+            By Toad114514
+"""
+
 stax_web_about = """
     ___  __                        __
   / __/ / /_  ___   ___  __  / /__
@@ -87,8 +55,8 @@ osys = os.popen("uname -o").read()
 
 prefix = os.getenv("PREFIX")
 cache_1 = prefix+"/tmp/staxle"
+configFile = "./stax.conf"
 configBase = "[HOME] = ~"
-configFile = "../stax_path.conf"
 user = getpass.getuser()
 # ip
 soc_var=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
