@@ -13,25 +13,29 @@ termux 工具安装管理脚本<br>
 他的性质犹如类似于 [Lazymux](https://github.com/Gameye98/Lazymux) 这一类的仓库，但 Staxle 这个脚本目标是将termux中各种服务的安装与配置集结起来，只需要一个脚本就能全自动或者半自动的完成大部分所想要的服务的安装与配置<br>
 由于个人是python牢底，有啥bug可以反馈到 issues
 # 未来加入的特性
+ - setup.sh
  - 桌面环境管理
  - 软件中心 (?%)
  - 批量安装/执行✔️
  - 服务器安装/管理 (一小部分完成)
- - 网站面板后台✔️
- - 黑客工具安装 (一小部分完成)
- - termux 工具✔️
+ - 网站面板后台(完善中)✔️
+ - 黑客工具安装 (小部分完成)
+ - termux 管理工具✔️
  - 小工具
    - Cli-Hexo (Chexo)✔️
    - Server2me
+   - Qemd
  - ...
 # 安装
 ```bash
-pkg install python git
+pkg install git
 git clone https://github.com/toad114514/staxle.git
-cd staxle
-python setup.py
+cd staxle && bash ./setup.sh
 ```
 或者
+```bash
+pkg install git && git clone https://github.com/toad114514/staxle.git && cd staxle && bash ./setup.sh
+```
 # 进度
 未完成阶段
 慢更新（学业繁重）
