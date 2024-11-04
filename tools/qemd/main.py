@@ -381,7 +381,7 @@ def vmanage(path):
     else: print("无效输入"); time.sleep(0.5); vmanage(path)
 
 def manage():
-    path = "./vm"
+    path = os.path.split(os.path.realpath(__file__))[0]+"/vm"
     vm_folder = []
     for item in os.scandir(path):
         if item.is_dir():
@@ -416,7 +416,7 @@ def manage():
         print("["+str(listd)+"] "+vm_list[listd])
     print("[q] 退出")
     sel = input("请输入其中一个以管理虚拟机：")
-    if sel == "q": main()
+    if sel.strip() == "q": main()
     elif int(sel) >= 0 and int(sel) <= len(vm_list):
         vmanage_check(vm_list[int(sel)])
     else: print("无效输入"); time.sleep(1); main()
