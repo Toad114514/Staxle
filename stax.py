@@ -373,9 +373,7 @@ def main():
             writeStatus(0)
     # 在线更新
     if sel.strip() == "02":
-        os.system("git clone https://github.io/Toad114514/Staxle")
-        os.system("mv Staxle $PREFIX/etc/staxle")
-        print("更新完成，重新启动 staxle 即可")
+        update()
         os._exit(0)
     if sel.strip() == "01":
         resp = requests.get('https://toad114514.github.io/staxle/board.txt')

@@ -1,5 +1,6 @@
 import os, sys, time, json
 import urllib.request
+import requests
 import getpass
 import socket
 import platform as plat
@@ -24,7 +25,8 @@ def output(type,msg):
     return result
 
 script_path = os.path.realpath(__file__)
-stax_path = os.path.dirname(script_path)
+staxcore_path = os.path.dirname(script_path)
+stax_path = staxcore_path+"/.."
 
 stax_banner = """
    \033[31m____\033[34m__  \033[33m    \033[32m    \033[31m   _\033[34m_
@@ -133,11 +135,46 @@ def loadConfigFile():
 
 homeDir = loadConfigFile()
 
+def update():
+    update_json = requests.get("https://api.github.com/repos/toad114514/staxle/releases/latest")
+    print("目前 Staxle 版本："+stax.version)
+    print("请等待获取最新的 Releases...")
+    if update_json.status_code == 200:
+        update_info=json.loads(update_json.text)
+        print("\n")
+        print("最近的 Releases 版本："+update_info["tag_name"])
+        print("提交时间："+update_info["published_at"].replace("T"," ").replace("Z",""))
+        print("===============================")
+        print("c(hanglog) 查看本次更新日志    u(pdate) 更新    b(ack) 退出")
+        inp=input("输入：")
+        if inp.strip() == "c" or inp.strip() == "changlog":
+            ud_body=update_info["body"]
+            print(update_info["name"]+" ("+update_info["tag_name"]+") 更新日志：")
+            print("===============================")
+            print(ud_body)
+            print("===============================")
+            print("u(pdate) 更新    b(ack) 退出")
+            inp=input("输入：")
+            if inp.strip() == "u" or inp.strip() == "update":
+                os.system("cd "+stax_path+" && git pull && cd")
+                print("更新完成，重新输入 stax/staxle 可体验新版本")
+            elif inp.strip() == "b" or inp.strip() == "back":
+                restart_program()
+            else: print("无效输入"); time.sleep(0.7); restart_program()
+        elif inp.strip() == "u" or inp.strip() == "update":
+            os.system("cd "+stax_path+" && git pull && cd")
+            print("更新完成，重新输入 stax/staxle 可体验新版本")
+        elif inp.strip() == "b" or inp.strip() == "back":
+            restart_program()
+        else: print("无效输入"); time.sleep(0.7); restart_program()
+    
+
 def about():
     print(stax_banner)
     print("Staxle "+stax.version+" ("+str(stax.version_num)+")")
     print(whoami+"@"+kenrel+"/"+osys)
     print("Python "+str(plat.python_version())+"("+str(plat.python_implementation())+")")
+    print("work_path:"+stax_path)
     print("ip:",ip)
     input("按下回车键回到菜单")
     restart_program()
