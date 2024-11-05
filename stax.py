@@ -411,4 +411,5 @@ def main():
 # loop
 if __name__ == "__main__":
     os.system("clear")
+    config_get()
     main()

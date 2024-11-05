@@ -38,7 +38,13 @@ setup_ready(){
 
 setup_set(){
   user=$(whiptail --title "用户配置" --inputbox "你叫什么✓8名？（留空则使用termux分配的用户名）" 10 70 3>&1 1>&2 2>&3)
-  echo $user
+  
+  if $(whiptail --title "设置gitmirror" --yesno "设置 Staxle 部分需要通过GitHub获取工具的镜像，GitHub 国内访问速度慢下载慢，KKGitHub 速度快但无法保证稳定性（有时会无法使用）" --yes-button "Github" --no-button "KKGithub" 15 60 3>&1 1>&2 2>&3)
+  then
+    gitmirror="github"
+  else
+    gitmirror="kkgithub"
+  fi
   
   tools=$(whiptail --title "选择所需工具" --checklist "根据你的所需去选择你的工具（按下空格键选中选项，回车继续）" 15 75 4 \
   "web.py" "Staxle 工具的面板后台（用于服务器管理和后台部署）" OFF \
@@ -48,7 +54,7 @@ setup_set(){
   3>&1 1>&2 2>&3
   )
   
-  if test "$(echo $tools|grep webpy)" != ""
+  if test "$(echo $tools|grep web.py)" != ""
   then
     webpy="true"
   else
@@ -109,7 +115,7 @@ setup_mem(){
 
 start_setup(){
   echo ${GREEN}开始进行初始化操作...${RESET}
-  sleep 1
+  sleep 0.6
   # main
   if test "$(pkg installed|grep python)" = ""
   then
@@ -146,13 +152,7 @@ start_setup(){
   if test $chexo = "true"
   then
     echo 正在安装${GREEN} Chexo ${RESET}所需依赖
-    if test "$(pkg installed|grep python)" = ""
-    then
-      echo 正在安装前置依赖包 ${GREEN}nodejs-lts${RESET}...
-      pkg install nodejs-lts -y
-      node -v
-    fi
-    if test "$(pkg installed|grep python)" = ""
+    if test "$(pkg installed|grep nodejs-lts)" = ""
     then
       echo 正在安装前置依赖包 ${GREEN}nodejs-lts${RESET}...
       pkg install nodejs-lts -y
@@ -173,24 +173,43 @@ start_setup(){
   
   echo 正在设置 ${GREEN}配置文件${RESET}...
   # config
-  configbase="{'user': $user}"
+   if test "$user" = ""
+  then
+    configbase="{'user': false,"
+  else
+    configbase="{'user': '$user',"
+  fi
+  configbase=$configbase"'git_mirror': '${gitmirror}',"
+  configbase=$configbase"'tools':{"
+  configbase=$configbase"'webpy': ${webpy},"
+  configbase=$configbase"'qemd': ${qemd},"
+  configbase=$configbase"'server2me': ${s2m},"
+  configbase=$configbase"'chexo': ${chexo}}}"
   echo $configbase > ${stax_path}/core/config.json
   # setdisable
   if test $webpy = "false"
   then
     mv ${stax_path}/web.py ${stax_path}/web.py.disable
+  else
+    mv ${stax_path}/web.py.disable ${stax_path}/web.py
   fi
   if test $chexo = "false"
   then
     mv ${stax_path}/tools/chexo/main.py ${stax_path}/tools/chexo/main.py.disable
+  else
+    mv ${stax_path}/tools/chexo/main.py.disable ${stax_path}/tools/chexo/main.py
   fi
   if test $s2m = "false"
   then
     mv ${stax_path}/tools/server2me/main.py ${stax_path}/tools/server2me/main.py.disable
+  else
+    mv ${stax_path}/tools/server2me/main.py.disable ${stax_path}/tools/server2me/main.py
   fi
   if test $qemd = "false"
   then
     mv ${stax_path}/tools/qemd/main.py ${stax_path}/tools/qemd/main.py.disable
+  else
+    mv ${stax_path}/tools/qemd/main.py.disable ${stax_path}/tools/qemd/main.py
   fi
   
   echo 正在 ${GREEN}添加全局命令${RESET}...
@@ -198,10 +217,10 @@ start_setup(){
   termux_bin="$PREFIX/bin"
   echo "python ${stax_path}/stax.py" > ${termux_bin}/staxle
   echo "python ${stax_path}/stax.py" > ${termux_bin}/stax
-  echo "bash ${stax_path}/setup.sh" > ${termux_bin}/stax-setup
+  echo "bash ${stax_path}/setup.sh $1" > ${termux_bin}/stax-setup
   chmod +x ${termux_bin}/staxle
   chmod +x ${termux_bin}/stax
-  chmod +x ${termux_bin}/staxle-setup
+  chmod +x ${termux_bin}/stax-setup
   if test $webpy = "true"
   then
     echo "python ${stax_path}/web.py" > ${termux_bin}/stax-webpanel
@@ -262,4 +281,32 @@ setup_run(){
   setup_check
 }
 
-setup_run
+## command
+com_help(){
+  echo Staxle Setup Wizard ${setup_ver}
+  echo 用法：bash setup.sh command
+  echo 如果没有任何参数传递则直接启动 Staxle 初始化向导
+  echo 
+  echo 可用的 command 选项：
+  echo     help - 打印帮助文档并退出
+  echo     version - 打印版本号并退出
+  echo     update - 升级 Staxle（包括 Staxle 本体、所有工具和本初始化向导）
+  exit 0
+}
+
+com_version(){
+  echo Staxle Setup Wizard ${setup_ver}
+  echo Staxle ${stax_ver}
+}
+
+com_update(){
+  git pull
+  echo 升级完成
+}
+
+case $1 in
+  help) com_help ;;
+  version) com_version ;;
+  update) com_update ;;
+  *) setup_run ;;
+esac

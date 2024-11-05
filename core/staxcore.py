@@ -96,10 +96,6 @@ def backtomenu_option():
 			time.sleep(2)
 			restart_program()
 
-def banner():
-	print(stax_banner)
-	print(stax.version+"("+str(stax.version_num)+")"+"    欢迎 "+user+"/"+str(plat.system()))
-
 def err():
     print("无效输入。")
     input("")
@@ -135,6 +131,31 @@ def loadConfigFile():
 
 homeDir = loadConfigFile()
 
+class staxconf():
+    user=""
+    git_clone_mirror=""
+    webpy=True
+    server2me=True
+    qemd=True
+    chexo=True
+
+def config_get():
+    with open(staxcore_path+"/config.json","r") as f:
+        conf=json.loads(f.read())
+    if user == False:
+        staxconf.user=str(plat.system())
+    else:
+        staxconf.user=conf["user"]
+    staxconf.git_clone_mirror=conf["git_mirror"]
+    staxconf.webpy=conf["tools"]["webpy"]
+    staxconf.qemd=conf["tools"]["qemd"]
+    staxconf.server2me=conf["tools"]["server2me"]
+    staxconf.chexo=conf["tools"]["chexo"]
+
+def banner():
+	print(stax_banner)
+	print(stax.version+"("+str(stax.version_num)+")"+"    欢迎 "+user+"/"+staxconf.user)
+
 def update():
     update_json = requests.get("https://api.github.com/repos/toad114514/staxle/releases/latest")
     print("目前 Staxle 版本："+stax.version)
@@ -167,7 +188,6 @@ def update():
         elif inp.strip() == "b" or inp.strip() == "back":
             restart_program()
         else: print("无效输入"); time.sleep(0.7); restart_program()
-    
 
 def about():
     print(stax_banner)
