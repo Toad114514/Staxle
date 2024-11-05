@@ -175,16 +175,16 @@ start_setup(){
   # config
    if test "$user" = ""
   then
-    configbase="{'user': false,"
+    configbase='{"user": false,'
   else
-    configbase="{'user': '$user',"
+    configbase='{"user": "'$user'",'
   fi
-  configbase=$configbase"'git_mirror': '${gitmirror}',"
-  configbase=$configbase"'tools':{"
-  configbase=$configbase"'webpy': ${webpy},"
-  configbase=$configbase"'qemd': ${qemd},"
-  configbase=$configbase"'server2me': ${s2m},"
-  configbase=$configbase"'chexo': ${chexo}}}"
+  configbase=$configbase'"git_mirror": "'${gitmirror}'",'
+  configbase=$configbase'"tools":{'
+  configbase=$configbase'"webpy": '${webpy}','
+  configbase=$configbase'"qemd": '${qemd}','
+  configbase=$configbase'"server2me": '${s2m}','
+  configbase=$configbase'"chexo": '${chexo}'}}'
   echo $configbase > ${stax_path}/core/config.json
   # setdisable
   if test $webpy = "false"

@@ -1,4 +1,5 @@
-import os, sys, time, json
+import os, sys, time
+import json
 import urllib.request
 import requests
 import getpass
@@ -142,7 +143,7 @@ class staxconf():
 def config_get():
     with open(staxcore_path+"/config.json","r") as f:
         conf=json.loads(f.read())
-    if user == False:
+    if conf["user"] == False:
         staxconf.user=str(plat.system())
     else:
         staxconf.user=conf["user"]
@@ -151,6 +152,9 @@ def config_get():
     staxconf.qemd=conf["tools"]["qemd"]
     staxconf.server2me=conf["tools"]["server2me"]
     staxconf.chexo=conf["tools"]["chexo"]
+
+def confout(conf):
+    return staxconf
 
 def banner():
 	print(stax_banner)

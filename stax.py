@@ -6,7 +6,6 @@
 import os
 import requests
 import time
-import json
 import sys
 import readline
 from core.staxcore import *
@@ -30,6 +29,7 @@ def main():
 01) 获取公告     02) 更新 Staxle
 03) 关于         99) 退出
 注：大部分程序文件都将安装到你的 home 目录
+注：如遇到部分选项点击后显示未初始化xxxx，则需要启动 setup.sh
 """)
     sel = input("Staxle/ $:")
     if sel.strip() == "1":
@@ -56,7 +56,13 @@ def main():
             if sel.strip() == "1": nginxins()
             elif sel.strip() == "2": apacheins()
             elif sel.strip() == "3": phpins()
-            elif sel.strip() == "01": os.system("python ./tools/server2me/main.py");restart_program()
+            elif sel.strip() == "01":
+                if staxconf.server2me == False:
+                    print("未初始化 Server2me。")
+                    restart_program()
+                else:
+                    os.system("python ./tools/server2me/main.py")
+                    restart_program()
             elif sel.strip() == "5":
                 print("  其他类型的服务器")
                 print("1) Ngircd: IRC 服务器")
@@ -389,17 +395,35 @@ def main():
         print("99) 回到 Staxle 菜单")
         sel = input("Staxle/Termux $:")
         if sel.strip() == "1":
-            os.system("cd ./tools/chexo/ && python main.py")
-            restart_program()
+            if staxconf.chexo == False:
+                print("未初始化 Chexo。")
+                restart_program()
+            else:
+                os.system("cd ./tools/chexo/ && python main.py")
+                restart_program()
         if sel.strip() == "2":
-            os.system("python ./tools/server2me/main.py")
-            restart_program()
+            if staxconf.server2me == False:
+                print("未初始化 Server2me。")
+                restart_program()
+            else:
+                os.system("python ./tools/server2me/main.py")
+                restart_program()
         elif sel.strip() == "99": restart_program()
         else: print("无效输入。");restart_program()
     if sel.strip() == "11":
-        os.system("python web.py")
-        restart_program()
-    if sel.strip() == "4": os.system("cd tools/qemd && python main.py");restart_program()
+        if staxconf.webpy == False:
+            print("未初始化 web.py。")
+            restart_program()
+        else:
+            os.system("python web.py")
+            restart_program()
+    if sel.strip() == "4": 
+        if staxconf.qemd == False:
+            print("未初始化 Qemd。")
+            restart_program()
+        else:
+            os.system("cd tools/qemd && python main.py")
+            restart_program()
     if sel.strip() == "99":
         os.system("clear && cd ~")
         sys.exit()
