@@ -1,4 +1,8 @@
 import os, sys, time
+if os.path.exists(".web_passwd") == False:
+    passwd = input("为面板后台设置一个新密码")
+    with open(".web_passwd","w+") as f:
+        f.write(passwd)
 import requests
 import json
 from core.webcore import *
@@ -16,7 +20,7 @@ def main():
         dui_pwd = f.read()
     if pwd == dui_pwd:
         runpanel()
-        print("[!] 有个老野登录了你的后台！")
+        print("[!]老野登录了你的后台！")
     else:
         out.popup("密码错误，请重新刷新页面重试")
 
