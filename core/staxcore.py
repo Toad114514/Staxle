@@ -153,9 +153,6 @@ def config_get():
     staxconf.server2me=conf["tools"]["server2me"]
     staxconf.chexo=conf["tools"]["chexo"]
 
-def confout(conf):
-    return staxconf
-
 def banner():
 	print(stax_banner)
 	print(stax.version+"("+str(stax.version_num)+")"+"    欢迎 "+user+"/"+staxconf.user)
@@ -209,7 +206,13 @@ def about_web():
     about03 = "Python "+str(plat.python_version())+"("+str(plat.python_implementation())+")"
     about04 = "ip:"+ip
     return stax_web_about + "\n终端设备：\n" + about01 + "\n" + about02 + "\m" + about03 + "\n" + about04
-    
+
+def gitc(repo):
+    if staxconf.git_clone_mirror == "kkgithub":
+        os.system("git clone https://kkgithub.com/"+repo)
+    else:
+        os.system("git clone https://github.com/"+repo)
+
 # 服务器命令
 def nginxins():
     aug()
@@ -350,7 +353,7 @@ def qurxin():
     aug()
     os.system("apt install git mpv figlet -y")
     os.system("pip install lolcat")
-    os.system("git clone https://github.com/fikrado/qurxin")
+    gitc("fikrado/qurxin")
     os.system('mv qurxin {}'.format(homeDir))
     os.system("cd ./qurxin")
     os.system("chmod +x *")
@@ -372,7 +375,7 @@ def termux_desktop():
 def toolx():
     aug()
     os.system("pkg install python3 git -y")
-    os.system("git clone https://github.com/vaginessa/Tool-X.git")
+    gitc("vaginessa/Tool-X")
     os.system('mv Tool-X {}'.format(homeDir))
     os.system("cd ~/Tool-X")
     os.system("chmod +x ./install.axe")
@@ -381,7 +384,7 @@ def toolx():
 def lazymux():
     aug()
     os.system("pkg install python3 git -y")
-    os.system("git clone https://github.com/Gameye98/Lazymux")
+    gitc("Gameye98/Lazymux")
     os.system("my Lazymux {}".format(homeDir))
     done("Lazymux 安装完成！\n输入 cd Lazymux && python lazymux.py 启动")
 
@@ -408,14 +411,14 @@ def nmap():
 def sqlmap():
     aug()
     os.system("apt install git python2 -y")
-    os.system("git clone https://github.com/sqlmapproject/sqlmap")
+    gitc("sqlmapproject/sqlmap")
     os.system('mv sqlmap {}'.format(homeDir))
     done("Sqlmap 安装完成")
 
 def evilurl():
     aug()
     os.system("apt install git python2 python3 -y")
-    os.system("git clone https://github.com/UndeadSec/EvilURL")
+    gitc("UndeadSec/EvilURL")
     os.system('mv sqlmap {}'.format(homeDir))
     done("EvilUrl 安装完成")
 
@@ -424,7 +427,7 @@ def wifite2():
     else:
         aug()
         os.system("apt install git python2 python3 -y")
-        os.system("git clone https://github.com/derv82/wifite2")
+        gitc("derv82/wifite2")
         os.system('mv wifite2 {}'.format(homeDir))
         done("wifite2 安装完成")
 
@@ -433,7 +436,7 @@ def wifiphisher():
     else:
         aug()
         os.system("apt install git python3 -y")
-        os.system("git clone https://github.com/wifiphisher/wifiphisher")
+        gitc("wifiphisher/wifiphisher")
         os.system('mv wifiphisher {}'.format(HomeDir))
         done("wifiphisher 安装完成")
 
@@ -447,7 +450,7 @@ def apktool():
 def eagleeye():
     aug()
     os.system("apt install python3 -y")
-    os.system("git clone https://github.com/ThoughtfulDev/EagleEye")
+    gitc("ThoughtfulDev/EagleEye")
     os.system('mv EagleEye {}'.format(homeDir))
     os.system("cd ~/EagleEye")
     os.system("pip install -r requirements.txt")
@@ -457,7 +460,7 @@ def eagleeye():
 def emailall():
     aug()
     os.system("apt install git -y")
-    os.system("git clone https://github.com/Taonn/EmailAll.git")
+    gitc("Taonn/EmailAll.git")
     os.system('mv EmailAll {}'.format(homeDir))
     os.system("pip3 install -r requirements.txt")
     done("EmailAll 安装完成")
@@ -475,7 +478,7 @@ def arl():
 def mapeye():
     aug()
     os.system("apt install git -y")
-    os.system("git clone https://github.com/bhikandeshmukh/MapEye.git")
+    gitc("bhikandeshmukh/MapEye.git")
     os.system('mv MapEye {}'.format(homeDir))
     os.system("apt install python php -y")
     os.system("pip3 install requests")
@@ -491,7 +494,7 @@ def sqlscan():
 def sqlmate():
     aug()
     os.system("apt install git -y")
-    os.system("git clone https://github.com/UltimateHackers/sqlmate")
+    gitc("UltimateHackers/sqlmate")
     os.system('mv sqlmate {}'.format(homeDir))
     os.system("cd ~/sqlmate")
     os.system("pip install -r requirements.txt")
@@ -501,7 +504,7 @@ def xsstrike():
     aug()
     os.system('apt install git python2 -y')
     os.system('python2 -m pip install fuzzywuzzy prettytable mechanize HTMLParser')
-    os.system('git clone https://github.com/s0md3v/XSStrike')
+    gitc("s0md3v/XSStrike")
     os.system('mv XSStrike {}'.format(homeDir))
     done("XSStrike 安装完成")
 
@@ -529,7 +532,7 @@ def metasploit():
 def easysploit():
     aug()
     os.system("pkg install git -y")
-    os.system("git clone https://github.com/KALILINUXTRICKSYT/easysploit")
+    gitc("KALILINUXTRICKSYT/easysploit")
     os.system('mv easysploit {}'.format(homeDir))
     os.system("cd easysploit")
     print(output("i","启动 Easysploit 安装脚本..."))
@@ -539,7 +542,7 @@ def easysploit():
 def phonesploit():
     aug()
     os.system("pkg install git python -y")
-    os.system("git clone https://github.com/AzeemIdrisi/PhoneSploit-Pro.git")
+    gitc("AzeemIdrisi/PhoneSploit-Pro.git")
     os.system('mv PhoneSploit-Pro {}'.format(homeDir))
     os.system("cd $HOME/PhoneSploit-Pro")
     os.system("python install -r requirements.txt")
@@ -548,7 +551,7 @@ def phonesploit():
 def cmseek():
     aug()
     os.system("pkg install git python -y")
-    os.system("git clone https://github.com/Tuhinshubhra/CMSeeK")
+    gitc("Tuhinshubhra/CMSeeK")
     os.system('mv CMSeeK {}'.format(homeDir))
     os.system("cd $HOME/CMSeeK")
     os.system("python install -r requirements.txt")
