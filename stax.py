@@ -160,9 +160,9 @@ def main():
             elif infor.strip() == "5": toolx()
             elif infor.strip() == "6": lazymux()
             elif infor.strip() == "8": neofetch()
-            elif infor.strip() == "9": os.system("termux-wake-lock")
-            elif infor.strip() == "11": os.system("vim ~/.termux/termux.properties")
-            elif infor.strip() == "12": os.system("vim $PREFIX/etc/motd")
+            elif infor.strip() == "9": os.system("termux-wake-lock"); restart_program()
+            elif infor.strip() == "11": os.system("vim ~/.termux/termux.properties"); restart_program()
+            elif infor.strip() == "12": os.system("vim $PREFIX/etc/motd"); restart_program()
             elif infor.strip() == "99": restart_program()
             else: print("\n错误：无效输入");time.sleep(1);restart_program()
         if readStatus():
