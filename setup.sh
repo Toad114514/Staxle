@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # Setup.sh by toad
-stax_ver="v1.05.1"
+stax_ver="v1.05.2"
 setup_ver="ver.106"
 stax_info="    这是一个为快速上手 termux 的新手，以及不想输入命令的 termux 佬特地提供的脚本工具，提供了各种 termux 中可运行的服务安装及配置\\n    他的性质犹如类似于 Lazymux 这一类的仓库，但 Staxle 这个脚本目标是将termux中各种服务的安装与配置集结起来，只需要一个脚本就能全自动或者半自动的完成大部分所想要的服务的安装与配置"
 

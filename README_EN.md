@@ -13,6 +13,7 @@ This is a scripting tool for those who are new to Termux and those who don't wan
 It's like a repository like [Lazymux](https://github.com/Gameye98/Lazymux) but the goal of Staxle's script is to assemble and configure all kinds of services in termux, and only one script can be fully or semi-automatically installed and configured for most of the desired services<br>
 Since I am a beginner in Python, if there are any bugs, you can report them to the issues
 # Feature
+ - setup.sh
  - Desktop environment management
  - Software Center (?%)
  - Batch installation/execution ✔️
@@ -23,13 +24,17 @@ Since I am a beginner in Python, if there are any bugs, you can report them to t
  - Some tools
    - Cli-Hexo (Chexo)✔️
    - Server2me
+   - Qemd
  - ...
 # install
 ```bash
-pkg install python git
+pkg install git
 git clone https://github.com/toad114514/staxle.git
-cd staxle
-python setup.py
+cd staxle && bash ./setup.sh
+```
+Or
+```bash
+pkg install git && git clone https://github.com/toad114514/staxle.git && cd staxle && bash ./setup.sh
 ```
 # Progress
 Unfinished stage
