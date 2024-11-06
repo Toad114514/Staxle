@@ -385,7 +385,7 @@ def lazymux():
     aug()
     os.system("pkg install python3 git -y")
     gitc("Gameye98/Lazymux")
-    os.system("my Lazymux {}".format(homeDir))
+    os.system("mv Lazymux {}".format(homeDir))
     done("Lazymux 安装完成！\n输入 cd Lazymux && python lazymux.py 启动")
 
 #def tmoe():
@@ -510,24 +510,11 @@ def xsstrike():
 
 def metasploit():
     aug()
-    print(output("i","安装依赖"))
-    os.system("pkg install -y binutils python autoconf bison clang coreutils curl findutils apr apr-util postgresql openssl readline libffi libgmp libpcap libsqlite libgrpc libtool libxml2 libxslt ncurses make ncurses-utils ncurses git wget unzip zip tar termux-tools termux-elf-cleaner pkg-config git ruby -o Dpkg::Options::='--force-confnew'")
-    os.system("python3 -m pip install --upgrade pip")
-    os.system("python3 -m pip install requests")
-    os.system("git clone https://github.com/rapid7/metasploit-framework.git --depth=1")
-    os.system('mv metasploit-framework {}'.format(homeDir))
-    os.system("cd $HOME/metasploit-framework")
-    os.system("gem install bundler")
-    os.system("declare NOKOGIRI_VERSION=$(cat Gemfile.lock | grep -i nokogiri | sed 's/nokogiri [\(\)]/(/g' | cut -d ' ' -f 5 | grep -oP '(.).[[:digit:]][\w+]?[.].')")
-    os.system("gem install nokogiri -v $NOKOGIRI_VERSION -- --use-system-libraries")
-    os.system("gem install actionpack")
-    os.system("gem install activesupport")
-    os.system("bundle update --bundler")
-    os.system("bundle install -j$(nproc --all)")
-    print(output("i","安装 Metasploit"))
-    os.system("mkdir -p $PREFIX/var/lib/postgresql >/dev/null 2>&1")
-    os.system("initdb $PREFIX/var/lib/postgresql  >/dev/null 2>&1")
-    done("Metasploit 安装完成\n执行 cd ~/metasploit-framework/ && ./msfconsole 启动")
+    print(output("i","安装 Metasploit-framework 6（依靠脚本 gushmazuko/metasploit_in_termux）"))
+    gitc("gushmazuko/metasploit_in_termux")
+    os.system('mv metasploit_in_termux {}'.format(homeDir))
+    os.system("cd {}/metasploit_in_termux && bash metasploit.sh".format(homeDir))
+    done("Metasploit 安装完成\n执行 msfconsole 启动")
 
 def easysploit():
     aug()
