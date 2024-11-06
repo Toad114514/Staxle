@@ -16,7 +16,7 @@ def main():
   - 输入选项选择
 1) 服务器管理工具
 2) 桌面环境管理
-3) Termux 配置
+3) Termux 工具
 4) 虚拟机 (Qemd)
 5) 安装包管理
 6) 千年软件老字店
@@ -56,6 +56,7 @@ def main():
             if sel.strip() == "1": nginxins()
             elif sel.strip() == "2": apacheins()
             elif sel.strip() == "3": phpins()
+            elif sel.strip() == "4": mysql()
             elif sel.strip() == "01":
                 if staxconf.server2me == False:
                     print("未初始化 Server2me。")
@@ -129,7 +130,7 @@ def main():
         else: print("\n错误：无效输入");time.sleep(1);restart_program()
     # Termux
     if sel.strip() == "3":
-        print("termux 一些配置")
+        print("termux 一些工具")
         print("1) proot-distro: 在 termux 上安装发行版 linux")
         print("2) termux 换源")
         print("3) 获取外部权限")

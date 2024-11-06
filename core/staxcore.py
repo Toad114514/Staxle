@@ -249,6 +249,11 @@ def lighttpd():
     os.system("apt install lighttpd -y")
     done("lighttpd 安装完成\n可进入 Server2me 配置")
 
+def mysql():
+    aug()
+    os.system("apt install mariadb -y")
+    done("mysql 安装完成！\n输入 mysqld 启动服务器")
+
 def proot_distro():
     proot_distro_ins = os.popen("pkg list-installed|grep proot-distro")
     if "proot-distro" not in proot_distro_ins.read():

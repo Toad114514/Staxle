@@ -100,6 +100,7 @@ def main():
         print("[4] php-apache")
         print("[5] ngircd")
         print("[6] lighttpd")
+        print("[7] mysql")
         print("[99] 返回")
         sel == input("Staxle/Server2me/start: ")
         if sel.strip() == "1":
@@ -150,6 +151,14 @@ def main():
             else:
                 os.system("lighttpd")
                 main()
+         if sel.strip() == "7":
+            if "mariadb" not in os.popen("pkg list-installed|grep mariadb").read():
+                print("未安装 mysql，请退出 Server2me 然后通过 Staxle 安装\n返回...")
+                time.sleep(1)
+                main()
+            else:
+                os.system("nohup mysqld &")
+                main()
         if sel.strip() == "99":
             main()
         else:
@@ -164,6 +173,7 @@ def main():
         print("[4] php-apache")
         print("[5] ngircd")
         print("[6] lighttpd")
+        print("[7] mysql")
         print("[99] 退出")
         if sel.strip() == "1":
             if os.system("pgrep nginx") == 1:
@@ -212,6 +222,14 @@ def main():
                 main()
             else:
                 os.system("pkill lighttpd")
+                main()
+        if sel.strip() == "7":
+            if os.system("pgrep mysql") == 1:
+                print("未启动或者未安装 Mysql")
+                time.sleep(1)
+                main()
+            else:
+                os.system("pkill mysql")
                 main()
         else:
             main()
