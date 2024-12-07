@@ -359,7 +359,7 @@ def xfce4():
         disp = "tx11"
         print("\n请在你的手机上面安装好 termux-x11\n还未安装的请移到 https://pan.huang1111.cn/s/m78eS1?path=%2F%E5%AE%89%E5%8D%93APK%2Ftermux-x11 下载并安装")
         input("如果已经安装好 termux-x11 的按下回车键继续")
-        is_legacy = sel("\m你的设备是不是为老手机/战神机？（例如oppoa5）\n因为termux-x11默认使用新的绘画方式，但老手机/战神机只会显示一个鼠标就没有了，解决方法就是使用传统绘画模式\n要启用传统绘画模式吗？[y/n]：")
+        is_legacy = input("\n你的设备是不是为老手机/战神机？（例如oppoa5）\n因为termux-x11默认使用新的绘画方式，但老手机/战神机只会显示一个鼠标就没有了，解决方法就是使用传统绘画模式\n要启用传统绘画模式吗？[y/n]：")
         if is_legacy != "y" and is_legacy != "n":
             print("无效输入")
             time.sleep(0.5)
@@ -373,7 +373,7 @@ def xfce4():
         output("i","开始安装 xfce4...")
         aug()
         os.system("pkg install x11-repo")
-        os.system("pkg install xfce4 dbus-x11 tigervnc -y")
+        os.system("pkg install xfce4 tigervnc -y")
         output("i","设置 vnc 服务器...")
         os.system("mkdit ~/.vnc")
         os.system(f"echo {vnc_passwd} > ~/.vnc/passwd")
@@ -397,17 +397,17 @@ def xfce4():
         output("i","开始安装 xfce4...")
         aug()
         os.system("pkg install x11-repo")
-        os.system("pkg install xfce4 dbus-x11 tigervnc xwayland termux-x11-nightly -y")
+        os.system("pkg install xfce4 tigervnc xwayland termux-x11-nightly -y")
         output("i","设置 termux-x11...")
         os.system("touch $PREFIX/bin/xfce4")
         if is_legacy == "y":
-        with open(os.path.join(prefix, "bin", "xfce4"),"w") as f:
-            bash_setup = "# vnc\ntermux-x11 :0 -legacy-drawing &\nenv DISPLAY=:0 startxfce4 &\necho xfce4的图形输出在 termux-x11 服务器上，请打开 termux-x11 应用"
-            f.write(bash_setup)
+            with open(os.path.join(prefix, "bin", "xfce4"),"w") as f:
+                bash_setup = "# vnc\ntermux-x11 :0 -legacy-drawing &\nenv DISPLAY=:0 startxfce4 &\necho xfce4的图形输出在 termux-x11 服务器上，请打开 termux-x11 应用"
+                f.write(bash_setup)
         if is_legacy == "n":
-        with open(os.path.join(prefix, "bin", "xfce4"),"w") as f:
-            bash_setup = "#type-bash tx11\n#请不要删除上方注释！\ntermux-x11 :0 &\nenv DISPLAY=:0 startxfce4 &\necho xfce4的图形输出在 termux-x11 服务器上，请打开 termux-x11 应用"
-            f.write(bash_setup)
+            with open(os.path.join(prefix, "bin", "xfce4"),"w") as f:
+                bash_setup = "#type-bash tx11\n#请不要删除上方注释！\ntermux-x11 :0 &\nenv DISPLAY=:0 startxfce4 &\necho xfce4的图形输出在 termux-x11 服务器上，请打开 termux-x11 应用"
+                f.write(bash_setup)
         os.system("chmod +x $PREFIX/bin/xfce4")
         print("xfce4 安装完成\n以后只需输入 xfce4 便可启动\n你现在要：")
         sel = input("[1] 现在启动\n[2] 返回 Staxle")
@@ -423,7 +423,7 @@ def xfce4_main():
         if sel == "2":
             sel = input("确定卸载xfce4？[y/n]：")
             if sel == "y":
-                os.system("pkg remove xfce4 dbux-x11 -y")
+                os.system("pkg remove xfce4 -y")
                 print("卸载完成。")
                 time.sleep(0.7)
                 restart_program()

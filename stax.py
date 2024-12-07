@@ -133,7 +133,7 @@ def main():
             print("99) 返回")
             sel = input("Staxle/WM $:")
             for deifor in sel.split():
-                if deifor.strip() == "1": xfce4-main()
+                if deifor.strip() == "1": xfce4_main()
                 elif deifor.strip() == "99": restart_program()
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
         elif demfor.strip() == "99": restart_program()

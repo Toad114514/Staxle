@@ -2,4 +2,4 @@ core/config.json
 .web_passwd
 tools/qemd/vm
 tools/chexo/hexo-dir
-core/__pycache__/
+core/__pycache__
