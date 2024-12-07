@@ -20,7 +20,7 @@ def main():
         dui_pwd = f.read()
     if pwd == dui_pwd:
         runpanel()
-        print("[!]老野登录了你的后台！")
+        print("[!]有老野登录了你的后台！")
     else:
         out.popup("密码错误，请重新刷新页面重试")
 
@@ -45,8 +45,10 @@ def runpanel():
           out.put_buttons(["安装","启动"],onclick=[de05, code_start]),
        ]},
        {"title":"桌面环境","content":[
-          out.put_markdown("# Shit")
-       
+          out.put_markdown("**请先选择显示方式后，再安装桌面！！！**")
+          out.put_markdown("显示方式")
+          out.put_html("<h3>termux-x11</h3>")
+          out.put_text("可吃图形加速，速度快")
        ]},
        {"title":"后台链接转接","content":[
           out.put_link("Apache 页面",url="http://127.0.0.1:8080")
@@ -65,7 +67,10 @@ def close():
     os._exit(0)
 
 if __name__ == "__main__":
-    print("输入下方地址进入面板后台")
-    print("关闭面板后台需要转到面板设置点击关闭页面后台才可关闭")
-    web.start_server(main, host="0.0.0.0", port=15334, debug=True)
-    web.session.hold()
+    if os.path.exists("./.web_passwd") == False:
+        print("未设置密码，请通过 Staxle 本体设置并启动。")
+    else:
+        print("输入下方地址进入面板后台")
+        print("关闭面板后台需要转到面板设置点击关闭页面后台才可关闭")
+        web.start_server(main, host="0.0.0.0", port=15334, debug=True)
+        web.session.hold()
