@@ -110,6 +110,7 @@ def main():
             print("1) openbox: lxde桌面环境原装wm")
             print("2) fvwm: 轻量且高度自定义")
             print("3) wmaker: 类似 NextSTeP 的窗口管理器")
+            print("99) 返回")
             sel = input("Staxle/WM $:")
             if sel == "@":
                 sel = ""
@@ -126,6 +127,15 @@ def main():
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
             if readStatus():
                 writeStatus(0)
+        if sel.strip() == "3":
+            print(" 桌面环境全家桶，面板、窗口管理器、桌面、文件管理器、会话、设置面板一应俱全")
+            print("1) xfce4: 兼容性最高的桌面环境")
+            print("99) 返回")
+            sel = input("Staxle/WM $:")
+            for deifor in sel.split():
+                if deifor.strip() == "1": xfce4-main()
+                elif deifor.strip() == "99": restart_program()
+                else: print("\n错误：无效输入");time.sleep(1);restart_program()
         elif demfor.strip() == "99": restart_program()
         else: print("\n错误：无效输入");time.sleep(1);restart_program()
     # Termux
