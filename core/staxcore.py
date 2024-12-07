@@ -12,6 +12,14 @@ class stax():
 
 work_path = os.getcwd()
 
+# 自定义异常类：
+class StaxleConfigLackOrValueError(Exception):
+     def __init__(self, msg):
+         self.msg = msg
+    
+     def __str__(self):
+         return self.msg
+
 def output(type,msg):
     result = ""
     if type == "e":
@@ -135,23 +143,21 @@ homeDir = loadConfigFile()
 class staxconf():
     user=""
     git_clone_mirror=""
-    webpy=True
-    server2me=True
-    qemd=True
-    chexo=True
 
 def config_get():
-    with open(staxcore_path+"/config.json","r") as f:
-        conf=json.loads(f.read())
-    if conf["user"] == False:
+    config_path="./core/config"
+    want = ["gitmirror", "user"]
+    for w in want:
+        if os.path.exists(os.path.join(config_path, w)) == False:
+            strss="是不是没有运行 setup.sh！！！！！我造密码币的配置项缺斤少两没有一个我要的"
+            raise StaxleConfigLackOrValueError(strss)
+    if os.popen(f"cat {config_path}/user").read() == "":
         staxconf.user=str(plat.system())
     else:
-        staxconf.user=conf["user"]
-    staxconf.git_clone_mirror=conf["git_mirror"]
-    staxconf.webpy=conf["tools"]["webpy"]
-    staxconf.qemd=conf["tools"]["qemd"]
-    staxconf.server2me=conf["tools"]["server2me"]
-    staxconf.chexo=conf["tools"]["chexo"]
+        staxconf.user=os.popen(f"cat {config_path}/user").read()
+    staxconf.git_clone_mirror=os.popen(f"cat {config_path}/gitmirror").read()
+    if staxconf.git_clone_mirror != "github" and staxconf.git_clone_mirror != "kkgithub":
+        raise StaxleConfigLackOrValueError("✓8玩意，gitmirror 项只能写 github 和 kkgithub，你写了个 "+staxconf.git_clone_mirror+" 进去喂猪啊番薯")
 
 def banner():
 	print(stax_banner)

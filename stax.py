@@ -420,14 +420,14 @@ def main():
         print("99) 回到 Staxle 菜单")
         sel = input("Staxle/Termux $:")
         if sel.strip() == "1":
-            if staxconf.chexo == False:
+            if os.path.exists("./tools/chexo/main.py") == False:
                 print("未初始化 Chexo。")
                 restart_program()
             else:
                 os.system("cd ./tools/chexo/ && python main.py")
                 restart_program()
         if sel.strip() == "2":
-            if staxconf.server2me == False:
+            if os.path.exists("./tools/server2me/main.py") == False:
                 print("未初始化 Server2me。")
                 restart_program()
             else:
@@ -436,21 +436,21 @@ def main():
         elif sel.strip() == "99": restart_program()
         else: print("无效输入。");restart_program()
     if sel.strip() == "11":
-        if staxconf.webpy == False:
+        if os.path.exists("./web.py") == False:
             print("未初始化 web.py。")
             restart_program()
         else:
             os.system("python web.py")
             restart_program()
-    if sel.strip() == "4": 
-        if staxconf.qemd == False:
+    if sel.strip() == "4":
+        if os.path.exists("./tools/qemd/main.py") == False:
             print("未初始化 Qemd。")
             restart_program()
         else:
             os.system("cd tools/qemd && python main.py")
             restart_program()
     if sel.strip() == "99":
-        os.system("clear && cd ~")
+        os.system("cd ~")
         sys.exit()
     else:
         print("无效输入")
@@ -461,4 +461,5 @@ def main():
 if __name__ == "__main__":
     os.system("clear")
     config_get()
+    tools_get()
     main()

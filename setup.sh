@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # Setup.sh by toad
 stax_ver="v1.05.2"
-setup_ver="ver.106"
+setup_ver="ver.109"
 stax_info="    这是一个为快速上手 termux 的新手，以及不想输入命令的 termux 佬特地提供的脚本工具，提供了各种 termux 中可运行的服务安装及配置\\n    他的性质犹如类似于 Lazymux 这一类的仓库，但 Staxle 这个脚本目标是将termux中各种服务的安装与配置集结起来，只需要一个脚本就能全自动或者半自动的完成大部分所想要的服务的安装与配置"
 
 stax_path=$(pwd)
@@ -175,16 +175,11 @@ start_setup(){
   # config
    if test "$user" = ""
   then
-    configbase='{"user": false,'
+    echo ${user} > ./core/config/user
   else
-    configbase='{"user": "'$user'",'
+    touch
   fi
-  configbase=$configbase'"git_mirror": "'${gitmirror}'",'
-  configbase=$configbase'"tools":{'
-  configbase=$configbase'"webpy": '${webpy}','
-  configbase=$configbase'"qemd": '${qemd}','
-  configbase=$configbase'"server2me": '${s2m}','
-  configbase=$configbase'"chexo": '${chexo}'}}'
+  echo ${gitmirror} > ./core/config/gitmirror
   echo $configbase > ${stax_path}/core/config.json
   # setdisable
   if test $webpy = "false"
@@ -281,7 +276,24 @@ setup_run(){
   setup_check
 }
 
+com_set(){
+  echo ${3} > ./core/config/${2}
+  echo ${RED}${2} 设置为 ${GREEN}${3}
+  exit 0
+}
+
+com_show_set(){
+  echo  Staxle 已设定项及值：
+  echo  选项  值
+  find "./core/config" -type f | while IFS= read -r file ; do
+    fnames=$(echo $file|sed -i 's?./core/config/? ')
+    echo $fnames  ${cat $file}
+  exit 0
+}
+
+###############
 ## command
+###############
 com_help(){
   echo Staxle Setup Wizard ${setup_ver}
   echo 用法：bash setup.sh command
@@ -291,6 +303,14 @@ com_help(){
   echo     help - 打印帮助文档并退出
   echo     version - 打印版本号并退出
   echo     update - 升级 Staxle（包括 Staxle 本体、所有工具和本初始化向导）
+  echo     set - 设置 Staxle 选项
+  echo     setshow - 显示 Staxle 所有已设定的选项
+  echo
+  echo set 命令用法：
+  echo     bash setup.sh set <设置项> <值>
+  echo 可用的设置项：
+  echo     gitmirror - 设置克隆仓库时使用的镜像地址，值只能输 github 和 kkgithub
+  echo     user - 设置 Staxle 用户名，留空则使用 termux 终端名
   exit 0
 }
 
@@ -308,5 +328,7 @@ case $1 in
   help) com_help ;;
   version) com_version ;;
   update) com_update ;;
+  set) com_set ;;
+  setshow) com_set_show ;;
   *) setup_run ;;
 esac
