@@ -247,7 +247,7 @@ start_setup(){
   fi
   echo ${BLUE}================================
   echo ${GREEN}您的 Staxle ${stax_ver} 已经完成初始化操作！
-  echo ${YELLOW}Tips:${GREEN} 输入staxle/stax启动 Staxle 主菜单
+  echo ${YELLOW}Tips:${GREEN} 输入staxle或stax启动 Staxle 主菜单
   echo ${YELLOW}Tips:${GREEN} 输入stax-setup启动本界面
   echo ${BLUE}================================
   echo ${PURPLE}祝你${GREEN}使用${CYAN}愉快！
