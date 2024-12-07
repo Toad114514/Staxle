@@ -45,13 +45,16 @@ def runpanel():
           out.put_buttons(["安装","启动"],onclick=[de05, code_start]),
        ]},
        {"title":"桌面环境","content":[
-          out.put_markdown("**请先选择显示方式后，再安装桌面！！！**")
-          out.put_markdown("显示方式")
-          out.put_html("<h3>termux-x11</h3>")
-          out.put_text("可吃图形加速，速度快")
+          out.put_markdown("**请先选择显示方式后，再安装桌面！！！**"),
+          out.put_markdown("显示方式"),
+          out.put_html("<h3>termux-x11</h3>"),
+          out.put_text("可吃图形加速，速度快"),
        ]},
-       {"title":"后台链接转接","content":[
+       {"title":"一些链接","content":[
           out.put_link("Apache 页面",url="http://127.0.0.1:8080")
+       ]},
+       {"title":"工具","content":[
+          out.put_link("命令行", app="webterm")
        ]},
        {"title":"面板设置","content":[
           out.put_html("<h2>面板后台和Staxle选项</h2>"),
