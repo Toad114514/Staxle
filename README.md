@@ -11,6 +11,7 @@ termux 工具安装管理脚本<br>
 # 简介
 这是一个为快速上手 termux 的新手，以及不想输入命令的 termux 佬特地提供的脚本工具，提供了各种 termux 中可运行的服务安装及配置<br>
 他的性质犹如类似于 [Lazymux](https://github.com/Gameye98/Lazymux) 这一类的仓库，但 Staxle 这个脚本目标是将termux中各种服务的安装与配置集结起来，只需要一个脚本就能全自动或者半自动的完成大部分所想要的服务的安装与配置<br>
+Dev 分支可以最先获取到新的更新，但不稳定（可以切换到 main 分支）<br>
 由于个人是python牢底，有啥bug可以反馈到 issues
 # 未来加入的特性
  - setup.sh
@@ -28,14 +29,16 @@ termux 工具安装管理脚本<br>
  - ...
 # 安装
 ```bash
+# Dev 分支安装命令如下
 pkg install git
-git clone https://github.com/toad114514/staxle.git
+git clone -b dev https://github.com/toad114514/staxle.git
 cd staxle && bash ./setup.sh
 ```
 或者
 ```bash
-pkg install git && git clone https://github.com/toad114514/staxle.git && cd staxle && bash ./setup.sh
+pkg install git && git clone -b dev https://github.com/toad114514/staxle.git && cd staxle && bash ./setup.sh
 ```
+不带 -b 参数则拉取 main 分支
 # 进度
 未完成阶段
 慢更新（学业繁重）
