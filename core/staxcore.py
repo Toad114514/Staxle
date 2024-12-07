@@ -6,6 +6,8 @@ import getpass
 import socket
 import platform as plat
 from subprocess import check_output as inputstream
+
+# stax_global 类
 class stax():
     version = "v1.05.2"
     version_num = 173
@@ -13,6 +15,7 @@ class stax():
 work_path = os.getcwd()
 
 # 自定义异常类：
+# 配置空/值错误
 class StaxleConfigLackOrValueError(Exception):
      def __init__(self, msg):
          self.msg = msg
@@ -74,6 +77,7 @@ soc_var=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 ip_socket_temp = soc_var.connect(("8.8.8.8",80))
 ip = soc_var.getsockname()[0]
 
+# 不知道干什么用的，还是写了罢
 def writeStatus(statusId):
 	open(cache_1,"w").write(str(statusId))
 
@@ -109,8 +113,10 @@ def err():
     print("无效输入。")
     input("")
 
+# 自动更新源和软件包
 def aug():
-    os.system("apt update -y && apt upgrade -y")
+    if staxconf.skip_aug == False:
+        os.system("apt update -y && apt upgrade -y")
 
 def done(desc):
     print("------------------------")
@@ -129,6 +135,8 @@ def checkConfigFile():
 	else:
 		open(configFile,"w").write(configBase)
 
+# 这里知道干什么用的，但是此处注释被奶龙偷走了
+# 你得 “今夜星光闪闪...” 才能获得此处注释
 def loadConfigFile():
 	checkConfigFile()
 	lfile = ""
@@ -140,33 +148,47 @@ def loadConfigFile():
 
 homeDir = loadConfigFile()
 
+# staxconf 配置类
 class staxconf():
     user=""
     git_clone_mirror=""
+    skip_aug=""
 
+# 获取配置
 def config_get():
     config_path="./core/config"
-    want = ["gitmirror", "user"]
+    want = ["gitmirror", "user", "skip_aug"]
+    # search what is not exists
     for w in want:
         if os.path.exists(os.path.join(config_path, w)) == False:
             strss="是不是没有运行 setup.sh！！！！！我造密码币的配置项缺斤少两没有一个我要的"
             raise StaxleConfigLackOrValueError(strss)
+    # set value
     if os.popen(f"cat {config_path}/user").read() == "":
         staxconf.user=str(plat.system())
     else:
-        staxconf.user=os.popen(f"cat {config_path}/user").read()
-    staxconf.git_clone_mirror=os.popen(f"cat {config_path}/gitmirror").read()
+        staxconf.user=os.popen(f"cat {config_path}/user").read().strip()
+    # gitmirror
+    staxconf.git_clone_mirror=os.popen(f"cat {config_path}/gitmirror").read().strip()
     if staxconf.git_clone_mirror != "github" and staxconf.git_clone_mirror != "kkgithub":
         raise StaxleConfigLackOrValueError("✓8玩意，gitmirror 项只能写 github 和 kkgithub，你写了个 "+staxconf.git_clone_mirror+" 进去喂猪啊番薯")
+    
+    # skip_aug
+    staxconf.skip_aug=os.popen(f"cat {config_path}/skip_aug").read().strip()
+    if staxconf.skip_aug != "y" and staxconf.skip_aug != "n":
+        raise StaxleConfigLackOrValueError("✓8玩意，skip_aug 项只能写 y 和 n，你写了个 "+staxconf.skip_aug+" 进去喂猪啊番薯")
 
+# 标题
 def banner():
 	print(stax_banner)
-	print(stax.version+"("+str(stax.version_num)+")"+"    欢迎 "+user+"/"+staxconf.user)
+	print(stax.version+"("+str(stax.version_num)+")"+"    欢迎 "+staxconf.user+"/localhost")
 
+# 升级 
 def update():
     update_json = requests.get("https://api.github.com/repos/toad114514/staxle/releases/latest")
     print("目前 Staxle 版本："+stax.version)
     print("请等待获取最新的 Releases...")
+    # 解析数据
     if update_json.status_code == 200:
         update_info=json.loads(update_json.text)
         print("\n")
@@ -191,11 +213,12 @@ def update():
             else: print("无效输入"); time.sleep(0.7); restart_program()
         elif inp.strip() == "u" or inp.strip() == "update":
             os.system("cd "+stax_path+" && git pull && cd")
-            print("更新完成，重新输入 stax/staxle 可体验新版本")
+            print("更新完成，重新输入 stax 或 staxle 可体验新版本")
         elif inp.strip() == "b" or inp.strip() == "back":
             restart_program()
         else: print("无效输入"); time.sleep(0.7); restart_program()
 
+# 关于
 def about():
     print(stax_banner)
     print("Staxle "+stax.version+" ("+str(stax.version_num)+")")
@@ -206,6 +229,7 @@ def about():
     input("按下回车键回到菜单")
     restart_program()
 
+# 关于（web.py）
 def about_web():
     about01 = "Staxle "+stax.version+" ("+str(stax.version_num)+")"
     about02 = str(plat.system())+"("+str(plat.processor())+"/"+str(plat.architecture())+")"

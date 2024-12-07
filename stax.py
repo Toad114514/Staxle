@@ -461,5 +461,4 @@ def main():
 if __name__ == "__main__":
     os.system("clear")
     config_get()
-    tools_get()
     main()

@@ -45,6 +45,12 @@ setup_set(){
   else
     gitmirror="kkgithub"
   fi
+  if $(whiptail --title "跳过更新源和软件包" --yesno "设置使用 Staxle 安装软件包时是否更新源和软件包，可加快安装速度，但很有可能因为其依赖包过老而导致兼容性问题" --yes-button "跳过" --no-button "不跳过" 15 60 3>&1 1>&2 2>&3)
+  then
+    saug="y"
+  else
+    saug="n"
+  fi
   
   tools=$(whiptail --title "选择所需工具" --checklist "根据你的所需去选择你的工具（按下空格键选中选项，回车继续）" 15 75 4 \
   "web.py" "Staxle 工具的面板后台（用于服务器管理和后台部署）" OFF \
@@ -180,7 +186,7 @@ start_setup(){
     touch
   fi
   echo ${gitmirror} > ./core/config/gitmirror
-  echo $configbase > ${stax_path}/core/config.json
+  echo ${saug} > ./core/config/skip_aug
   # setdisable
   if test $webpy = "false"
   then
@@ -309,8 +315,9 @@ com_help(){
   echo set 命令用法：
   echo     bash setup.sh set <设置项> <值>
   echo 可用的设置项：
-  echo     gitmirror - 设置克隆仓库时使用的镜像地址，值只能输 github 和 kkgithub
-  echo     user - 设置 Staxle 用户名，留空则使用 termux 终端名
+  echo "    gitmirror - 设置克隆仓库时使用的镜像地址，值只能输 github 和 kkgithub"
+  echo "    user - 设置 Staxle 用户名，留空则使用 termux 终端名"
+  echo "    skip_aug - 跳过 apt 源更新和软件包更新"
   exit 0
 }
 
