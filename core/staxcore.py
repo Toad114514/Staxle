@@ -721,3 +721,26 @@ def firefox():
     os.system("pkg install x11-repo -y")
     os.system("pkg install firefox -y")
     done("Firefox 安装成功\n在桌面环境中输入 firefox 启动浏览器")
+
+##########
+## 多媒体
+##########
+def timg():
+    aug()
+    os.system("pkg install timg -y")
+    done("timg 安装成功！\n查看图片和视频：timg <图片/视频路径>")
+
+def mpd():
+    aug()
+    os.system("pkg install mpd -y")
+    done("mpd 安装成功！")
+
+def mpv():
+    aug()
+    os.system("pkg install mpv -y")
+    done("mpd 安装成功！\n播放音频（其实视频也可以 但在终端运行下只有声）：mpv <音频/视频路径>")
+
+def musicfox():
+    aug()
+    os.system("pkg install musicfox -y")
+    done("musicfox 安装成功！\ntermux 播放音乐时可能会卡，可以去仓库查看解决办法\n仓库地址：https://github.com/go-musicfox/go-musicfox\n启动命令：musicfox")

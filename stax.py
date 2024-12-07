@@ -186,7 +186,7 @@ def main():
         print("2) 多媒体")
         print("3) 网络/互联网")
         print("4) 终端")
-        print("5) zsh")
+        print("5) x11 应用")
         print("6) 游戏")
         print("7) 无聊东西")
         print("99) 返回主菜单")
@@ -219,8 +219,22 @@ def main():
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
             if readStatus():
                 writeStatus(0)
+        elif sel.strip() == "2":
+            print(" 多媒体的快乐")
+            print("1) timg: 终端图片/视频查看器")
+            print("2) mpd: music player deamon")
+            print("3) mpv: 最强开源媒体播放器")
+            print("4) musicfox: 网易云音乐命令行客户端")
+            print("99) 返回主菜单")
+            for infor in sel.split():
+                if infor.strip() == "1": timg()
+                elif infor.strip() == "2": mpd()
+                elif infor.strip() == "3": mpv()
+                elif infor.strip() == "4": musicfox()
+                elif infor.strip() == "99": restart_program()
+                else: print("\n错误：无效输入");time.sleep(1);restart_program()
         elif sel.split() == "3":
-            # 02
+            # 03
             print(" 网上冲浪")
             print("1) w3m: 终端式网页浏览器")
             print("2) weechat: 简单的 IRC 聊天室")
