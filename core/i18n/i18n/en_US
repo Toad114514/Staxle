@@ -1,0 +1,29 @@
+{
+    "staxle": "i18n",
+    "language_version": 109,
+    "language_name": "English",
+    "i18n": {
+        "stax.banner.1": "All-In-One",
+        "stax.banner.2": "Termux",
+        "stax.banner.3": "Tool-Panel",
+        "stax.menu.tips": " - Select an option",
+        "stax.menu.1": "Server Manager Tool",
+        "stax.menu.2": "Desktop Environment Tool",
+        "stax.menu.3": "Termux Tool",
+        "stax.menu.4": "Virtual Machine（Qemd）",
+        "stax.menu.5": "Package Manager",
+        "stax.menu.6": "Software Shop",
+        "stax.menu.7": "Apt Source Manager",
+        "stax.menu.8": "Hacker Tool",
+        "stax.menu.9": "PyList",
+        "stax.menu.10": "Other Tool",
+        "stax.menu.11": "Staxle Web Panel",
+        "stax.menu.12": "Get Board",
+        "stax.menu.13": "Update Staxle",
+        "stax.menu.14": "About",
+        "stax.menu.15": "Exit",
+        "stax.with": "Note: Most of the program files will be installed in your home directory",
+        "stax.wni": "Note: If you encounter some options that show that “what is not initialized” after clicking, you need to start setup.sh",
+        "stax.menu.other": " - Other Option"
+    }
+}
