@@ -318,6 +318,7 @@ com_help(){
   echo "    gitmirror - 设置克隆仓库时使用的镜像地址，值只能输 github 和 kkgithub"
   echo "    user - 设置 Staxle 用户名，留空则使用 termux 终端名"
   echo "    skip_aug - 跳过 apt 源更新和软件包更新"
+  echo "    lang - 设置语言"
   exit 0
 }
 

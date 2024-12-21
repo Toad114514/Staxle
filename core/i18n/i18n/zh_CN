@@ -1,0 +1,29 @@
+{
+    "staxle": "i18n",
+    "language_version": 109,
+    "language_name": "简体中文",
+    "i18n": {
+        "stax.banner.1": "All-In-One",
+        "stax.banner.2": "Termux",
+        "stax.banner.3": "Tool-Panel",
+        "stax.menu.tips": " - 输入选项选择",
+        "stax.menu.1": "服务器管理工具",
+        "stax.menu.2": "桌面环境管理",
+        "stax.menu.3": "Termux 工具",
+        "stax.menu.4": "虚拟机（Qemd）",
+        "stax.menu.5": "安装包管理",
+        "stax.menu.6": "千年软件老字店",
+        "stax.menu.7": "仓库源管理器",
+        "stax.menu.8": "Hacker 工具",
+        "stax.menu.9": "PyList",
+        "stax.menu.10": "各种小工具",
+        "stax.menu.11": "Staxle 面板后台",
+        "stax.menu.12": "获取公告",
+        "stax.menu.13": "更新 Staxle",
+        "stax.menu.14": "关于",
+        "stax.menu.15": "退出",
+        "stax.with": "注：大部分程序文件都将安装到你的 home 目录",
+        "stax.wni": "注：如遇到部分选项点击后显示未初始化xxxx，则需要启动 setup.sh",
+        "stax.menu.other": " - 其他选项"
+    }
+}

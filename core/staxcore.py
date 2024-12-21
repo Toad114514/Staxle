@@ -6,6 +6,7 @@ import getpass
 import socket
 import platform as plat
 from subprocess import check_output as inputstream
+import core.i18n.i18n as lang
 
 # stax_global 类
 class stax():
@@ -45,10 +46,11 @@ stax_banner = """
   \033[32m/ __\033[31m/ /_\033[34m___ \033[33m___ \033[32m__ /\033[31m /__
  \033[33m_\ \\\033[32m/ __\033[31m/ _ \033[34m`/\ \033[33m\ //\033[32m / -_)
 \033[34m/___\033[33m/\__\033[32m/\_,\033[31m_//_\033[34m\_\/\033[33m_/\__/\033[0m
-
-   \033[0mAll-in-One \033[32mtermux\033[0m Tool-panel
-            By Toad114514
 """
+#   \033[0mAll-in-One \033[32mtermux\033[0m Tool-panel
+#            By Toad114514
+
+stax_banner2 = "          \033[0m" + str(lang.get("stax.banner.1")) + " \033[32m" + str(lang.get("stax.banner.2")) + " \033[0m" + str(lang.get("stax.banner.3"))
 
 stax_web_about = """
     ___  __                        __
@@ -181,6 +183,8 @@ def config_get():
 # 标题
 def banner():
 	print(stax_banner)
+	print(stax_banner2)
+	print("       By Toad114514")
 	print(stax.version+"("+str(stax.version_num)+")"+"    欢迎 "+staxconf.user+"/localhost")
 
 # 升级 

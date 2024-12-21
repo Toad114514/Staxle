@@ -9,28 +9,17 @@ import time
 import sys
 import readline
 from core.staxcore import *
+import core.i18n.i18n as lang
 
 def main():
     banner()
-    print("""
-  - 输入选项选择
-1) 服务器管理工具
-2) 桌面环境管理
-3) Termux 工具
-4) 虚拟机 (Qemd)
-5) 安装包管理
-6) 千年软件老字店
-7) 仓库源管理器
-8) Hacker 工具
-9) PyList
-10) 各种小工具
-11) Staxle 面板后台
-  - 其他选项
-01) 获取公告     02) 更新 Staxle
-03) 关于         99) 退出
-注：大部分程序文件都将安装到你的 home 目录
-注：如遇到部分选项点击后显示未初始化xxxx，则需要启动 setup.sh
-""")
+    print(lang.get("stax.menu.tips"))
+    for x in range(1,12):
+        print(str(x)+") "+lang.get("stax.menu."+str(x)))
+    print(lang.get("stax.menu.other"))
+    print("01) "+lang.get("stax.menu.12")+"   02) "+lang.get("stax.menu.13")+"\n03)       "+lang.get("stax.menu.14")+"   04) "+lang.get("stax.menu.15"))
+    print(lang.get("stax.with")+"\n"+lang.get("stax.wni"))
+    
     sel = input("Staxle/ $:")
     if sel.strip() == "1":
         print("  服务器菜单  ")
@@ -136,7 +125,7 @@ def main():
                 if deifor.strip() == "1": xfce4_main()
                 elif deifor.strip() == "99": restart_program()
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
-        elif demfor.strip() == "99": restart_program()
+        elif selfor.strip() == "99": restart_program()
         else: print("\n错误：无效输入");time.sleep(1);restart_program()
     # Termux
     if sel.strip() == "3":
