@@ -9,6 +9,7 @@ import time
 import sys
 import readline
 from core.staxcore import *
+from core.staxapps import *
 import core.i18n.i18n as lang
 
 def main():
