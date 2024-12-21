@@ -17,7 +17,7 @@ def main():
     for x in range(1,12):
         print(str(x)+") "+lang.get("stax.menu."+str(x)))
     print(lang.get("stax.menu.other"))
-    print("01) "+lang.get("stax.menu.12")+"   02) "+lang.get("stax.menu.13")+"\n03)       "+lang.get("stax.menu.14")+"   04) "+lang.get("stax.menu.15"))
+    print("01) "+lang.get("stax.menu.12")+"   02) "+lang.get("stax.menu.13")+"\n03) "+lang.get("stax.menu.14")+"       04) "+lang.get("stax.menu.15"))
     print(lang.get("stax.with")+"\n"+lang.get("stax.wni"))
     
     sel = input("Staxle/ $:")
