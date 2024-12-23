@@ -189,6 +189,8 @@ def main():
             print("3) code-server: 网页版 VSCode")
             print("4) Clang: 编译，爽！")
             print("5) Lazygit: 可视化 git")
+            print("6) ttyd: 网页可访问的终端")
+            print("7) Python: 你们好啊，我是爬虫王，我要来爆破网站了")
             print("99) 返回主菜单")
             sel = input("Staxle/Software/Code $:")
             if sel == "@":
@@ -205,6 +207,8 @@ def main():
                 elif infor.strip() == "3": code-server()
                 elif infor.strip() == "4": clang()
                 elif infor.strip() == "5": lazygit()
+                elif infor.strip() == "6": ttyd()
+                elif infor.strip() == "5": python()
                 elif infor.strip() == "99": restart_program()
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
             if readStatus():
@@ -215,6 +219,7 @@ def main():
             print("2) mpd: music player deamon")
             print("3) mpv: 最强开源媒体播放器")
             print("4) musicfox: 网易云音乐命令行客户端")
+            print("5) cmus: 小、轻便、快速的小型开源播放器")
             print("99) 返回主菜单")
             for infor in sel.split():
                 if infor.strip() == "1": timg()
@@ -230,6 +235,7 @@ def main():
             print("2) weechat: 简单的 IRC 聊天室")
             print("3) lynx: 比 w3m 更靓的终端网页浏览器")
             print("4) firefox: 桌面环境下的经典浏览器 [*]")
+            print("5) aria2: 强大的下载程序")
             print("99) 返回主菜单")
             sel = input("Staxle/Software/Internet $:")
             if sel == "@":
@@ -244,7 +250,8 @@ def main():
                 if infor.strip() == "1": w3m()
                 elif infor.strip() == "2": weechat()
                 elif infor.strip() == "3": lynx()
-                elif infor.strip() == "3": firefox()
+                elif infor.strip() == "4": firefox()
+                elif infor.strip() == "5": aria2()
                 elif infor.strip() == "99": restart_program()
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
             if readStatus():

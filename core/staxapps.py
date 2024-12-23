@@ -499,6 +499,15 @@ def clang():
 def lazygit():
     os.system("pkg install lazygit -y")
     done("Lazygit 安装成功\n在git文件夹中输入 lazygit 启动")
+
+def ttyd():
+    os.system("pkg install ttyd -y")
+    done("ttyd 安装成功\n输入 ttyd bash 便可以在网页上启动终端")
+
+def python():
+    aug()
+    os.system("pkg install python -y")
+    done("Python 安装成功，可！\n输入 python 进入 ipython 界面")
 ## 网络/互联网
 def w3m():
     aug()
@@ -521,6 +530,10 @@ def firefox():
     os.system("pkg install firefox -y")
     done("Firefox 安装成功\n在桌面环境中输入 firefox 启动浏览器")
 
+def aria2():
+    aug()
+    os.system("pkg install aria2")
+    done("Aria2 安装成功！\n输入 aria2c <链接> 可本地下载")
 ##########
 ## 多媒体
 ##########
@@ -543,3 +556,8 @@ def musicfox():
     aug()
     os.system("pkg install musicfox -y")
     done("musicfox 安装成功！\ntermux 播放音乐时可能会卡，可以去仓库查看解决办法\n仓库地址：https://github.com/go-musicfox/go-musicfox\n启动命令：musicfox")
+
+def cmus():
+    aug()
+    os.system("pkg install cmus -y")
+    done("cmus 安装成功！\n输入 cmus 启动本体")
