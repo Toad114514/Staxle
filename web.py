@@ -10,7 +10,9 @@ import pywebio as web
 import pywebio.output as out
 import pywebio.input as input
 
-def main():
+import core.web.terminal as term
+
+def index():
     web.session.set_env(title="💻Staxle 面板后台🤣")
     out.put_image(open("img/stax.png","rb").read())
     out.put_html("<h1>Staxle Web Panel</h1>")
@@ -54,7 +56,7 @@ def runpanel():
           out.put_link("Apache 页面",url="http://127.0.0.1:8080")
        ]},
        {"title":"工具","content":[
-          out.put_link("命令行", app="webterm")
+          out.put_link("命令行", app="term")
        ]},
        {"title":"面板设置","content":[
           out.put_html("<h2>面板后台和Staxle选项</h2>"),
@@ -75,5 +77,5 @@ if __name__ == "__main__":
     else:
         print("输入下方地址进入面板后台")
         print("关闭面板后台需要转到面板设置点击关闭页面后台才可关闭")
-        web.start_server(main, host="0.0.0.0", port=15334, debug=True)
+        web.start_server([index, term.term], host="0.0.0.0", port=15334, debug=True)
         web.session.hold()

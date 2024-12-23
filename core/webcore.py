@@ -57,4 +57,4 @@ def de05():
 
 def code_start():
     os.system("nohup code-server")
-    done("code-server 可能已完成启动")
+    done("code-server 已完成启动")
