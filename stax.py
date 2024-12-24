@@ -130,7 +130,7 @@ def main():
         else: print("\n错误：无效输入");time.sleep(1);restart_program()
     # Termux
     if sel.strip() == "3":
-        print("termux 一些工具")
+        print("termux 一些小工具")
         print("1) proot-distro: 在 termux 上安装发行版 linux")
         print("2) termux 换源")
         print("3) 获取外部权限")
@@ -143,6 +143,7 @@ def main():
         print("10) termux-desktop: 安装 xfce4 在您的 termux 上")
         print("11) termux.properties: termux 的一些配置")
         print("12) termux.motd: termux 欢迎语设置")
+        print("13) 解决安卓12 signal 9 杀后台")
         print("99) 返回上一菜单")
         sel = input("Staxle/Termux $:")
         if sel == "@":
@@ -164,6 +165,7 @@ def main():
             elif infor.strip() == "9": os.system("termux-wake-lock"); restart_program()
             elif infor.strip() == "11": os.system("vim ~/.termux/termux.properties"); restart_program()
             elif infor.strip() == "12": os.system("vim $PREFIX/etc/motd"); restart_program()
+            elif infor.strip() == "13": termux_s9()
             elif infor.strip() == "99": restart_program()
             else: print("\n错误：无效输入");time.sleep(1);restart_program()
         if readStatus():
@@ -190,7 +192,7 @@ def main():
             print("4) Clang: 编译，爽！")
             print("5) Lazygit: 可视化 git")
             print("6) ttyd: 网页可访问的终端")
-            print("7) Python: 你们好啊，我是爬虫王，我要来爆破网站了")
+            print("7) Python: 你们好啊，我是爬虫王，我要来爬网站了")
             print("99) 返回主菜单")
             sel = input("Staxle/Software/Code $:")
             if sel == "@":

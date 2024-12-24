@@ -278,6 +278,25 @@ def termux_storage():
     os.system("termux-setup-storage")
     restart_program()
 
+def termux_s9():
+    print("解决 [Process completed (signal 9) - press Enter]（Android 12以上的PhantomProcesskiller限32个子进程问题）")
+    print("如果搞桌面环境或其他情况时确实出现该问题杀你后台，则输入y，否则输入n返回（其他内容也是返回）")
+    sel=input("[y/n]: ")
+    if sel == "y":
+        aug()
+        os.system("pkg install android-tools")
+        print("接下来到你操作了：\nStep1 开发者模式：\n根据自己手机系统找到关于手机（部分可能需要查看详细信息才能继续）-> 点击“版本号”多次启动开发者模式\nStep2 无线调试：\n设置主页 -> 根据手机系统找到开发者模式 -> 打开无线调试开关 -> 使用配对码配对设备\nStep3 给我记：\n记住此时弹出的 IP地址（包括端口，全部照搬）和配对码")
+        ip = input("如果已完成所有操作，请在这里输入IP地址\n弹出 “Enter pairing code：”时，请输入上述记住的配对码\n[ip地址]: ")
+        os.system(f"adb pair {ip}")
+        print("连接到 adb\n回到刚才的无线调试界面，复制“IP地址和端口”这一项下面的ip地址和端口，并在这里重新输入新的ip地址和端口")
+        ip = input("adb connect: ")
+        os.system(f"adb connect {ip}")
+        os.system("adb shell device_config set_sync_disabled_for_tests persistent && adb shell device_config put activity_manager max_phantom_processes 65536")
+        os.system("adb kill-server")
+        done("现在你的手机不会莫名其妙给你干没了\n放心搞桌面环境吧（回车键返回）")
+    else:
+        restart_program()
+
 def qurxin():
     aug()
     os.system("apt install git mpv figlet -y")
