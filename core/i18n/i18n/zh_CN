@@ -1,6 +1,6 @@
 {
     "staxle": "i18n",
-    "language_version": 109,
+    "language_version": 112,
     "language_name": "简体中文",
     "i18n": {
         "stax.banner.1": "All-In-One",
@@ -24,6 +24,25 @@
         "stax.menu.15": "退出",
         "stax.with": "注：大部分程序文件都将安装到你的 home 目录",
         "stax.wni": "注：如遇到部分选项点击后显示未初始化xxxx，则需要启动 setup.sh",
-        "stax.menu.other": " - 其他选项"
+        "stax.menu.other": " - 其他选项",
+        "stax.ok.sel1": "返回主页面",
+        "stax.ok.sel2": "退出 Staxle",
+        "stax.installed": "操作完成",
+        "staxm.back": "返回菜单",
+        "staxm.server.title": "服务器管理",
+        "staxm.server.subt": "服务器安装",
+        "staxm.server.nginx": "一款速度快，cpu占用小的C++开源自由服务器",
+        "staxm.server.apache": "世界服务器排名第一的服务器，拥有跨平台、安全性高、稳定性好之称",
+        "staxm.server.php": "动态网站的重要一环，也是CMS和框架的必需品",
+        "staxm.server.mysql": "动态网站不可缺失的服务器数据库",
+        "staxm.server.other": "安装其他类型的服务器",
+        "staxm.server.s2m": "Staxle 配套服务器管理工具",
+        "ok.nginx": "安装已完成。您的 nginx 文件夹已存放于 /usr/local/nginx",
+        "ok.apache": "apache已安装，配置文件在 /etc/httpd/conf，网站目录在 /var/www/html",
+        "ok.php": "PHP 安装成功，如果要配置 php 请启动 Server2me",
+        "ok.ngircd": "ngircd 安装成功，配置文件在 /etc/ngircd/ 里",
+        "ok.sshd": "sshd 安装完成\n输入 sshd 启动",
+        "ok.lighttpd": "lighttpd 安装完成\n可进入 Server2me 配置",
+        "ok.mysql": "mysql 安装完成！\n输入 mysqld 启动服务器"
     }
 }

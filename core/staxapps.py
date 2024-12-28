@@ -1,5 +1,6 @@
 import os
 from core.staxcore import *
+import core.i18n.i18n as lang
 
 # 自动更新源和软件包
 def aug():
@@ -16,12 +17,12 @@ def gitc(repo):
 def nginxins():
     aug()
     os.system("pkg install nginx")
-    done("安装已完成。您的 nginx 文件夹已存放于 /usr/local/nginx")
+    done(lang.get("ok.nginx"))
 
 def apacheins():
     aug()
     os.system("apt install httpd -y")
-    done("apache已安装，配置文件在 /etc/httpd/conf，网站目录在 /var/www/html")
+    done(lang.get("ok.apache"))
 
 def phpins():
     aug()
@@ -31,27 +32,27 @@ def phpins():
         os.system("apt install php-fpm -y")
     elif sel == "2":
         os.system("apt install apache-php -y")
-    done("PHP 安装成功，如果要配置 php 请启动 Server2me")
+    done(lang.get("ok.php"))
 
 def ircins():
     aug()
     os.system("apt install ngircd -y")
-    done("ngircd 安装成功，配置文件在 /etc/ngircd/ 里")
+    done(lang.get("ok.ngircd"))
 
 def sshd():
     aug()
     os.system("apt install sshd -y")
-    done("sshd 安装完成\n输入 sshd 启动")
+    done(lang.get("ok.sshd"))
 
 def lighttpd():
     aug()
     os.system("apt install lighttpd -y")
-    done("lighttpd 安装完成\n可进入 Server2me 配置")
+    done(lang.get("ok.lighttpd"))
 
 def mysql():
     aug()
     os.system("apt install mariadb -y")
-    done("mysql 安装完成！\n输入 mysqld 启动服务器")
+    done(lang.get("ok.mysql"))
 
 def proot_distro():
     proot_distro_ins = os.popen("pkg list-installed|grep proot-distro")

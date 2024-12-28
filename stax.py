@@ -23,16 +23,17 @@ def main():
     
     sel = input("Staxle/ $:")
     if sel.strip() == "1":
-        print("  服务器菜单  ")
-        print("  - 安装服务器")
-        print("1) Nginx: 一款速度快，cpu占用小的C++开源自由服务器")
-        print("2) Apache: 世界服务器排名第一的服务器，拥有跨平台、安全性高、稳定性好之称")
-        print("3) PHP: 动态网站的重要一环，也是CMS和框架的必需品")
-        print("4) Mysql: 动态网站不可缺失的服务器数据库")
-        print("5) 安装其他类型的服务器")
+        lts = lang.getToList(["staxm.server.title","staxm.server.subt","staxm.server.nginx","staxm.server.apache","staxm.server.php","staxm.server.mysql","staxm.server.other","staxm.server.s2m","staxm.back"])
+        print(f"  {lts[0]}  ")
+        print(f"  - {lts[1]}")
+        print(f"1) Nginx: {lts[2]}")
+        print(f"2) Apache: {lts[3]}")
+        print(f"3) PHP: {lts[4]}")
+        print(f"4) Mysql: {lts[5]}")
+        print(f"5) {lts[6]}")
         print("  ---------  ")
-        print("01) Server2me: Staxle 配套安装工具")
-        print("00) 返回菜单")
+        print(f"01) Server2me: {lts[7]}")
+        print(f"99) {lts[8]}")
         sel = input("Staxle/Server $:")
         if sel == "@":
             sel = ""
@@ -126,7 +127,7 @@ def main():
                 if deifor.strip() == "1": xfce4_main()
                 elif deifor.strip() == "99": restart_program()
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
-        elif selfor.strip() == "99": restart_program()
+        elif sel.strip() == "99": restart_program()
         else: print("\n错误：无效输入");time.sleep(1);restart_program()
     # Termux
     if sel.strip() == "3":

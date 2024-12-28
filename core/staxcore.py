@@ -61,9 +61,11 @@ stax_web_about = """
    All-in-One termux Tool-panel
        By Toad114514
 """
-backtomenu_banner = """
-99) 回到主页面
-00) 退出 Staxle
+backtomenu_tmp1 = lang.get("stax.ok.sel1")
+backtomenu_tmp2 = lang.get("stax.ok.sel2")
+backtomenu_banner = f"""
+99) {backtomenu_tmp1}
+00) {backtomenu_tmp2}
 """
 
 whoami = os.popen("whoami").read()
@@ -117,8 +119,9 @@ def err():
     input("")
 
 def done(desc):
+    tmp=lang.get("stax.installed")
     print("------------------------")
-    print("      操作完成        ")
+    print(f"      {tmp}        ")
     print("------------------------")
     print(desc)
     print("------------------------")

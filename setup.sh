@@ -17,6 +17,22 @@ terminal_color(){
   BOLD=$(printf '\033[1m')
 }
 
+setup_language(){
+ option=$(whiptail --title "设置语言" --menu "选择你所能看懂的语言 Select your Language" 15 60 10 \
+ "1" "zh_CN 中文" \
+ "2" "en_US English" \
+ 3>&1 1>&2 2>&3)
+ case option in
+  "zh_CN 中文")
+    echo "zh_CN" > ./core/config/lang
+    ;;
+  "en_US English")
+    echo "en_US" > ./core/config/lang
+    ;;
+  *)
+    echo "en_US" > ./core/config/lang
+}
+
 setup_ready(){
   if test -e ./core/stax.json
   then
@@ -51,6 +67,8 @@ setup_set(){
   else
     saug="n"
   fi
+  
+  setup_language
   
   tools=$(whiptail --title "选择所需工具" --checklist "根据你的所需去选择你的工具（按下空格键选中选项，回车继续）" 15 75 4 \
   "web.py" "Staxle 工具的面板后台（用于服务器管理和后台部署）" OFF \
@@ -306,14 +324,15 @@ com_help(){
   echo 如果没有任何参数传递则直接启动 Staxle 初始化向导
   echo 
   echo 可用的 command 选项：
-  echo     help - 打印帮助文档并退出
-  echo     version - 打印版本号并退出
-  echo     update - 升级 Staxle（包括 Staxle 本体、所有工具和本初始化向导）
-  echo     set - 设置 Staxle 选项
-  echo     setshow - 显示 Staxle 所有已设定的选项
+  echo "    help - 打印帮助文档并退出"
+  echo "    version - 打印版本号并退出"
+  echo "    update - 升级 Staxle（包括 Staxle 本体、所有工具和本初始化向导）"
+  echo "    set - 设置 Staxle 选项"
+  echo "    setshow - 显示 Staxle 所有已设定的选项"
+  echo "    lang - Set your Language"
   echo
   echo set 命令用法：
-  echo     bash setup.sh set <设置项> <值>
+  echo "    bash setup.sh set <设置项> <值>"
   echo 可用的设置项：
   echo "    gitmirror - 设置克隆仓库时使用的镜像地址，值只能输 github 和 kkgithub"
   echo "    user - 设置 Staxle 用户名，留空则使用 termux 终端名"
@@ -328,7 +347,7 @@ com_version(){
 }
 
 com_update(){
-  git pull
+  git pulll
   echo 升级完成
 }
 
@@ -336,6 +355,7 @@ case $1 in
   help) com_help ;;
   version) com_version ;;
   update) com_update ;;
+  lang) setup_language ;;
   set) com_set ;;
   setshow) com_set_show ;;
   *) setup_run ;;
