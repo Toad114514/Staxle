@@ -11,6 +11,7 @@ import pywebio.output as out
 import pywebio.input as input
 
 import core.web.terminal as term
+import core.web.x11 as x11
 
 def index():
     web.session.set_env(title="💻Staxle 面板后台🤣")
@@ -51,6 +52,7 @@ def runpanel():
           out.put_markdown("显示方式"),
           out.put_html("<h3>termux-x11</h3>"),
           out.put_text("可吃图形加速，速度快"),
+          out.put_link("选你了", app="x11")
        ]},
        {"title":"一些链接","content":[
           out.put_link("Apache 页面",url="http://127.0.0.1:8080")
@@ -77,5 +79,5 @@ if __name__ == "__main__":
     else:
         print("输入下方地址进入面板后台")
         print("关闭面板后台需要转到面板设置点击关闭页面后台才可关闭")
-        web.start_server([index, term.term], host="0.0.0.0", port=15334, debug=True)
+        web.start_server([index, term.term, x11.x11], host="0.0.0.0", port=15334, debug=True)
         web.session.hold()
