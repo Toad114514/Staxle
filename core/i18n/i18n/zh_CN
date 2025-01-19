@@ -1,6 +1,6 @@
 {
     "staxle": "i18n",
-    "language_version": 112,
+    "language_version": 115,
     "language_name": "简体中文",
     "i18n": {
         "stax.banner.1": "All-In-One",
@@ -43,6 +43,20 @@
         "ok.ngircd": "ngircd 安装成功，配置文件在 /etc/ngircd/ 里",
         "ok.sshd": "sshd 安装完成\n输入 sshd 启动",
         "ok.lighttpd": "lighttpd 安装完成\n可进入 Server2me 配置",
-        "ok.mysql": "mysql 安装完成！\n输入 mysqld 启动服务器"
+        "ok.mysql": "mysql 安装完成！\n输入 mysqld 启动服务器",
+        "staxm.tt.title": "termux 一些小工具",
+        "staxm.tt.pd": "在 termux 上安装发行版 linux",
+        "staxm.tt.repo": "termux 换源",
+        "staxm.tt.storage": "获取外部权限",
+        "staxm.tt.qurxin": "安装 qurxin (装b工具)",
+        "staxm.tt.toolx": "为 termux 准备的多功能工具",
+        "staxm.tt.lazymux": "为 termux 准备了更多的黑客工具",
+        "staxm.tt.tmoe": "为 termux 准备的多语言纯 bash 工具集",
+        "staxm.tt.neofetch": "termux 终端上的设备查询",
+        "staxm.tt.wl": "termux wake-lock 防杀后台",
+        "staxm.tt.desk": "安装 xfce4 在您的 termux 上",
+        "staxm.tt.ppt": "termux 的一些配置",
+        "staxm.tt.motd": "termux 欢迎语设置",
+        "staxm.tt.sign9": "解决安卓12 signal 9 杀后台"
     }
 }
