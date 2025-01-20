@@ -3,7 +3,7 @@ import os, json
 
 class i18n:
     path=os.path.join(os.getcwd(), "core", "i18n", "i18n")
-    version=111
+    version=115
 
 def get(ids):
     with open(os.path.join("core","config","lang"),"r") as f:
