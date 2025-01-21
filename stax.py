@@ -264,7 +264,7 @@ def main():
             print(" Xdesktops GUI")
             print("1) Firefox: 隐私保护拉满的老牌浏览器")
             print("2) audacious: Linux 最强GUI播放器")
-            print{"3) gimp: GNU 图片编辑器"}
+            print("3) gimp: GNU 图片编辑器")
             print("4) xfce4-terminal: 轻便终端，xfce4默认")
             print("5) gvim: 基于gtk的vim前端")
             print("6) vlc-qt: vlc 前端")
