@@ -121,10 +121,12 @@ def main():
         if sel.strip() == "3":
             print(" 桌面环境全家桶，面板、窗口管理器、桌面、文件管理器、会话、设置面板一应俱全")
             print("1) xfce4: 兼容性最高的桌面环境")
+            print("2) lxqt: 跟lxde差不多的桌面环境，但是qt")
             print("99) 返回")
             sel = input("Staxle/WM $:")
             for deifor in sel.split():
                 if deifor.strip() == "1": xfce4_main()
+                elif deifor.strip() == "2": lxde_main()
                 elif deifor.strip() == "99": restart_program()
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
         elif sel.strip() == "99": restart_program()
