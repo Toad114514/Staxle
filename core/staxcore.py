@@ -11,8 +11,8 @@ from core.staxapps import *
 
 # stax_global 类
 class stax():
-    version = "v1.05.2"
-    version_num = 173
+    version = "v1.05.3"
+    version_num = 175
 
 work_path = os.getcwd()
 

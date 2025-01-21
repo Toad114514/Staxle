@@ -9,7 +9,7 @@ def get(ids):
     with open(os.path.join("core","config","lang"),"r") as f:
         lang=f.read()
     try:
-        with open(os.path.join(i18n.path, lang),"r") as f:
+        with open(os.path.join(i18n.path, lang).strip(),"r") as f:
             langs=f.read()
         langs=json.loads(langs)
         if langs["language_version"] < i18n.version:
@@ -26,7 +26,7 @@ def getToList(ids):
         with open(os.path.join("core","config","lang"),"r") as f:
             lang=f.read()
         try:
-            with open(os.path.join(i18n.path, lang),"r") as f:
+            with open(os.path.join(i18n.path, lang).strip(),"r") as f:
                 langs=f.read()
             langs=json.loads(langs)
             if langs["language_version"] < i18n.version:
@@ -47,7 +47,7 @@ def out(ids):
     with open(os.path.join("core","config","lang"),"r") as f:
         lang=f.read()
     try:
-        with open(os.path.join(i18n.path, lang),"r") as f:
+        with open(os.path.join(i18n.path, lang).strip(),"r") as f:
             langs=f.read()
         langs=json.loads(langs)
         if langs["language_version"] < i18n.version:
