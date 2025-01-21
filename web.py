@@ -17,7 +17,7 @@ def index():
     web.session.set_env(title="💻Staxle 面板后台🤣")
     out.put_image(open("img/stax.png","rb").read())
     out.put_html("<h1>Staxle Web Panel</h1>")
-    out.put_text("基于 Staxle v1.03.6")
+    out.put_text("基于 Staxle v1.05.3")
     pwd = input.input("输入 Staxle 面板后台密码：")
     with open(".web_passwd","r") as f:
         dui_pwd = f.read()
