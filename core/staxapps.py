@@ -159,7 +159,7 @@ def xfce4():
         disp = "tx11"
         print("\n请在你的手机上面安装好 termux-x11\n还未安装的请移到 https://pan.huang1111.cn/s/m78eS1?path=%2F%E5%AE%89%E5%8D%93APK%2Ftermux-x11 下载并安装")
         input("如果已经安装好 termux-x11 的按下回车键继续")
-        is_legacy = input("\n你的设备是不是为老手机/战神机？（例如oppoa5）\n因为termux-x11默认使用新的绘画方式，但老手机/战神机只会显示一个鼠标就没有了，解决方法就是使用传统绘画模式\n要启用传统绘画模式吗？[y/n]：")
+        is_legacy = input("\n你的设备是不是为老手机/战神机？（例如oppoa5）\n因为termux-x11默认使用新的绘画方式，导致老手机/战神机只会显示一个鼠标就没有了，解决方法就是使用传统绘画模式\n要启用传统绘画模式吗？[y/n]：")
         if is_legacy != "y" and is_legacy != "n":
             print("无效输入")
             time.sleep(0.5)
@@ -265,6 +265,124 @@ def xfce4_main():
             restart_program()
     else:
         xfce4()
+
+def lxqt():
+    print("你想要在使用什么方式输出图形？\n[1] VNC \n[2] termux-x11 (图形加速，建议）")
+    sel = input("选择：")
+    if sel.strip() == "1":
+        disp = "vnc"
+        print("设置 vnc 密码，这个密码在连接时需要用到（长度必须是 5-8 位）")
+        vnc_passwd = input("输入密码：")
+    elif sel.strip() == "2":
+        disp = "tx11"
+        print("\n请在你的手机上面安装好 termux-x11\n还未安装的请移到 https://pan.huang1111.cn/s/m78eS1?path=%2F%E5%AE%89%E5%8D%93APK%2Ftermux-x11 下载并安装")
+        input("如果已经安装好 termux-x11 的按下回车键继续")
+        is_legacy = input("\n你的设备是不是为老手机/战神机？（例如oppoa5）\n因为termux-x11默认使用新的绘画方式，导致老手机/战神机只会显示一个鼠标就没有了，解决方法就是使用传统绘画模式\n要启用传统绘画模式吗？[y/n]：")
+        if is_legacy != "y" and is_legacy != "n":
+            print("无效输入")
+            time.sleep(0.5)
+            restart_program()
+    else:
+        print("无效输入")
+        time.sleep(0.7)
+        restart_program()
+    # vnc_config
+    if disp == "vnc":
+        output("i","开始安装 lxqt...")
+        aug()
+        os.system("pkg install x11-repo")
+        os.system("pkg install lxqt tigervnc -y")
+        output("i","设置 vnc 服务器...")
+        os.system("mkdit ~/.vnc")
+        os.system(f"echo {vnc_passwd} > ~/.vnc/passwd")
+        with open("~/.vnc/xstartup","w") as f:
+            f.write("startxfce4")
+        os.system("chmod +x ~/.vnc/xstartup")
+        os.system("touch $PREFIX/bin/xfce4")
+        with open(os.path.join(prefix, "bin", "xfce4"),"w") as f:
+            bash_setup = "#type-bash vnc\n# 请不要删除上方注释！\necho xfce4的图形输出在 localhost:5902，请使用任意 vnc 客户端访问 localhost:5902\nvncserver :2 -geometry 1920x1080"
+            f.write(bash_setup)
+        os.system("chmod +x $PREFIX/bin/xfce4")
+        print("xfce4 安装完成\n以后只需输入 xfce4 便可启动\n你现在要：")
+        sel = input("[1] 现在启动\n[2] 返回 Staxle")
+        if sel == "1":
+            os.system("xfce4")
+            restart_program()
+        else:
+            restart_program()
+    # termux x11
+    elif disp == "tx11":
+        output("i","开始安装 xfce4...")
+        aug()
+        os.system("pkg install x11-repo")
+        os.system("pkg install lxqt xwayland termux-x11-nightly -y")
+        output("i","设置 termux-x11...")
+        os.system("touch $PREFIX/bin/lxqt")
+        if is_legacy == "y":
+            with open(os.path.join(prefix, "bin", "lxqt"),"w") as f:
+                bash_setup = "# vnc\ntermux-x11 :0 -legacy-drawing &\nenv DISPLAY=:0 startlxqt &\necho lxqt的图形输出在 termux-x11 服务器上，请打开 termux-x11 应用"
+                f.write(bash_setup)
+        if is_legacy == "n":
+            with open(os.path.join(prefix, "bin", "lxqt"),"w") as f:
+                bash_setup = "#type-bash tx11\n#请不要删除上方注释！\ntermux-x11 :0 &\nenv DISPLAY=:0 startlxqt &\necho lxqt的图形输出在 termux-x11 服务器上，请打开 termux-x11 应用"
+                f.write(bash_setup)
+        os.system("chmod +x $PREFIX/bin/xfce4")
+        print("lxqt 安装完成\n以后只需输入 lxqt 便可启动\n你现在要：")
+        sel = input("[1] 现在启动\n[2] 返回 Staxle")
+        if sel == "1":
+            os.system("xfce4")
+            restart_program()
+        else:
+            restart_program()
+
+def lxqt_main():
+    if "lxqt" in os.popen("pkg list-installed|grep lxqt").read():
+        sel = input("检测到已安装 lxqt，你要\n[1] 启动\n[2] 卸载\n[3] 重装\n[4] 设置\n[5] 退出")
+        if sel == "2":
+            sel = input("确定卸载lxqt？[y/n]：")
+            if sel == "y":
+                os.system("pkg remove lxqt -y")
+                print("卸载完成。")
+                time.sleep(0.7)
+                restart_program()
+            else:
+                restart_program()
+        elif sel == "1":
+            os.system("lxqt")
+            restart_program()
+        elif sel == "3":
+            lxqt()
+        elif sel == "4":
+            with open(os.path.join(prefix, "bin", "lxqt"),"r") as f:
+                type = f.read()
+            type = os.popen("cat $PREFIX/bin/xfce4|grep type-bash").read()
+            if type in "tx11":
+                sel = input("使用传统绘画模式？（老设备/战神机需要使用 否则黑屏只有鼠标显示 例如oppoa5）\n[y/n](任意内容取消修改): ")
+                if sel == "y":
+                    os.system("sed -i '3s/.*/termux-x11 :0 -legacy-drawing &' $PREFIX/bin/lxqt")
+                    restart_program()
+                elif sel == "n":
+                    os.system("sed -i '3s/.*/termux-x11 :0 &' $PREFIX/bin/lxqt")
+                    restart_program()
+                else:
+                    restart_program()
+            elif type in "vnc":
+                sel = input("修改显示分辨率（长x宽，中间的x是必须是字母小写x，例如 1920x1080、800x600 等）：")
+                temp = "vncserver :2 -geometry "+sel
+                os.system(f"sed -i '3s/.*/{temp}' $PREFIX/bin/lxqt")
+                restart_program()
+            else:
+                print("程序不知道你的 lxqt 使用了什么方式显示（你是不是删掉那行注释了！），自动返回")
+                time.sleep(1)
+                restart_program()
+        elif sel == "5":
+            restart_program()
+        else:
+            print("无效输入")
+            time.sleep(0.7)
+            restart_program()
+    else:
+        lxqt()
 
 ########
 # Termux
@@ -581,3 +699,24 @@ def cmus():
     aug()
     os.system("pkg install cmus -y")
     done("cmus 安装成功！\n输入 cmus 启动本体")
+# x11-apps
+def firefox():
+    aug()
+    os.system("pkg install firefox -y")
+    done("firefox 安装成功，请在 X11 桌面环境下运行")
+def audacious():
+    aug()
+    os.system("pkg install audacious -y")
+    done("audacious 安装成功，请在 X11 桌面环境下运行")
+def gimp():
+    aug()
+    os.system("pkg install gimp -y")
+    done("gimp 安装成功，请在 X11 桌面环境下运行")
+def gvim():
+    aug()
+    os.system("pkg install vim-gtk -y")
+    done("gvim 安装成功，请在 X11 桌面环境下运行")
+def vlcqt():
+    aug()
+    os.system("pkg install vlc vlc-qt -y")
+    done("vlc-qt 安装成功，请在 X11 桌面环境下运行")

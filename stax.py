@@ -260,6 +260,23 @@ def main():
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
             if readStatus():
                 writeStatus(0)
+        elif sel.split() == "5":
+            print(" Xdesktops GUI")
+            print("1) Firefox: 隐私保护拉满的老牌浏览器")
+            print("2) audacious: Linux 最强GUI播放器")
+            print{"3) gimp: GNU 图片编辑器"}
+            print("4) xfce4-terminal: 轻便终端，xfce4默认")
+            print("5) gvim: 基于gtk的vim前端")
+            print("6) vlc-qt: vlc 前端")
+            for infor in sel.split():
+                if infor.strip() == "1": firefox()
+                elif infor.strip() == "2": audacious()
+                elif infor.strip() == "3": gimp()
+                elif infor.strip() == "4": xf4term()
+                elif infor.strip() == "5": gvim()
+                elif infor.strip() == "6": vlcqt()
+                elif infor.strip() == "99": restart_program()
+                else: print("\n错误：无效输入");time.sleep(1);restart_program()
         elif sel.strip() == "99": restart_program()
         else: print("\n错误：无效输入");time.sleep(1);restart_program()
         
