@@ -749,4 +749,3 @@ def gvim():
 def vlcqt():
     aug()
     os.system("pkg install vlc vlc-qt -y")
-    done("vlc-qt 安装成功，请在 X11 桌面环境下运行")

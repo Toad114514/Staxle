@@ -15,7 +15,7 @@ termux 工具安装管理脚本<br>
 由于个人是python牢底，有啥bug可以反馈到 issues
 # 未来加入的特性
  - setup.sh
- - 桌面环境管理
+ - 桌面环境安装/管理
  - 软件中心 (?%)
  - 批量安装/执行✔️
  - 服务器安装/管理 (一小部分完成)
@@ -29,14 +29,16 @@ termux 工具安装管理脚本<br>
  - ...
 # 安装
 ```bash
+# Dev 分支安装命令如下
 pkg install git
-git clone https://github.com/toad114514/staxle.git
+git clone -b dev https://github.com/toad114514/staxle.git
 cd staxle && bash ./setup.sh
 ```
 或者
 ```bash
-pkg install git && git clone https://github.com/toad114514/staxle.git && cd staxle && bash ./setup.sh
+pkg install git && git clone -b dev https://github.com/toad114514/staxle.git && cd staxle && bash ./setup.sh
 ```
+不带 -b 参数则拉取 main 分支
 # 进度
 未完成阶段
 慢更新（学业繁重）

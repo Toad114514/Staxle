@@ -2,47 +2,38 @@
 # ByToad114514
 # 仓库 in toad114514/Staxle
 # 部分代码使用 Gameye98/Lazymux
-# v1.05.2
+# v1.05.3
 import os
 import requests
 import time
 import sys
 import readline
 from core.staxcore import *
+from core.staxapps import *
+import core.i18n.i18n as lang
 
 def main():
     banner()
-    print("""
-  - 输入选项选择
-1) 服务器管理工具
-2) 桌面环境管理
-3) Termux 工具
-4) 虚拟机 (Qemd)
-5) 安装包管理
-6) 千年软件老字店
-7) 仓库源管理器
-8) Hacker 工具
-9) PyList
-10) 各种小工具
-11) Staxle 面板后台
-  - 其他选项
-01) 获取公告     02) 更新 Staxle
-03) 关于         99) 退出
-注：大部分程序文件都将安装到你的 home 目录
-注：如遇到部分选项点击后显示未初始化xxxx，则需要启动 setup.sh
-""")
+    print(lang.get("stax.menu.tips"))
+    for x in range(1,12):
+        print(str(x)+") "+lang.get("stax.menu."+str(x)))
+    print(lang.get("stax.menu.other"))
+    print("01) "+lang.get("stax.menu.12")+"   02) "+lang.get("stax.menu.13")+"\n03) "+lang.get("stax.menu.14")+"       99) "+lang.get("stax.menu.15"))
+    print(lang.get("stax.with")+"\n"+lang.get("stax.wni"))
+    
     sel = input("Staxle/ $:")
     if sel.strip() == "1":
-        print("  服务器菜单  ")
-        print("  - 安装服务器")
-        print("1) Nginx: 一款速度快，cpu占用小的C++开源自由服务器")
-        print("2) Apache: 世界服务器排名第一的服务器，拥有跨平台、安全性高、稳定性好之称")
-        print("3) PHP: 动态网站的重要一环，也是CMS和框架的必需品")
-        print("4) Mysql: 动态网站不可缺失的服务器数据库")
-        print("5) 安装其他类型的服务器")
+        lts = lang.getToList(["staxm.server.title","staxm.server.subt","staxm.server.nginx","staxm.server.apache","staxm.server.php","staxm.server.mysql","staxm.server.other","staxm.server.s2m","staxm.back"])
+        print(f"  {lts[0]}  ")
+        print(f"  - {lts[1]}")
+        print(f"1) Nginx: {lts[2]}")
+        print(f"2) Apache: {lts[3]}")
+        print(f"3) PHP: {lts[4]}")
+        print(f"4) Mysql: {lts[5]}")
+        print(f"5) {lts[6]}")
         print("  ---------  ")
-        print("01) Server2me: Staxle 配套安装工具")
-        print("00) 返回菜单")
+        print(f"01) Server2me: {lts[7]}")
+        print(f"99) {lts[8]}")
         sel = input("Staxle/Server $:")
         if sel == "@":
             sel = ""
@@ -136,24 +127,26 @@ def main():
                 if deifor.strip() == "1": xfce4_main()
                 elif deifor.strip() == "99": restart_program()
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
-        elif demfor.strip() == "99": restart_program()
+        elif sel.strip() == "99": restart_program()
         else: print("\n错误：无效输入");time.sleep(1);restart_program()
     # Termux
     if sel.strip() == "3":
-        print("termux 一些工具")
-        print("1) proot-distro: 在 termux 上安装发行版 linux")
-        print("2) termux 换源")
-        print("3) 获取外部权限")
-        print("4) 安装 qurxin (装b工具)")
-        print("5) Tool-X: 为 termux 准备的多功能工具")
-        print("6) Lazymux: 为 termux 准备了更多的黑客工具")
-        print("7) Tmoe: 为 termux 准备的多语言纯 bash 工具集")
-        print("8) Neofetch: termux 终端上的设备查询")
-        print("9) termux wake-lock 防杀后台")
-        print("10) termux-desktop: 安装 xfce4 在您的 termux 上")
-        print("11) termux.properties: termux 的一些配置")
-        print("12) termux.motd: termux 欢迎语设置")
-        print("99) 返回上一菜单")
+        lts = lang.getToList(["staxm.tt.title","staxm.tt.pd","staxm.tt.repo","staxm.tt.storage","staxm.tt.qurxin","staxm.tt.toolx","staxm.tt.lazymux","staxm.tt.tmoe","staxm.tt.neofetch","staxm.tt.wl","staxm.tt.desk","staxm.tt.ppt","staxm.tt.motd","staxm.tt.sign9","staxm.back"])
+        print(f"   {lts[0]}")
+        print(f"1) proot-distro: {lts[1]}")
+        print(f"2) {lts[2]}")
+        print(f"3) {lts[3]}")
+        print(f"4) {lts[4]}")
+        print(f"5) Tool-X: {lts[5]}")
+        print(f"6) Lazymux: {lts[6]}")
+        print(f"7) Tmoe: {lts[7]}")
+        print(f"8) Neofetch: {lts[8]}")
+        print(f"9) {lts[9]}")
+        print(f"10) termux-desktop: {lts[10]}")
+        print(f"11) termux.properties: {lts[11]}")
+        print(f"12) termux.motd: {lts[12]}")
+        print(f"13) {lts[13]}")
+        print(f"99) {lts[14]}")
         sel = input("Staxle/Termux $:")
         if sel == "@":
             sel = ""
@@ -174,6 +167,7 @@ def main():
             elif infor.strip() == "9": os.system("termux-wake-lock"); restart_program()
             elif infor.strip() == "11": os.system("vim ~/.termux/termux.properties"); restart_program()
             elif infor.strip() == "12": os.system("vim $PREFIX/etc/motd"); restart_program()
+            elif infor.strip() == "13": termux_s9()
             elif infor.strip() == "99": restart_program()
             else: print("\n错误：无效输入");time.sleep(1);restart_program()
         if readStatus():
@@ -199,6 +193,8 @@ def main():
             print("3) code-server: 网页版 VSCode")
             print("4) Clang: 编译，爽！")
             print("5) Lazygit: 可视化 git")
+            print("6) ttyd: 网页可访问的终端")
+            print("7) Python: 你们好啊，我是爬虫王，我要来爬网站了")
             print("99) 返回主菜单")
             sel = input("Staxle/Software/Code $:")
             if sel == "@":
@@ -215,6 +211,8 @@ def main():
                 elif infor.strip() == "3": code-server()
                 elif infor.strip() == "4": clang()
                 elif infor.strip() == "5": lazygit()
+                elif infor.strip() == "6": ttyd()
+                elif infor.strip() == "5": python()
                 elif infor.strip() == "99": restart_program()
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
             if readStatus():
@@ -225,6 +223,7 @@ def main():
             print("2) mpd: music player deamon")
             print("3) mpv: 最强开源媒体播放器")
             print("4) musicfox: 网易云音乐命令行客户端")
+            print("5) cmus: 小、轻便、快速的小型开源播放器")
             print("99) 返回主菜单")
             for infor in sel.split():
                 if infor.strip() == "1": timg()
@@ -240,6 +239,7 @@ def main():
             print("2) weechat: 简单的 IRC 聊天室")
             print("3) lynx: 比 w3m 更靓的终端网页浏览器")
             print("4) firefox: 桌面环境下的经典浏览器 [*]")
+            print("5) aria2: 强大的下载程序")
             print("99) 返回主菜单")
             sel = input("Staxle/Software/Internet $:")
             if sel == "@":
@@ -254,11 +254,29 @@ def main():
                 if infor.strip() == "1": w3m()
                 elif infor.strip() == "2": weechat()
                 elif infor.strip() == "3": lynx()
-                elif infor.strip() == "3": firefox()
+                elif infor.strip() == "4": firefox()
+                elif infor.strip() == "5": aria2()
                 elif infor.strip() == "99": restart_program()
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
             if readStatus():
                 writeStatus(0)
+        elif sel.split() == "5":
+            print(" Xdesktops GUI")
+            print("1) Firefox: 隐私保护拉满的老牌浏览器")
+            print("2) audacious: Linux 最强GUI播放器")
+            print{"3) gimp: GNU 图片编辑器"}
+            print("4) xfce4-terminal: 轻便终端，xfce4默认")
+            print("5) gvim: 基于gtk的vim前端")
+            print("6) vlc-qt: vlc 前端")
+            for infor in sel.split():
+                if infor.strip() == "1": firefox()
+                elif infor.strip() == "2": audacious()
+                elif infor.strip() == "3": gimp()
+                elif infor.strip() == "4": xf4term()
+                elif infor.strip() == "5": gvim()
+                elif infor.strip() == "6": vlcqt()
+                elif infor.strip() == "99": restart_program()
+                else: print("\n错误：无效输入");time.sleep(1);restart_program()
         elif sel.strip() == "99": restart_program()
         else: print("\n错误：无效输入");time.sleep(1);restart_program()
         

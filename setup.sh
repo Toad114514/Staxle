@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # Setup.sh by toad
-stax_ver="v1.05.2"
-setup_ver="ver.109"
+stax_ver="v1.05.3"
+setup_ver="ver.113"
 stax_info="    这是一个为快速上手 termux 的新手，以及不想输入命令的 termux 佬特地提供的脚本工具，提供了各种 termux 中可运行的服务安装及配置\\n    他的性质犹如类似于 Lazymux 这一类的仓库，但 Staxle 这个脚本目标是将termux中各种服务的安装与配置集结起来，只需要一个脚本就能全自动或者半自动的完成大部分所想要的服务的安装与配置"
 
 stax_path=$(pwd)
@@ -15,6 +15,23 @@ terminal_color(){
   CYAN=$(printf '\033[36m')
   RESET=$(printf '\033[m')
   BOLD=$(printf '\033[1m')
+}
+
+setup_language(){
+ option=$(whiptail --title "设置语言" --menu "选择你所能看懂的语言 Select your Language" 15 60 10 \
+ "1" "zh_CN 中文" \
+ "2" "en_US English" \
+ 3>&1 1>&2 2>&3)
+ case option in
+  "zh_CN 中文")
+    echo "zh_CN" > ./core/config/lang
+    ;;
+  "en_US English")
+    echo "en_US" > ./core/config/lang
+    ;;
+  *)
+    echo "en_US" > ./core/config/lang
+ esac
 }
 
 setup_ready(){
@@ -35,81 +52,41 @@ setup_ready(){
     setup_set
   fi
 }
-
-setup_set(){
-  user=$(whiptail --title "用户配置" --inputbox "你叫什么✓8名？（留空则使用termux分配的用户名）" 10 70 3>&1 1>&2 2>&3)
-  
+setgm(){
   if $(whiptail --title "设置gitmirror" --yesno "设置 Staxle 部分需要通过GitHub获取工具的镜像，GitHub 国内访问速度慢下载慢，KKGitHub 速度快但无法保证稳定性（有时会无法使用）" --yes-button "Github" --no-button "KKGithub" 15 60 3>&1 1>&2 2>&3)
   then
     gitmirror="github"
   else
     gitmirror="kkgithub"
   fi
+  echo ${gitmirror} > ./core/config/gitmirror
+}
+set_user(){
+ user=$(whiptail --title "用户配置" --inputbox "你叫什么✓8名？（留空则使用termux分配的用户名）" 10 70 3>&1 1>&2 2>&3)
+ echo ${user} > ./core/config/user
+}
+
+setskaug(){
   if $(whiptail --title "跳过更新源和软件包" --yesno "设置使用 Staxle 安装软件包时是否更新源和软件包，可加快安装速度，但很有可能因为其依赖包过老而导致兼容性问题" --yes-button "跳过" --no-button "不跳过" 15 60 3>&1 1>&2 2>&3)
   then
     saug="y"
   else
     saug="n"
   fi
+  echo ${saug} > ./core/config/skip_aug
+}
+setup_set(){
   
-  tools=$(whiptail --title "选择所需工具" --checklist "根据你的所需去选择你的工具（按下空格键选中选项，回车继续）" 15 75 4 \
-  "web.py" "Staxle 工具的面板后台（用于服务器管理和后台部署）" OFF \
-  "chexo" "可视化的 Hexo 博客部署工具" OFF \
-  "server2me" "服务器管理工具" OFF \
-  "qemd" "Qemu 虚拟机管理工具" OFF \
-  3>&1 1>&2 2>&3
-  )
-  
-  if test "$(echo $tools|grep web.py)" != ""
-  then
-    webpy="true"
-  else
-    webpy="false"
-  fi
-  if test "$(echo $tools|grep chexo)" != ""
-  then
-    chexo="true"
-  else
-    chexo="false"
-  fi
-  if test "$(echo $tools|grep server2me)" != ""
-  then
-    s2m="true"
-  else
-    s2m="false"
-  fi
-  if test "$(echo $tools|grep qemd)" != ""
-  then
-    qemd="true"
-  else
-    qemd="false"
-  fi
+  set_user
+  setgm
+  setskaug
+  setup_language
   
   setup_mem
 }
 
 setup_mem(){
   mem=0
-  printf "${GREEN}这将准备初始化以下东西/安装对应依赖：${RESET}\\n"
-  printf "Staxle 主菜单本体\\n  - Python 包依赖（60mb）\\n  - Python 库依赖\\n    - requests\\n    - tqdm\\n"
-  if test $webpy = "true"
-  then
-    printf "web.py 工具面板后台\\n  - Python 库依赖\\n    - pywebio\\n"
-  fi
-  if test $chexo = "true"
-  then
-    printf "Chexo 博客可视化管理器\\n  - Python 库依赖\\n    - PyYAML\\n  - 前置依赖\\n    - nodejs-lts\\n      - hexo-cli\\n"
-  fi
-  if test $s2m = "true"
-  then
-    printf "Server2me 服务器管理工具\\n"
-  fi
-  if test $qemd = "true"
-  then
-    printf "Qemd 虚拟机管理工具\\n"
-  fi
-  printf "\\n${BLUE}<回车键>${RESET} 继续"
-  read sbaheixk
   if $(whiptail --title "继续进行初始化吗？" --yesno "选择继续将开始初始化，否则选择重新设置" --yes-button "继续" --no-button "重新设置（关闭脚本）" 10 70 3>&1 1>&2 2>&3)
   then
     start_setup
@@ -143,75 +120,6 @@ start_setup(){
     echo 正在安装依赖库 ${GREEN}tqdm${RESET}...
     pip install tqdm
   fi
-  # webpy required
-  if test $webpy = "true"
-  then
-    echo 正在安装${GREEN}面板后台${RESET}所需依赖
-    tests=$(pip show pywebio)
-    if test $? -eq $[err]
-    then
-      echo 正在安装依赖库 ${GREEN}pywebio${RESET}...
-      pip install pywebio
-    fi
-  fi
-  # chexo required
-  if test $chexo = "true"
-  then
-    echo 正在安装${GREEN} Chexo ${RESET}所需依赖
-    if test "$(pkg installed|grep nodejs-lts)" = ""
-    then
-      echo 正在安装前置依赖包 ${GREEN}nodejs-lts${RESET}...
-      pkg install nodejs-lts -y
-      node -v
-    fi
-    if test "$(npm ls -g|grep hexo-cli)" = ""
-    then
-      echo 正在安装前置nodejs包 ${GREEN}hexo-cli${RESET}...
-      npm install hexo-cli
-    fi
-    tests=$(pip show PyYAML)
-    if test $? -eq $[err]
-    then
-      echo 正在安装依赖库 ${GREEN}PyYAML${RESET}...
-      pip install PyYAML
-    fi
-  fi
-  
-  echo 正在设置 ${GREEN}配置文件${RESET}...
-  # config
-   if test "$user" = ""
-  then
-    echo ${user} > ./core/config/user
-  else
-    touch
-  fi
-  echo ${gitmirror} > ./core/config/gitmirror
-  echo ${saug} > ./core/config/skip_aug
-  # setdisable
-  if test $webpy = "false"
-  then
-    mv ${stax_path}/web.py ${stax_path}/web.py.disable
-  else
-    mv ${stax_path}/web.py.disable ${stax_path}/web.py
-  fi
-  if test $chexo = "false"
-  then
-    mv ${stax_path}/tools/chexo/main.py ${stax_path}/tools/chexo/main.py.disable
-  else
-    mv ${stax_path}/tools/chexo/main.py.disable ${stax_path}/tools/chexo/main.py
-  fi
-  if test $s2m = "false"
-  then
-    mv ${stax_path}/tools/server2me/main.py ${stax_path}/tools/server2me/main.py.disable
-  else
-    mv ${stax_path}/tools/server2me/main.py.disable ${stax_path}/tools/server2me/main.py
-  fi
-  if test $qemd = "false"
-  then
-    mv ${stax_path}/tools/qemd/main.py ${stax_path}/tools/qemd/main.py.disable
-  else
-    mv ${stax_path}/tools/qemd/main.py.disable ${stax_path}/tools/qemd/main.py
-  fi
   
   echo 正在 ${GREEN}添加全局命令${RESET}...
   # bin
@@ -222,30 +130,23 @@ start_setup(){
   chmod +x ${termux_bin}/staxle
   chmod +x ${termux_bin}/stax
   chmod +x ${termux_bin}/stax-setup
-  if test $webpy = "true"
-  then
-    echo "python ${stax_path}/web.py" > ${termux_bin}/stax-webpanel
-    chmod +x ${termux_bin}/stax-webpanel
-    echo ${YELLOW}Tips:${GREEN} 输入stax-webpanel可以快速启动面板后台
-  fi
-  if test $chexo = "true"
-  then
-    echo "python ${stax_path}/tools/chexo/main.py" > ${termux_bin}/chexo
-    chmod +x ${termux_bin}/chexo
-    echo ${YELLOW}Tips:${GREEN} 输入chexo可以快速启动Chexo工具
-  fi
-  if test $s2m = "true"
-  then
-    echo "python ${stax_path}/tools/server2me/main.py" > ${termux_bin}/server2me
-    chmod +x ${termux_bin}/server2me
-    echo ${YELLOW}Tips:${GREEN} 输入server2me可以快速启动Server2me服务器管理
-  fi
-  if test $qemd = "true"
-  then
-    echo "python ${stax_path}/tools/qemd/main.py" > ${termux_bin}/qemd
-    chmod +x ${termux_bin}/qemd
-    echo ${YELLOW}Tips:${GREEN} 输入qemd可以快速启动Qemd虚拟机管理工具
-  fi
+  
+  echo "python ${stax_path}/web.py" > ${termux_bin}/stax-webpanel
+  chmod +x ${termux_bin}/stax-webpanel
+  echo ${YELLOW}Tips:${GREEN} 输入stax-webpanel可以快速启动面板后台
+  
+  echo "python ${stax_path}/tools/chexo/main.py" > ${termux_bin}/chexo
+  chmod +x ${termux_bin}/chexo
+  echo ${YELLOW}Tips:${GREEN} 输入chexo可以快速启动Chexo工具
+
+  echo "python ${stax_path}/tools/server2me/main.py" > ${termux_bin}/server2me
+  chmod +x ${termux_bin}/server2me
+  echo ${YELLOW}Tips:${GREEN} 输入server2me可以快速启动Server2me服务器管理
+  
+  echo "python ${stax_path}/tools/qemd/main.py" > ${termux_bin}/qemd
+  chmod +x ${termux_bin}/qemd
+  echo ${YELLOW}Tips:${GREEN} 输入qemd可以快速启动Qemd虚拟机管理工具
+  
   echo ${BLUE}================================
   echo ${GREEN}您的 Staxle ${stax_ver} 已经完成初始化操作！
   echo ${YELLOW}Tips:${GREEN} 输入staxle或stax启动 Staxle 主菜单
@@ -283,17 +184,13 @@ setup_run(){
 }
 
 com_set(){
-  echo ${3} > ./core/config/${2}
-  echo ${RED}${2} 设置为 ${GREEN}${3}
-  exit 0
-}
-
-com_show_set(){
-  echo  Staxle 已设定项及值：
-  echo  选项  值
-  find "./core/config" -type f | while IFS= read -r file ; do
-    fnames=$(echo $file|sed -i 's?./core/config/? ')
-    echo $fnames  ${cat $file}
+  case $1 in
+    gitmirror) setgm ;;
+    user) set_user ;;
+    skip_aug) setskaug ;;
+    lang) setup_language ;;
+    *) echo "${RED}未找到对应设置项。${RESET}" ;;
+  esac
   exit 0
 }
 
@@ -306,18 +203,19 @@ com_help(){
   echo 如果没有任何参数传递则直接启动 Staxle 初始化向导
   echo 
   echo 可用的 command 选项：
-  echo     help - 打印帮助文档并退出
-  echo     version - 打印版本号并退出
-  echo     update - 升级 Staxle（包括 Staxle 本体、所有工具和本初始化向导）
-  echo     set - 设置 Staxle 选项
-  echo     setshow - 显示 Staxle 所有已设定的选项
+  echo "    help - 打印帮助文档并退出"
+  echo "    version - 打印版本号并退出"
+  echo "    update - 升级 Staxle（包括 Staxle 本体、所有工具和本初始化向导）"
+  echo "    set - 设置 Staxle 选项"
+  echo "    lang - Set your Language"
   echo
   echo set 命令用法：
-  echo     bash setup.sh set <设置项> <值>
+  echo "    bash setup.sh set <设置项>"
   echo 可用的设置项：
   echo "    gitmirror - 设置克隆仓库时使用的镜像地址，值只能输 github 和 kkgithub"
   echo "    user - 设置 Staxle 用户名，留空则使用 termux 终端名"
   echo "    skip_aug - 跳过 apt 源更新和软件包更新"
+  echo "    lang - 设置语言"
   exit 0
 }
 
@@ -327,7 +225,7 @@ com_version(){
 }
 
 com_update(){
-  git pull
+  git pulll
   echo 升级完成
 }
 
@@ -335,7 +233,8 @@ case $1 in
   help) com_help ;;
   version) com_version ;;
   update) com_update ;;
-  set) com_set ;;
+  lang) setup_language ;;
+  set) com_set ${2} ;;
   setshow) com_set_show ;;
   *) setup_run ;;
 esac
