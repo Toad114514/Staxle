@@ -30,7 +30,7 @@ setup_language(){
     echo "en_US" > ./core/config/lang
     ;;
   *)
-    echo "en_US" > ./core/config/lang
+    echo "zh_CN" > ./core/config/lang
  esac
 }
 
