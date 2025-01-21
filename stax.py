@@ -234,7 +234,7 @@ def main():
                 elif infor.strip() == "4": musicfox()
                 elif infor.strip() == "99": restart_program()
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
-        elif sel.split() == "3":
+        elif sel.strip() == "3":
             # 03
             print(" 网上冲浪")
             print("1) w3m: 终端式网页浏览器")
@@ -262,7 +262,7 @@ def main():
                 else: print("\n错误：无效输入");time.sleep(1);restart_program()
             if readStatus():
                 writeStatus(0)
-        elif sel.split() == "5":
+        elif sel.strip() == "5":
             print(" Xdesktops GUI")
             print("1) Firefox: 隐私保护拉满的老牌浏览器")
             print("2) audacious: Linux 最强GUI播放器")
