@@ -1,6 +1,7 @@
 import os
 from core.staxcore import *
 import core.i18n.i18n as lang
+
 # 自动更新源和软件包
 def aug():
     if staxconf.skip_aug == False:
@@ -749,3 +750,4 @@ def gvim():
 def vlcqt():
     aug()
     os.system("pkg install vlc vlc-qt -y")
+    done("vlc-qt 安装成功，请在 X11 桌面环境下运行")
