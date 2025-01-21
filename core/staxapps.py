@@ -149,10 +149,14 @@ def fvwm():
 # Xfce4-DesktopEnvironment Code
 #############
 def xfce4():
-    print("你想要在使用什么方式输出图形？\n[1] VNC \n[2] termux-x11 (图形加速，建议）")
+    print("你想要在使用什么方式输出图形？\n[1] VNC \n[2] termux-x11 (图形加速，建议）\n[3] noVNC（网页vnc，可以尝鲜）")
     sel = input("选择：")
     if sel.strip() == "1":
         disp = "vnc"
+        print("设置 vnc 密码，这个密码在连接时需要用到（长度必须是 5-8 位）")
+        vnc_passwd = input("输入密码：")
+    if sel.strip() == "3":
+        disp = "novnc"
         print("设置 vnc 密码，这个密码在连接时需要用到（长度必须是 5-8 位）")
         vnc_passwd = input("输入密码：")
     elif sel.strip() == "2":
@@ -183,6 +187,33 @@ def xfce4():
         os.system("touch $PREFIX/bin/xfce4")
         with open(os.path.join(prefix, "bin", "xfce4"),"w") as f:
             bash_setup = "#type-bash vnc\n# 请不要删除上方注释！\necho xfce4的图形输出在 localhost:5902，请使用任意 vnc 客户端访问 localhost:5902\nvncserver :2 -geometry 1920x1080"
+            f.write(bash_setup)
+        os.system("chmod +x $PREFIX/bin/xfce4")
+        print("xfce4 安装完成\n以后只需输入 xfce4 便可启动\n你现在要：")
+        sel = input("[1] 现在启动\n[2] 返回 Staxle")
+        if sel == "1":
+            os.system("xfce4")
+            restart_program()
+        else:
+            restart_program()
+    # novnc
+    if disp == "novnc":
+        output("i","开始安装 xfce4...")
+        aug()
+        os.system("pkg install x11-repo")
+        os.system("pkg install xfce4 tigervnc -y")
+        output("i","设置 vnc 服务器...")
+        os.system("mkdit ~/.vnc")
+        os.system(f"echo {vnc_passwd} > ~/.vnc/passwd")
+        with open("~/.vnc/xstartup","w") as f:
+            f.write("startxfce4")
+        gitc("novnc/noVNC")
+        os.system('mv noVNC {}'.format(homeDir))
+        os.system(f"chmod +755 {homeDir}/noVNC/utils/novnc_proxy")
+        os.system("chmod +x ~/.vnc/xstartup")
+        os.system("touch $PREFIX/bin/xfce4")
+        with open(os.path.join(prefix, "bin", "xfce4"),"w") as f:
+            bash_setup = f"#type-bash novnc\n# 请不要删除上方注释！\necho xfce4的图形输出在 localhost:5902，你可以使用任何 vnc 服务连接，但现在还没打开 noVNC\nvncserver :2 -geometry 1920x1080 &\necho noVNC 启动！接下来会打印出一个地址，使用浏览器访问即可\n{homeDir}/noVNC/utils/novnc_proxy --vnc localhost:5902"
             f.write(bash_setup)
         os.system("chmod +x $PREFIX/bin/xfce4")
         print("xfce4 安装完成\n以后只需输入 xfce4 便可启动\n你现在要：")
@@ -248,7 +279,7 @@ def xfce4_main():
                     restart_program()
                 else:
                     restart_program()
-            elif type in "vnc":
+            elif type in "vnc" or type in "novnc":
                 sel = input("修改显示分辨率（长x宽，中间的x是必须是字母小写x，例如 1920x1080、800x600 等）：")
                 temp = "vncserver :2 -geometry "+sel
                 os.system(f"sed -i '3s/.*/{temp}' $PREFIX/bin/xfce4")
@@ -300,7 +331,7 @@ def lxqt():
         os.system("chmod +x ~/.vnc/xstartup")
         os.system("touch $PREFIX/bin/xfce4")
         with open(os.path.join(prefix, "bin", "xfce4"),"w") as f:
-            bash_setup = "#type-bash vnc\n# 请不要删除上方注释！\necho xfce4的图形输出在 localhost:5902，请使用任意 vnc 客户端访问 localhost:5902\nvncserver :2 -geometry 1920x1080"
+            bash_setup = "#type-bash vnc\n# 请不要删除上方注释！\necho lxqt的图形输出在 localhost:5902，请使用任意 vnc 客户端访问 localhost:5902\nvncserver :2 -geometry 1920x1080"
             f.write(bash_setup)
         os.system("chmod +x $PREFIX/bin/xfce4")
         print("xfce4 安装完成\n以后只需输入 xfce4 便可启动\n你现在要：")
