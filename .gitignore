@@ -1,4 +1,5 @@
 core/__pycache__
 .gitignore
 .web_passwd
-i18n/__pycache__
+core/i18n/__pycache__
+core/config

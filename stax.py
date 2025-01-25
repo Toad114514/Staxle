@@ -49,12 +49,8 @@ def main():
             elif sel.strip() == "3": phpins()
             elif sel.strip() == "4": mysql()
             elif sel.strip() == "01":
-                if staxconf.server2me == False:
-                    print("未初始化 Server2me。")
-                    restart_program()
-                else:
-                    os.system("python ./tools/server2me/main.py")
-                    restart_program()
+                os.system("python ./tools/server2me/main.py")
+                restart_program()
             elif sel.strip() == "5":
                 print("  其他类型的服务器")
                 print("1) Ngircd: IRC 服务器")
