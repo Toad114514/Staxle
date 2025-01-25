@@ -24,12 +24,16 @@ termux 工具安装管理脚本<br>
  - 小工具
    - Cli-Hexo (Chexo)✔️
    - Server2me
-   - Qemd
+   - Qemd✔️
  - ...
+# 分支
+`main` 稳定分支 `dev` 测试分支
 # 安装
 ```bash
-# Dev 分支安装命令如下
 pkg install git
+# main
+git clone https://github.com/toad114514/staxle.git
+# dev
 git clone -b dev https://github.com/toad114514/staxle.git
 cd staxle && bash ./setup.sh
 ```
