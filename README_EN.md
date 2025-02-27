@@ -8,6 +8,8 @@ Termux tool installs management scripts<br>
 [![GitHub Tag](https://img.shields.io/github/v/tag/toad114514/staxle)](https://github.com/Toad114514/Staxle/releases)
 [![Python](https://img.shields.io/badge/language-Python%203-blue.svg)](https://www.python.org)<br>
 [中文](https://github.com/Toad114514/Staxle/blob/main/README.md)
+# Considering stopping maintenance
+Recently, as you may know, I've been busy with school, and **my phone gets confiscated every night**. Additionally, I've been working on maintaining a new project [tPaxs](). Because of this, the project might not be updated regularly. It's not exactly stopping updates; I might just push some commits over the weekend casually.
 # Description
 This is a scripting tool for those who are new to Termux and those who don't want to type commands, and provides a variety of services that can be run in Termux to install and configure<br>
 It's like a repository like [Lazymux](https://github.com/Gameye98/Lazymux) but the goal of Staxle's script is to assemble and configure all kinds of services in termux, and only one script can be fully or semi-automatically installed and configured for most of the desired services<br>
