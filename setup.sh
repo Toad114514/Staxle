@@ -222,6 +222,7 @@ com_help(){
 com_version(){
   echo Staxle Setup Wizard ${setup_ver}
   echo Staxle ${stax_ver}
+  mkdir ./core/config
 }
 
 com_update(){
