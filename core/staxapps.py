@@ -145,6 +145,12 @@ def fvwm():
         else:
             restart_program()
 
+###################
+# pdesktop
+###################
+def pdesktop_stax():
+    os.system(f"bash {stax_path}/tools/pdesktop")
+
 #############
 # Xfce4-DesktopEnvironment Code
 #############
